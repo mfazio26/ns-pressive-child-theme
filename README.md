@@ -10,7 +10,7 @@ I can make myself available for an onboarding/handoff call if you think its nece
 - You must have a working knowledge of Wordpress, website and local development, command-line usage, and an understanding of "why we use build systems" in the first place.
 - You must have admin access to notsalmon.com as well as filesystem access to the LightningBase hosting account (cPanel, SSH, FTP, etc) in order to pull the database and download some files where/when applicable.
 - Download and install a local development environment that supports Linux, Apache, MySQL and PHP (LAMP) such as [MAMP](https://www.mamp.info/en/mac/), [Local by FlyWheel](https://localwp.com/), etc.
-- The local build system requires [NodeJS](https://nodejs.org/en/). It is recommended (but not required) that you download and install the [Node Version Manager](https://github.com/nvm-sh/nvm) (NVM) in order to specify which version of NodeJS the build system is stable. A `.nvm` file is also included in this repo for reference.
+- The local build system requires [NodeJS](https://nodejs.org/en/) and has been tested up to version `8.6.0`. It is recommended (but not required) that you download and install the [Node Version Manager](https://github.com/nvm-sh/nvm) (NVM) in order to specify which version of NodeJS the build system is stable. A `.nvm` file is also included in this repo for reference.
 
 ## Important notes before you get started
 
@@ -103,7 +103,7 @@ cd path/to/repo/directory
 ```
 
 **Step 11: Check Node.js version.**  
-Be aware, this build system uses Gulp 3 and may not work in newer versions of Node.js. For this reason, it is recommended that you use Node Version Manager. There is a `.nvm` file in this repo that will auto-select the tested version of Node.js or it will prompt you to download a specific version when you run `nvm use`. If you are unable to run a compatible version of Node.js, you may need to port/migrate this build system to  something else like Webpack on your own.
+Be aware, this build system uses Gulp 3 and Node.js version `8.6.0` and may not work in newer versions of Node.js. Until recently, it also worked in Node.js versions as low as `5.10.0`, however it appears an NPM update was release that broken all older versions of NPM. Just be aware. For this reason, it is recommended that you use Node Version Manager, install and use version `8.6.0`. There is a `.nvmrc` file in this repo that will auto-select the tested version of Node.js or it will prompt you to download a specific version when you run `nvm use`. If you are unable to run a compatible version of Node.js, you may need to port/migrate this build system to  something else like Webpack on your own.
 
 **Step 12: Install Gulp-CLI globally.** 
 The Gulp-CLI utility needs to be installed globally. Again, you need to ensure you are running the proper version of Node.js before continuing as this may install the wrong Gulp version. For more information, [visit this page](https://gulpjs.com/docs/en/getting-started/quick-start/).
