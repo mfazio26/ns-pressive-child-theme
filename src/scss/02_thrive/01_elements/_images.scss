@@ -1,0 +1,89 @@
+// ============================================================================================================
+// =============== IMAGES : VARIABLES =========================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== IMAGES : EXPORT ============================================================================
+// ============================================================================================================
+
+@mixin ns-export-thrive-elements-images() {
+
+	// ===== INLINE IMAGES (IN POST) ==========================================================================
+	// alignment modifiers: when an image is left/right aligned inside a post, we want to normalize their 
+	// appearance on small screens by centering them.
+	img {
+
+		// modifier: left/right aligned 
+		&.alignleft,
+		&.alignright {
+			@include ns-breakpoint-simple($max-width: 540px){
+				@include ns-size($width: 100%, $max-width: 100%);
+				display: block;
+				text-align: center;
+				margin-left: 0;
+				margin-right: 0;
+			}
+		}
+	}
+
+	// ===== IN ARTICLE IMAGE CAPTIONS ========================================================================
+	.cnt .tve-c p.wp-caption-text {
+		@include ns-type-family($is-heading: false);
+		@include ns-type-style($is-heading: false, $italic: true, $bold: false);
+		@include ns-size($max-width: 90%);
+		@include ns-hmargins-auto;
+		margin-top: ns-calc-vr(0);
+
+		// modifier: this caption is used only on single poster pages to place the caption immediately below 
+		// the image. this is because the caption gets added differently on these pages than standard articles.
+		&--quotesingle {
+			@include ns-type-size(standard, "auto");
+			@include ns-size($max-width: 570px);
+			margin-top: ns-calc-vr(-0.25);
+		}
+	}
+
+	// ===== MONARCH : SHARE MEDIA ============================================================================
+	// alignment modifiers: Monarch places the alignment classes on the wrapper, which ultimately jacks up the 
+	// layout. so, in combination with the below fixes, this should help.
+	.alignleft:not(img),
+	.alignright:not(img) {
+		margin: 0;
+	}
+
+	// block: monarch inline
+	.et_social_media_wrapper {
+
+		// immediate child: images with alignment
+		// note, because Monarch places the alignment classes on the wrapper, we don't also want them included 
+		// on the images – which results in a float inside a float. at that point, Monarch has no idea where to 
+		// place its components. so, we're fixing it here.
+		& > img {
+			&.alignleft {
+				text-align: left;
+			}
+
+			&.alignright {
+				text-align: right;
+			}
+
+			&.alignleft,
+			&.alignright {
+				float: none;
+			}
+		}
+
+		// breakpoint: small screens
+		@include ns-breakpoint-simple($max-width: 540px){
+			float: none;
+			margin-left: 0;
+			margin-right: 0;
+		}
+
+		@include ns-breakpoint-simple($min-width: 541px){
+			&.alignright .et_social_media {
+				@include ns-position($left: 40px);
+			}
+		}
+	}
+}

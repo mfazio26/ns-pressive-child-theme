@@ -1,0 +1,141 @@
+// ============================================================================================================
+// =============== SIDEBAR : VARIABLES ========================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== SIDEBAR : EXPORT ===========================================================================
+// ============================================================================================================
+
+@mixin ns-export-thrive-components-sidebar() {
+
+	// ===== SIDEBAR CONTAINER ? ==============================================================================
+	.sAsCont {
+
+		// sidebar
+		& .sAs {
+			background-color: $ns-brand-light;
+			border: none;
+
+			// individual widgets
+			& section {
+				margin-top: 0;
+				margin-bottom: ns-calc-vr(1);
+
+				// pseudo modifier: first widget
+				&:first-child {
+					margin-top: ns-calc-vr(1);
+				}
+
+				// child: listing
+				& ul {
+					margin-top: 0;
+
+					// child: listing item
+					& li {
+						border-color: rgba($ns-brand-purplegray, 0.3);
+
+						// child: listing item link
+						& > a {
+							@include ns-type-family($is-heading: false);
+							@include ns-type-size(reduce, "auto");
+							@include ns-type-style($is-heading: false, $bold: false);
+							color: $ns-brand-grayscale-2;
+
+							// pseudo modifier: hover
+							&:hover {
+								color: $ns-brand-primary-color;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		// sidebar titles
+		& .ttl {
+			@include ns-type-family($is-heading: true);
+			@include ns-type-size(standard, "auto");
+			@include ns-type-style($is-heading: true, $bold: true);
+			color: $ns-brand-aqua-blue;
+			margin-top: 0;
+
+			// underline graphic
+			&:after {
+				@include ns-position($bottom: ns-calc-vr(-0.25, $rem: false));
+				background-color: $ns-brand-mint-green;
+			}
+		}
+
+	}
+	
+	// ===== WP WIDGET : RECENT POSTS =========================================================================
+	section[id*="recent-posts"] {
+		// list items
+		& ul li {
+			margin-bottom: 0;
+
+			// pseudo modifier: first item
+			&:first-child {
+				& > a {
+					padding-top: 0;
+				}
+			}
+
+			// pseudo modifier: last item
+			&:last-child {
+				border-bottom: 0;
+			}
+
+			// child: list item link
+			& > a {
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+		}
+	}
+	
+	// ===== THRIVE WIDGET : RECENT POSTS =====================================================================
+	.rw {
+		// widget: specificity?
+		&.widget_thrive_related {
+
+			// thumbnail container
+			& .tim {
+				@include ns-size($width: 100px);
+				margin-top: 0;
+
+				// thumbnail
+				& .wti {
+					@include ns-size($width: 100%, $max-width: 100%, $height: auto);
+					padding-top: 100%;
+					margin-right: 0;
+				}
+			}
+			
+			// text container
+			& .txt {
+				@include ns-size($width: auto);
+			}
+		}
+		
+		// child: text container
+		& .txt {
+			padding-left: ns-calc-vr(0.5);
+			overflow: hidden; // hack: forces text to fill remaing space when another item is float:left.
+			float: none;
+		}
+
+		// child: link
+		& a {
+			@include ns-type-family($is-heading: false);
+			@include ns-type-size(reduce, "auto");
+			@include ns-type-style($is-heading: false, $bold: false);
+			margin-top: 0;
+
+			// pseudo modifier: hover
+			&:hover {
+				color: $ns-brand-primary-color;
+			}
+		}
+	}
+}

@@ -1,0 +1,136 @@
+// ============================================================================================================
+// =============== POSTS AUTHORS PICK : VARIABLES =============================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== POSTS AUTHORS PICK : EXPORT ================================================================
+// ============================================================================================================
+
+@mixin ns-export-ns-components-posts-authorspick() {
+
+	// block: authors pick box
+	.ns-authorspick {
+		$block_selector: &;
+
+		@include ns-size($width: 100%);
+		display: block;
+		clear: both;
+
+		// pseudo-child: used to clear inline content, images, etc.
+		&:before, 
+		&:after {
+			@include ns-size($width: 100%);
+			content: "";
+			display: block;
+		}
+
+		// pseudo-child: used instead of margin to ensure clearing inline content.
+		&:before {
+			padding-top: ns-calc-vr(0.75);
+		}
+
+		// pseudo-child: used instead of margin to ensure clearing inline content.
+		&:after {
+			padding-bottom: ns-calc-vr(0.5);
+		}
+		
+		// element: .ns-authorspick__btn
+		&__btn {
+			@include ns-size($width: 100%, $max-width: 600px);
+			@include ns-hmargins-auto;
+			display: flex;
+			align-items: center;
+			background-color: darken($ns-brand-light, 2%);
+			padding: ns-calc-vr(0.5) 0;
+			border-top: 1px solid $ns-thrive-border-color;
+			border-bottom: 1px solid $ns-thrive-border-color;
+		}
+
+		// shared elements: .ns-authorspick__figure, .ns-authorspick__content
+		// note: columns
+		&__figure,
+		&__content {
+			padding: 0 ns-calc-vr(0.25);
+		}
+
+		// element: .ns-authorspick__figure
+		// note: holds featured image
+		&__figure {
+			@include ns-size($width: 100%, $max-width: 120px, $height: auto);
+		}
+
+		// element: .ns-authorspick__img
+		// note: featured image
+		&__img {
+			display: block;
+			border: 1px solid $ns-thrive-border-color;
+
+			// child: .ns-authorspick__img .et_social_media
+			// note: don't ever show the media image sharer here!!!
+			& .et_social_media {
+				display: none !important;
+			}
+		}
+
+		// element: .ns-authorspick__content
+		// note: right column
+		&__content {
+			padding-bottom: ns-calc-vr(0.2);
+		}
+
+		// shared elements: .ns-authorspick__heading, .ns-authorspick__article
+		// note: hover effects
+		&__heading,
+		&__article {
+			@include ns-button-transition($property: color);
+
+			// .ns-authorspick)__btn
+			#{$block_selector}__btn:hover & {
+				color: $ns-brand-purple !important;
+			}
+		}
+
+		// element: .ns-authorspick__heading
+		// note: Karen’s Pick title
+		&__heading {
+			@include ns-type-family($is-heading: true);
+			@include ns-type-size(standard, "auto");
+			@include ns-type-style($is-heading: true, $bold: true);
+			text-transform: uppercase;
+			margin: 0;
+		}
+
+		// element: .ns-authorspick__article
+		// note: article title/url
+		&__article {
+			@include ns-type-family($is-heading: false);
+			@include ns-type-style($is-heading: false, $bold: false);
+			margin: 0;
+		}
+
+		// element: .ns-authorspick .ns-authorspick__article
+		// note: specificity battle in setting text styles! (thrive!!!)
+		& &__article {
+			@include ns-type-size(standard, reduce);
+			text-decoration: underline;
+			color: $ns-brand-purple !important;
+		}
+
+		// breakpoint: mobile only
+		@include ns-breakpoint-simple($max-width: 500px){
+			// element: .ns-authorspick__figure
+			// note: hide on mobile
+			&__figure {
+				display: none;
+			}
+
+			// element: .ns-authorspick__content
+			// note: tighten up the horizontal padding
+			&__content {
+				padding-left: ns-calc-vr(0.5);
+				padding-right: ns-calc-vr(0.5);
+			}
+		}
+	}
+}
+

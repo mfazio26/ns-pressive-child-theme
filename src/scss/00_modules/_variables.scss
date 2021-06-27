@@ -1,0 +1,151 @@
+// ============================================================================================================
+// =============== GLOBAL VARS ================================================================================
+// ============================================================================================================
+
+/// Base font size applied to `html, .root`.
+/// 
+/// **IMPORTANT:** Please only use `px` units.
+/// @type Number
+$ns-type-base-font-size: 18px !default;
+
+/// Base font line-height applied to `html, .root`.
+/// 
+/// **IMPORTANT:** Please only use a **unitless** value.
+/// @type Number
+$ns-type-base-line-height: 1.667 !default;
+
+
+
+
+
+/// Color definition for dark grayscale.
+/// @type Color
+$ns-brand-grayscale-1: #0E1116 !default;
+
+/// Color definition for lighter grayscale.
+/// @type Color
+$ns-brand-grayscale-2: #393E41 !default;
+
+/// Color definition for lighter grayscale. Derived from Thrive's search placeholder color.
+/// @type Color
+$ns-brand-grayscale-3: #9FA4A4 !default;
+
+/// Color definition for lighter grayscale. Derived from Thrive's search border color.
+/// @type Color
+$ns-brand-grayscale-4: #CCCCCC !default;
+
+/// Color definition for purple-ish gray.
+/// @type Color
+$ns-brand-purplegray: #8893A9 !default;
+
+/// Color definition for aqua blue.
+/// @type Color
+$ns-brand-aqua-blue: #008F95 !default;
+
+/// Color definition for mint green.
+/// @type Color
+$ns-brand-mint-green: #9EDDA8 !default;
+
+/// Color definition for light blue.
+/// @type Color
+$ns-brand-light-blue: #CEEFE3 !default;
+
+/// Color definition for light background color (non-white).
+/// @type Color
+$ns-brand-light: #F9F9F7 !default;
+
+/// Color definition for white background color. (can be non-white)
+/// @type Color
+$ns-brand-white: #FFFFFF !default;
+
+
+
+
+
+/// Accent Color: Color definition for purple.
+/// @type Color
+$ns-brand-purple: #AB0372 !default;
+
+/// Accent Color: Color definition for orange.
+/// @type Color
+$ns-brand-orange: #FC6612 !default;
+
+/// Accent Color: Color definition for yellow.
+/// @type Color
+$ns-brand-yellow: #FDE720 !default;
+
+
+
+
+
+/// Primary action color is used for primary interactive elements – buttons, links, etc etc.
+/// @type Color
+$ns-brand-primary-color: $ns-brand-purple !default;
+
+/// Secondary action color is used when the primary action color isn't the right choice for any reason.
+/// @type Color
+$ns-brand-secondary-color: $ns-brand-orange !default;
+
+
+
+
+
+
+/// Shortcut: Matches the border color defined/hard-coded by Thrive Themes. We want to match their color when appropriate.
+/// @type Color
+$ns-thrive-border-color: #EBE9E9 !default;
+
+/// Shortcut: Matches the hard-coded gutters/margins in Thrive Themes.
+/// @type Number
+$ns-thrive-margin-default: 20px !default;
+
+/// Margins/padding that applies to the outer containers that touch the left/right edges of the browsers. The 
+/// primary purpose of this variable is to ensure that any content isn't hidden/obscured by the Monarch Sharing 
+/// widget that floats on the left side of the browser above the content. (this number should be slightly bigger 
+/// than the width of their component)
+/// @type Number
+$ns-thrive-desktop-margin-outer: 45px !default;
+
+
+
+
+
+
+/// Container and button border radius for consistency.
+/// @type Number
+$ns-btn-border-radius: 4px !default;
+
+/// Common size for callouts' `max-width`, limiting it on full-width pages.
+/// @type Number
+$ns-common-callout-max-width: 824px !default;
+
+/// Common size for spacing between components inside the flow of content. (ie...callout boxes, cta, share, subscribes, etc)
+/// @type Number
+$ns-common-content-vspacer: ns-calc-vr(2) !default;
+
+
+
+
+
+/// Font stack applied to the custom/brand "Mrs Ant" font. Please note, this is ony used in the header tagline for now.
+/// @type String
+$ns-font-stack-mrs-ant: "Mrs Ant", serif;
+
+
+
+
+
+
+/// Relative file path that points to the theme's `/images` directory.
+/// @type String
+$ns-path-to-images: "../pressive-child/images/";
+
+/// Relative file path that points to the theme's `/font` directory.
+/// @type String
+$ns-path-to-fonts: "../pressive-child/fonts/";
+
+
+
+
+
+

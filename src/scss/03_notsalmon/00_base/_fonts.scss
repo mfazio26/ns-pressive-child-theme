@@ -1,0 +1,20 @@
+// ============================================================================================================
+// =============== FONTS : VARIABLES ==========================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== FONTS : EXPORT =============================================================================
+// ============================================================================================================
+
+@mixin ns-export-ns-base-fonts() {
+
+	@font-face {
+	  font-family: 'Mrs Ant';
+	  src: url('#{$ns-path-to-fonts}hipopotam_studio_-_mrsant-regular-webfont.eot'); /* IE9 Compat Modes */
+	  src: url('#{$ns-path-to-fonts}hipopotam_studio_-_mrsant-regular-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	       url('#{$ns-path-to-fonts}hipopotam_studio_-_mrsant-regular-webfont.woff2') format('woff2'), /* Super Modern Browsers */
+	       url('#{$ns-path-to-fonts}hipopotam_studio_-_mrsant-regular-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+	       url('#{$ns-path-to-fonts}hipopotam_studio_-_mrsant-regular-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+	       url('#{$ns-path-to-fonts}hipopotam_studio_-_mrsant-regular-webfont.svg#mrs_ant_regularregular') format('svg'); /* Legacy iOS */
+	}
+}

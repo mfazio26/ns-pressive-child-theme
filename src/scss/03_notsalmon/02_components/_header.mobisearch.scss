@@ -1,0 +1,112 @@
+// ============================================================================================================
+// =============== HEADER MOBI SEARCH : VARIABLES =============================================================
+// ============================================================================================================
+
+$ns-header-mobisearch-input-height: 38px !default;
+
+// ============================================================================================================
+// =============== HEADER MOBI SEARCH : EXPORT ================================================================
+// ============================================================================================================
+
+@mixin ns-export-ns-components-header-mobisearch() {
+
+	// block
+	// note: search bar only visible on mobile
+	.ns-header-mobisearch {
+		$block_selector: &;
+
+		padding: ($ns-thrive-margin-default / 2);
+		border-bottom: 1px solid $ns-thrive-border-color;
+		background-color: $ns-brand-light-blue;
+
+		// pseudo-child: we need to clear the element since there are "float" elements inside.
+		&:after {
+			@include ns-size($height: 0);
+			content: "";
+			display: block;
+			line-height: 0;
+			visibility: hidden;
+			clear: both;
+		}
+
+		// block element: .ns-header-mobisearch-form
+		// note: the following styles are mostly designed to mimic the sidebar search bar defined by Thrive's 
+		// Pressive Theme. there are only a few style exceptions where we deviated to make it more "NS".
+		&-form {
+			
+			// shared elements: .ns-header-mobisearch-form__input, .ns-header-mobisearch-form__btn
+			&__input, 
+			&__btn {
+				@include ns-position($position: relative);
+				@include ns-size($height: $ns-header-mobisearch-input-height);
+				@include ns-button-transition($property: color);
+				float: left;
+				color: $ns-brand-grayscale-3;
+				background: $ns-brand-white;
+				line-height: 1;
+				border: 1px solid $ns-brand-grayscale-4;
+				box-sizing: border-box;
+			}
+			
+			// element: .ns-header-mobisearch-form__input
+			&__input {
+				@include ns-position($z-index: 1);
+				@include ns-size($width: 81%);
+				@include ns-type-family($is-heading: true);
+
+				// note: specificity battle with Thrive! so, we have to set our styles like this instead.
+				font-size: ns-type-get(reduce, font-size, true) !important;
+				line-height: ns-type-get(reduce, line-height, true) !important;
+				
+				padding: 6px 0 6px 9px;
+				border-right-width: 0 !important;
+				border-right-color: transparent;
+				border-radius: 0;
+				-webkit-appearance: none;
+			}
+
+			// element: .ns-header-mobisearch-form__btn
+			&__btn {
+				@include ns-position($z-index: 0);
+				@include ns-size($width: 18%);
+				font-family: "pressive_font";
+				font-size: 18px;
+				speak: none;
+				font-style: normal;
+				font-weight: normal;
+				font-variant: normal;
+				text-transform: none;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				border-left-width: 0 !important;
+				border-left-color: transparent;
+				cursor: pointer;
+
+				// pseudo-child: 1px stroke divider/rule
+				&:before {
+					@include ns-position($position: absolute);
+					@include ns-size($width: 1px, $height: 20px);
+					background: $ns-brand-grayscale-4;
+					content: "";
+					display: block;
+				}
+				
+				// pseudo-child: magnifying glass icon
+				&:after {
+					content: "\73";
+					font-weight: 700;
+				}
+
+				// hover state: change color!
+				&:hover {
+					color: $ns-brand-primary-color;
+				}
+			}
+		}
+
+		// breakpoint: hide mobi search bar as soon as desktop nav is available (bc it has its own search!)
+		@include ns-breakpoint-simple($min-width: 775px) {
+			display: none;
+		}
+	}
+}

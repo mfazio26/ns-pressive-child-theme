@@ -1,0 +1,202 @@
+// ============================================================================================================
+// =============== BUTTONS : VARIABLES ========================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== BUTTONS : EXPORT ===========================================================================
+// ============================================================================================================
+
+@mixin ns-export-thrive-elements-buttons() {
+
+	// ===== GENERAL BUTTONS ==================================================================================
+	.btn {
+		border-radius: $ns-btn-border-radius;
+	}
+	
+	// ===== READ MORE BUTTON =================================================================================
+	.btn.small.mrb {
+		@include ns-button-primary-colors();
+	}
+
+	// base and text button
+	.wrp.cnt.gin .mrb, 
+	.wrp.cnt.gin .mre {
+		@include ns-position($left: $ns-thrive-margin-default, $right: $ns-thrive-margin-default);
+		@include ns-type-size(reduce, "auto");
+		@include ns-type-style($is-heading: false, $bold: false);
+		text-align: left;
+		text-transform: none;
+	}
+
+	// button style
+	.wrp.cnt.gin .mrb.btn {
+		@include ns-position($left: auto, $right: auto);
+		@include ns-size($max-width: 100%);
+		display: inline-block;
+		margin-left: $ns-thrive-margin-default;
+		margin-right: $ns-thrive-margin-default;
+	}
+
+	// ===== PAGINATION BUTTONS ===============================================================================
+	.bSe .pgn > span, 
+	.bSe .pgn > a {
+		@include ns-type-family($is-heading: false);
+		@include ns-type-size(reduce, "auto");
+		@include ns-type-style($is-heading: false, $bold: false);
+		@include ns-button-primary-colors();
+		padding-top: ns-calc-vr(0.1); // magic number
+		border-radius: $ns-btn-border-radius;
+	}
+
+	.pgn>span.current, 
+	.pgn>a.current {
+		background: $ns-brand-white;
+		border: 1px solid $ns-brand-primary-color;
+		color: $ns-brand-primary-color;
+
+		&:hover {
+			background: $ns-brand-white;
+			border: 1px solid $ns-brand-primary-color;
+			color: $ns-brand-primary-color;
+			cursor: default;
+		}
+	}
+
+	.pgn>span.dots {
+		&:hover {
+			background: $ns-brand-primary-color;
+			color: $ns-brand-white;
+			cursor: default;
+		}
+	}
+
+	.pgn>.page-numbers:not(.prev):not(.next) {
+		@include ns-breakpoint-simple($max-width: 774px){
+			display: none;
+		}
+	}
+
+
+	// ===== PREV/NEXT POST BUTTONS ===========================================================================
+	.pnav {
+		@include ns-type-family($is-heading: false);
+		@include ns-type-size(reduce, "auto");
+		border: 0;
+
+		// <a>
+		& a.pav {
+			color: $ns-brand-primary-color;
+
+			& > span {
+				@include ns-button-transition($property: color);
+				color: inherit;
+			}
+
+			// prev/next post label
+			& > span:first-child {
+				@include ns-type-family($is-heading: true);
+				@include ns-type-style($is-heading: true, $bold: true);
+				margin-bottom: ns-calc-vr(0.25);
+			}
+
+			// no need for two overlapping borders (ie...left and right columns)
+			&.right {
+				border-left: 0;
+			}
+
+			// highlight
+			&:hover {
+				& > span,
+				& > span:first-child {
+					color: $ns-brand-grayscale-1;
+				}
+			}
+		}
+
+		// on small screens, hide the article titles bc some are very long, get squished and wrap oddly.
+		@include ns-breakpoint-simple($max-width: 650px){
+			
+			// <a>
+			& a.pav {
+				& > span:last-child {
+					display: none;
+				}
+
+				// push the buttons to their respective outer edges
+				&.left {
+					text-align: left;
+					padding-right: $ns-thrive-margin-default;
+				}
+
+				&.right {
+					text-align: right;
+					padding-left: $ns-thrive-margin-default;
+				}
+			}
+		}
+
+		// on small screens, make sure the widget doesn't touch the bottom (ie...the top of the sidebar)
+		@include ns-breakpoint-simple($max-width: 774px){
+			padding-bottom: ns-calc-vr(1);
+		}
+	}
+
+	
+	// ===== MEGA BUTTONS =====================================================================================
+	// @see /about/brand-story
+	// increase specificifity!!!
+	.mbi.mbi {
+		@include ns-button-primary-colors;
+		border-radius: $ns-btn-border-radius;
+		transition: all 0.2s ease 0s;
+		text-align: center;
+
+		// button headline
+		& .mbt {
+			@include ns-type-family($is-heading: true);
+			@include ns-type-size(medium, "auto");
+			@include ns-type-style($is-heading: true, $bold: false);
+
+			// breakpoint: on small screens make the heading a little smaller.
+			@include ns-breakpoint-simple($max-width: 540px) {
+				@include ns-type-size(standard, reduce);
+				@include ns-type-style($is-heading: true, $bold: true);
+				text-transform: uppercase;
+			}
+		}
+
+		// button subheadline
+		& .mbb {
+			@include ns-type-family($is-heading: false);
+			@include ns-type-size(reduce, "auto");
+			@include ns-type-style($is-heading: false, $bold: false);
+		}
+
+		// modifier: full width
+		&.full {
+
+			// text container?
+			& .mbr {
+				display: block;
+				box-sizing: border-box;
+			}
+		}
+	}
+
+	// ===== 404 SEARCH BUTTON ================================================================================
+	.lost form .btn {
+		
+		// child: submit button
+		& input[type="submit"]:not(.search-button) {
+			background-color: $ns-brand-primary-color;
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+
+		// modified child hover
+		&:hover input[type="submit"]:not(.search-button) {
+			background-color: $ns-brand-grayscale-1;
+		}
+	}
+}
+

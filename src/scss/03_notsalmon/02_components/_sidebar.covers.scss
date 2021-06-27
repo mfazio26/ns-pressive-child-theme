@@ -1,0 +1,51 @@
+// ============================================================================================================
+// =============== SIDEBAR COVERS : VARIABLES =================================================================
+// ============================================================================================================
+
+
+
+// ============================================================================================================
+// =============== SIDEBAR COVERS : EXPORT ====================================================================
+// ============================================================================================================
+
+@mixin ns-export-ns-components-sidebar-covers() {
+
+	// ===== BOOK/COURSE COVER : SIDEBAR WIDGET ===============================================================
+	// block
+	// note: this element is shown on single Book and Course pages at the top of the sidebar.		
+	.ns-sidebar-widget-cover {
+		$parent-selector: &;
+
+		// element: .ns-sidebar-widget-cover__container
+		&__container {
+			text-align: center;
+			// margin-bottom: ns-calc-vr(1);
+		}
+
+		// element: .ns-sidebar-widget-cover__title
+		&__title {
+			@include ns-type-style($is-heading: true, $bold: true);
+			color: $ns-brand-grayscale-2;
+			text-transform: uppercase;
+			margin-top: ns-calc-vr(0.25);
+			
+			// increase specificity!
+			#{$parent-selector} & {
+				@include ns-type-size(standard, reduce);	
+			}
+		}
+
+		// element: .ns-sidebar-widget-cover__image
+		&__image {
+
+		}
+
+		// modifier: book post type
+		&--book { }
+		
+		// modifier: course post type
+		&--course { }
+
+	}
+}
+

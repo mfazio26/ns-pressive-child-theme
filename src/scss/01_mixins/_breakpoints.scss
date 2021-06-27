@@ -1,0 +1,54 @@
+////
+/// @access public
+/// @group mixins-breakpoints
+//// 
+
+// ============================================================================================================
+// =============== MIXINS : BREAKPOINTS =======================================================================
+// ============================================================================================================
+
+/// Creates an `@media (...)` media query that can have a combination of `max-width`, `min-width` and 
+/// `-webkit-device-pixel-ratio` values.
+/// @parameter {Number} $min-width [null] - The media query `min-width`.
+/// @parameter {Number} $max-width [null] - The media query `max-width`.
+/// @parameter {Number} $pixel-ratio [null] - The media query `-webkit-device-pixel-ratio`.
+@mixin ns-breakpoint-simple($min-width: null, $max-width: null, $pixel-ratio: null) {
+	$min: if($min-width != null, "and (min-width: #{$min-width})", "");
+	$max: if($max-width != null, "and (max-width: #{$max-width})", "");
+	$ratio: if($pixel-ratio != null, "and (-webkit-device-pixel-ratio: #{$pixel-ratio})", "");
+	$query: $min + " " + $max + " " + $ratio;
+
+	@media only screen #{$query} {
+		@content;
+	}
+}
+
+/// Creates an `@media (...)` media query that can have a combination of `min-device-width` and `max-device-width` 
+/// values. Please note, we aren't really using this much.
+/// @parameter {Number} $min-width [null] - The media query `min-device-width`.
+/// @parameter {Number} $max-width [null] - The media query `max-device-width`.
+@mixin ns-breakpoint-device($min-width: null, $max-width: null){
+	$min: if($min-width != null, "and (min-device-width: #{$min-width})", "");
+	$max: if($max-width != null, "and (max-device-width: #{$max-width})", "");
+	$query: $min + " " + $max;
+	
+	@media only screen #{$query} {
+		@content;
+	}
+}
+
+/// Creates an `@media (...)` media query that can have a combination of `device-width`, `device-height` and 
+/// `-webkit-device-pixel-ratio` values. Please note, we aren't really using this much.
+/// @parameter {Number} $width [null] - The media query `device-width`.
+/// @parameter {Number} $height [null] - The media query `device-height`.
+/// @parameter {Number} $pixel-ratio [null] - The media query `-webkit-device-pixel-ratio`.
+@mixin ns-breakpoint-device-dims($width: null, $height: null, $pixel-ratio: null){
+	$w: if($width != null, "and (device-width: #{$width})", "");
+	$h: if($height != null, "and (device-height: #{$height})", "");
+	$ratio: if($pixel-ratio != null, "and (-webkit-device-pixel-ratio: #{$pixel-ratio})", "");
+	$query: $w + " " + $h + " " + $ratio;
+
+	@media only screen #{$query} {
+		@content;
+	}
+}

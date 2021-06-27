@@ -1,0 +1,32 @@
+// ============================================================================================================
+// =============== SIDEBAR CTAS : VARIABLES ===================================================================
+// ============================================================================================================
+
+
+
+// ============================================================================================================
+// =============== SIDEBAR CTAS : EXPORT ======================================================================
+// ============================================================================================================
+
+@mixin ns-export-ns-components-sidebar-ctas() {
+
+	// ===== IMAGE CALL-TO-ACTION : SIDEBAR WIDGET ============================================================
+	// block
+	// note: this element is used to enable an image to either (A) trigger a ThriveBox, or (B) open an internal 
+	// or external url
+	.ns-sidebar-widget-image-cta {
+
+		// element: .ns-sidebar-widget-image-cta
+		// note: we just want to make the `<a>` tag be a proper container.
+		&__btn {
+			display: inline-block;
+		}
+
+		// child 
+		// note: we just want to make the auto-generated ThriveBox trigger wrapper `<span>` be a proper container.
+		& > .tve-leads-two-step-trigger {
+			display: block;
+		}
+	}
+}
+

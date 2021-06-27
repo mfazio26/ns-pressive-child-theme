@@ -1,0 +1,110 @@
+// ============================================================================================================
+// =============== MONARCH : VARIABLES ========================================================================
+// ============================================================================================================
+
+
+// ============================================================================================================
+// =============== MONARCH : EXPORT ===========================================================================
+// ============================================================================================================
+
+@mixin ns-export-vendor-monarch() {
+
+	// sidebar social follow
+	// note: if the grid is not exactly 6 items, we need to provide a background color 
+	// that will be visible in any empty cells.
+	.sAsCont .sAs .et_social_networks .et_social_icons_container {
+		background-color: $ns-brand-grayscale-4;
+	}
+
+	// namespace: applied on the <body>
+	.et_monarch {
+
+		// block: mobile "share this" button
+		& .et_social_mobile {
+			background-color: rgba($ns-brand-purple, 0.8);
+			display:none !important;
+		}
+
+		// block: smaller mobile "share this" icon-only button.
+		& .et_social_mobile_button:before {
+			background-color: rgba($ns-brand-purple, 0.8);
+		}
+
+		// block: inline sharer at the bottom of each page/article.
+		& .et_social_inline_bottom {
+			@media only screen and (max-width: 767px){
+				& .et_social_networks.et_social_nospace li {
+					width: 1/5 * 100% !important;
+					clear: none !important;
+
+					&:nth-child(2n+1){
+						clear: none !important;
+					}
+				}
+			}
+		}
+	}
+
+	// Override all instances of Monarch using Open+Sans!
+	.et_monarch .et_social_popup_content, 
+	.et_monarch .et_social_flyin,
+	.et_monarch .et_social_networks, 
+	.et_monarch .et_social_sidebar_networks,
+	.et_monarch .et_social_networks div, 
+	.et_monarch .et_social_sidebar_networks div,
+	.et_monarch .et_social_networks span, 
+	.et_monarch .et_social_sidebar_networks span,
+	.et_monarch .et_social_networks h2, 
+	.et_monarch .et_social_sidebar_networks h2,
+	.et_monarch .et_social_networks h3, 
+	.et_monarch .et_social_sidebar_networks h3,
+	.et_monarch .et_social_networks h4, 
+	.et_monarch .et_social_sidebar_networks h4,
+	.et_monarch .et_social_networks p, 
+	.et_monarch .et_social_sidebar_networks p,
+	.et_monarch .et_social_networks a, 
+	.et_monarch .et_social_sidebar_networks a,
+	.et_monarch .et_social_networks font, 
+	.et_monarch .et_social_sidebar_networks font,
+	.et_monarch .et_social_networks img, 
+	.et_monarch .et_social_sidebar_networks img,
+	.et_monarch .et_social_networks strike, 
+	.et_monarch .et_social_sidebar_networks strike,
+	.et_monarch .et_social_networks strong, 
+	.et_monarch .et_social_sidebar_networks strong,
+	.et_monarch .et_social_networks b, 
+	.et_monarch .et_social_sidebar_networks b,
+	.et_monarch .et_social_networks u, 
+	.et_monarch .et_social_sidebar_networks u,
+	.et_monarch .et_social_networks i, 
+	.et_monarch .et_social_sidebar_networks i,
+	.et_monarch .et_social_networks ol, 
+	.et_monarch .et_social_sidebar_networks ol,
+	.et_monarch .et_social_networks ul, 
+	.et_monarch .et_social_sidebar_networks ul,
+	.et_monarch .et_social_networks li, 
+	.et_monarch .et_social_sidebar_networks li,
+	.et_monarch .widget_monarchwidget li, 
+	.et_monarch .widget .et_social_networks li,
+	.et_monarch .widget_text .et_social_networks li, 
+	.et_monarch .widget_monarchwidget li:before,
+	.et_monarch .widget_monarchwidget li:after,
+	.et_monarch .et_social_popup_content h3,
+	.et_monarch .et_social_popup_content p, 
+	.et_monarch .et_social_popup_content:after,
+	.et_monarch .et_social_flyin h3, 
+	.et_monarch .et_social_flyin p, 
+	.et_monarch .et_social_flyin:after,
+	.et_monarch .et_social_pinterest_window h3, 
+	.et_monarch .et_social_mobile,
+	.et_monarch .et_social_mobile_button, 
+	.et_monarch .et_social_heading,
+
+	.et_monarch .et_social_sidebar_networks_mobile,
+	.et_monarch .et_social_popup h3,
+	.et_monarch .et_social_locked h3,
+	.et_monarch .et_social_popup p {
+	    @include ns-type-family($is-heading: false);
+	}
+}
+

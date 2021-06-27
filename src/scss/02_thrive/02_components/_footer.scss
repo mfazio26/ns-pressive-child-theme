@@ -1,0 +1,207 @@
+// ============================================================================================================
+// =============== FOOTER : VARIABLES =========================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== FOOTER : EXPORT ============================================================================
+// ============================================================================================================
+
+@mixin ns-export-thrive-components-footer() {
+
+	footer {
+		margin-top: 0;
+		text-align: center;
+
+		&,
+		& .fmw,
+		& .fmm {
+			background-color: $ns-brand-white;
+		}
+
+		// wave border
+		&:before {
+			@include ns-size($width: 100%, $height: 49px);
+			@include ns-background($repeat: no-repeat, $position: center center, $image: "dividers/wave-border-wide-1174x49.jpg", $prependPath: true);
+			content: "";
+			display: block;
+		}
+		
+		// ===== WIDGET SECTION ===============================================================================
+		// if a widget renders as a `<section>` we need remove the margins that are intended for sidebar widgets.
+		& section {
+			margin: 0 auto;
+
+			// menu widget button
+			&[id*='nav_menu-'] ul li a {
+				@include ns-type-size(small, "auto");
+				@include ns-type-style($is-heading: true, $bold: true);
+				padding-top: ns-calc-vr(0.25);
+				padding-bottom: ns-calc-vr(0.25);
+				color: $ns-brand-grayscale-2;
+				text-transform: uppercase;
+
+				&:before {
+					display: none;
+				}
+
+				&:hover {
+					color: $ns-brand-primary-color;
+				}
+			}
+		}
+
+		// ===== MAIN FOOTER AREA =============================================================================
+		& .fmw {
+			padding-top: ns-calc-vr(1.5);
+			padding-bottom: ns-calc-vr(1);
+
+			// main footer columns
+			& .oth {
+				@include ns-size($width: 50%);
+				box-sizing: border-box;
+				padding: 0 ($ns-thrive-margin-default / 2);
+
+				// first and last column are smaller
+				&:first-child,
+				&.lst {
+					@include ns-size($width: 25%);
+				}
+			}
+
+			// text widget in column
+			& .textwidget {
+				color: $ns-brand-grayscale-2;
+
+				// remove top margin of first paragraph
+				& p:first-child {
+					margin-top: 0;
+				}
+			}
+
+			// override all paragraph colors
+			& p {
+				@include ns-type-size(standard, "auto");
+				color: $ns-brand-grayscale-2;
+			}
+
+			// ns image cta widget (be happy dammit graphic)
+			& .ns-sidebar-widget-image-cta {
+				@include ns-size($max-width: 232px);
+			}
+		}
+
+		// ===== SECONDARY FOOTER AREA ========================================================================
+		& .fmm {
+			@include ns-type-family($is-heading: false);
+			@include ns-type-size(small, "auto");
+			@include ns-type-style($is-heading: false, $bold: false);
+			background-color: $ns-brand-grayscale-2;
+			padding-left: $ns-thrive-margin-default;
+			padding-right: $ns-thrive-margin-default;
+
+			// normalize font colors
+			&,
+			& p,
+			& a {
+				color: darken($ns-brand-white, 30%);
+			}
+
+			// paragraph: get rid of top margin for vertical centering
+			& p {
+				margin-top: 0;
+			}
+
+			// menu button (colors)
+			& a {
+				&:hover {
+					@include ns-button-transition($property: color);
+					color: $ns-brand-white;
+				}
+			}
+
+			// menu
+			& .footer_menu {
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+
+			@include ns-breakpoint-simple($min-width: 940px){
+				padding-left: $ns-thrive-desktop-margin-outer;
+				padding-right: $ns-thrive-desktop-margin-outer;
+			}
+		}
+
+		// ===== BREAKPOINTS ==================================================================================
+		// expand breakpoint (mobile)
+		@include ns-breakpoint-simple($max-width: 774px){
+			// main content area
+			& .fmw {
+				padding-top: 0;
+				padding-bottom: 0;
+
+				// image cta widget
+				& .ns-sidebar-widget-image-cta {
+					margin-bottom: ns-calc-vr(1);
+				}
+			}
+
+			// secondary footer area
+			& .fmm {
+				text-align: center;
+
+				// stack elements
+				& p,
+				& .fm-m,
+				& .fm-m .menu-item {
+					float: none;
+				}
+
+				// copywrite text to full-width
+				& > .wrp > p {
+					@include ns-size($width: 100%, $max-width: none);
+					margin-bottom: ns-calc-vr(0.5);
+				}
+
+				// ancillary menu item
+				& .fm-m .menu-item {
+					margin-bottom: ns-calc-vr(0.25);
+
+					// get rid of menu icon
+					&:before {
+						display: none;
+					}
+				}
+			}
+		}
+
+		// Monarch social "share this" `fixed:bottom` social button is visible (mobile)
+		@include ns-breakpoint-simple($max-width: 1024px){
+			// secondary footer area
+			// we need to ensure that the ancillary footer doesn't get stuck under the fixed Monarch social button.
+			& .fmm {
+				padding-bottom: ns-calc-vr(1.25);
+			}
+		}
+
+		// above mobile size (3-column)
+		@include ns-breakpoint-simple($min-width: 775px){
+			& section[id*='nav_menu-'] {
+				& ul {
+					margin-bottom: 0;
+
+					& li {
+						display: inline-block;
+						border-bottom: 0;
+						margin: 0 ns-calc-vr(0.25);
+
+						& a {
+							display: inline-block;
+							padding: 0;
+							border-bottom: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+}

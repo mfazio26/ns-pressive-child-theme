@@ -1,0 +1,128 @@
+// ============================================================================================================
+// =============== LAYOUT : VARIABLES =========================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== LAYOUT : EXPORT ============================================================================
+// ============================================================================================================
+
+@mixin ns-export-thrive-layouts-layout() {
+
+	// ===== FULL WIDTH ARCHITECT SECTIONS ====================================================================
+
+	// By default, a Thrive Architect section that has the "stretch to fit" the browser's full width enabled 
+	// requires javascript to calculate the actual width...which causes a layout shift after on load. The 
+	// reason for this is that the architect builder puts things inside a master container that already has a 
+	// limited width applied...so, technically, setting width:100% only stretches to the size of the container. 
+	// So, the javascript has to calculate the full browser width and the offset in order for a full-width 
+	// "section" to work properly.
+	// 
+	// Instead, we can just use viewport units (vw) and calc() to do the exact same thing without having to 
+	// wait for javascript to load.
+	// .thrv_wrapper.thrv-page-section.tcb-window-width {
+	// 	width: 100vw !important;
+	// 	left: -15px !important;
+
+	// 	@media (min-width: 940px){
+	// 		width: calc(100vw + 80px) !important;
+	// 		left: -45px !important;	
+	// 	}
+	// }
+
+
+	// ===== MAIN CONTAINER/WRAPPER ===========================================================================
+	// note: main wrapper (holds main content and sidebar columns)
+	.wrp {
+		@include ns-size($width: 100%, $max-width: 1300px);
+
+		// breakpoint: mobile only
+		@include ns-breakpoint-simple($max-width: 740px){
+			padding-top: 0;
+		}
+
+		// breakpoint: medium up
+		@include ns-breakpoint-simple($min-width: 940px){
+			padding-left: $ns-thrive-desktop-margin-outer;
+			padding-right: $ns-thrive-desktop-margin-outer;
+		}
+	}
+	
+	// container
+	.cnt {
+		color: $ns-brand-grayscale-2;
+		margin-top: 0;
+		margin-bottom: ns-calc-vr(2);
+		box-shadow: none;
+
+		// inner main content column container
+		& .bSe {
+			&.left,
+			&.right {
+				@include ns-breakpoint-simple($max-width: 940px){
+					@include ns-size($width: 100%);	
+				}
+			}
+		}
+
+		// inner sidebar column container
+		& .sAs {
+			&.left,
+			&.right {
+				@include ns-breakpoint-simple($max-width: 940px){
+					@include ns-size($width: 100%);
+					padding-top: ns-calc-vr(1);
+					padding-bottom: ns-calc-vr(1);
+				}
+			}
+		}
+	}
+
+	// if full width template, allow the container to become full width. Please note, this means we have to pay 
+	// special attention to the content inside!
+	.page-template-fullwidth-page > .wrp.cnt {
+		@include ns-size($max-width: none);
+	}
+	
+	// ===== MAIN CONTENT & SIDEBAR COLUMNS ===================================================================
+	// note: the original `display: table-footer-group` doesn't expand all the way
+	.bSeCont,
+	.sAsCont {
+		display: block;
+	}
+
+	// ===== TEMPLATE : FULL WIDTH ============================================================================
+	// note: primarily used on sales pages (ie...hateloss, do-it, etc)
+	// - we have to get rid of some of the spacing on the main container.
+	.page-template-fullwidth-page {
+		 & .wrp.cnt {
+			background-color: $ns-brand-white;
+			margin-bottom: 0;
+			padding-top: 0;
+		}
+	}
+
+	// note: ...and, this is down a few levels below `.wrp.cnt`.
+	.fullWidth {
+	
+		// Thive Content Build: Page Section
+		// note: we need to match our ns custom gutters as well as ensuring that the inner content doesn't 
+		// overlap the Monarch Share "fixed" component on the side of the viewport.
+		& .out .in {
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+
+		@include ns-breakpoint-simple($min-width: 940px){
+
+			& .out {
+				margin-left: ($ns-thrive-desktop-margin-outer * -1);
+				margin-right: ($ns-thrive-desktop-margin-outer * -1);
+			}
+
+			& .out .in {
+				padding-left: $ns-thrive-desktop-margin-outer;
+				padding-right: $ns-thrive-desktop-margin-outer;	
+			}
+		}
+	}
+}

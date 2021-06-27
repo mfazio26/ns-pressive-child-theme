@@ -1,0 +1,26 @@
+// ============================================================================================================
+// =============== FONT-AWESOME EXPORTS ONLY ==================================================================
+// ============================================================================================================
+// BentoBox: 
+// - This file is derived from bower_components/font-awesome/scss/font-awesome.scss.
+// 			 
+// Intended use: 
+// - Override the default Font-Awesome imports and re-path to use our /assets/bower_components/ directory instead.
+// - Only @import files that export classes directly. DO NOT @import variables, function, mixins, etc.
+
+/*!
+ *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
+
+@import "../../../../bower_components/font-awesome/scss/path";
+@import "../../../../bower_components/font-awesome/scss/core";
+@import "../../../../bower_components/font-awesome/scss/larger";
+@import "../../../../bower_components/font-awesome/scss/fixed-width";
+@import "../../../../bower_components/font-awesome/scss/list";
+@import "../../../../bower_components/font-awesome/scss/bordered-pulled";
+@import "../../../../bower_components/font-awesome/scss/animated";
+@import "../../../../bower_components/font-awesome/scss/rotated-flipped";
+@import "../../../../bower_components/font-awesome/scss/stacked";
+@import "../../../../bower_components/font-awesome/scss/icons";
+@import "../../../../bower_components/font-awesome/scss/screen-reader";

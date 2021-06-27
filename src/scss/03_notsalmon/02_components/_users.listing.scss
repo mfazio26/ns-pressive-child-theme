@@ -1,0 +1,109 @@
+// ============================================================================================================
+// =============== USERS LISTING : VARIABLES ==================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== USERS LISTING : EXPORT =====================================================================
+// ============================================================================================================
+
+@mixin ns-export-ns-components-users-listing() {
+
+	// note: this is only used on the `/contributors` page and uses the `Simple User Listing Plugin`. It is 
+	// only included for legacy purposes. Please see `https://wordpress.org/plugins/simple-user-listing/` for 
+	// more information.
+	.ns-user-listing {
+		
+
+		// child: search box
+		& .author-search {
+			display: none;
+		}
+
+		& .user-list-wrap {
+			display: flex;
+			flex-wrap: wrap;
+			text-align: center;
+			justify-content: center;
+		}
+
+		// child: author item
+		& .author-block {
+			@include ns-size($width: 50%);
+			box-sizing: border-box;
+			padding-left: $ns-thrive-margin-default;
+			padding-right: $ns-thrive-margin-default;
+			margin-bottom: $ns-common-content-vspacer;
+
+			// immediate child: author title/link
+			& > h2 {
+				@include ns-type-family($is-heading: true);
+				@include ns-type-size(medium, "auto");
+				@include ns-type-style($is-heading: true, $bold: true);
+				margin-top: 0;
+
+				// immediate child: author's number of posts
+				& > .post-count {
+					@include ns-type-family($is-heading: false);
+					@include ns-type-size(standard, "auto");
+					@include ns-type-style($is-heading: false, $bold: true);
+					display: block;
+
+					// immediate child: hyphen between author name and count
+					& > .hyphen {
+						display: none;
+					}
+				}
+			}
+
+			// immediate child: author photo
+			& > .photo {
+				background-color: $ns-brand-light-blue;
+				padding: 6px;
+				border-radius: 50%;
+			}
+		}
+
+		// child: pagination navigation
+		& #nav-single {
+			@include ns-size($width: 100%);
+			display: flex;
+			justify-content: center;
+			margin-bottom: $ns-common-content-vspacer;
+
+			// child: buttons
+			& .nav-next,
+			& .nav-previous {
+				margin-left: ($ns-thrive-margin-default / 2);
+				margin-right: ($ns-thrive-margin-default / 2);
+
+				// immediate child: link/button
+				& > a {
+					@include ns-button-primary($has-span: false);
+				} 
+			}
+
+			// child: weird arrow glyph
+			& .meta-nav {
+				display: none;
+			}
+
+			// child: "user navigation" label
+			& .assistive-text {
+				@include element-invisible;
+				margin: 0;
+			}
+		}
+
+		
+		// breakpoint: small screens only
+		@include ns-breakpoint-simple($max-width: 774px){
+			padding-top: $ns-common-content-vspacer;
+
+			// child: author item
+			& .author-block {
+				@include ns-size($width: 100%);
+				@include ns-hmargins-auto;
+			}	
+		}
+	}
+}

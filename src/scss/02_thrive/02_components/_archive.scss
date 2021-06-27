@@ -1,0 +1,71 @@
+// ============================================================================================================
+// =============== ARCHIVE : VARIABLES ========================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== ARCHIVE : EXPORT ===========================================================================
+// ============================================================================================================
+
+@mixin ns-export-thrive-components-archive() {
+
+	// ===== LISTING ITEM TITLES ==============================================================================
+	.cnt .entry-title a {
+		transition: color 0.2s ease;
+
+		&:hover {
+			color: $ns-brand-primary-color;
+		}
+	}
+
+	// ===== LISTING ITEM IMAGE ===============================================================================
+	.ind,
+	.gin,
+	.mry {
+		// featured image
+		& .fwit {
+			box-sizing: border-box;
+			border: 1px solid $ns-brand-grayscale-2;
+			
+			// + sign
+			&:before {
+				@include ns-position($top: 50%, $bottom: auto);
+				@include ns-size($height: auto);
+				content: "\2665"; // heart icon
+				font-size: 2rem;
+				line-height: 0;
+				transform: translateY(-50%);
+				margin: auto;
+			}
+			
+			// pseudo modifier: hover
+			&:hover {
+				// color overlay
+				&:after {
+					background-color: $ns-brand-primary-color;
+				}
+			}
+		}
+	}
+	
+	// ===== GRID ARTICLE ITEM ================================================================================
+	.wrp.cnt.gin .bSeCont .gr-i {
+		border: none;
+		margin-bottom: ns-calc-vr(2);
+
+		// featured image
+		& .fwit {
+			@include ns-size($height: auto);
+			padding-top: 75%;
+			margin-bottom: ns-calc-vr(0.5);
+		}
+	}
+
+	// article content wrapper
+	// note: this is used in multiple places, including sidebar content
+	.awr {
+		// child: article content inner
+		& .awr-i {
+			padding-left: 0;
+		}
+	}
+}

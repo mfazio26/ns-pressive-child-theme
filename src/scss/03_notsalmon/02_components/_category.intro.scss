@@ -1,0 +1,89 @@
+// ============================================================================================================
+// =============== CATEGORY INTRO : VARIABLES =================================================================
+// ============================================================================================================
+
+
+// ============================================================================================================
+// =============== CATEGORY INTRO : EXPORT ====================================================================
+// ============================================================================================================
+
+@mixin ns-export-ns-components-category-intro() {
+
+	// block
+	// blog categories can have an intro section – with an image and a short description/intro paragraph.
+	.ns-category-intro {
+		@include ns-size($width: 100%, $max-width: 740px);
+		@include ns-hmargins-auto;
+		padding: 0 35px 0; // matches thrive's .wrp
+
+		// pseudo child: bottom dot border
+		// note: the `max-width` is provided so that it is always smaller than the category image (360px)
+		&:after {
+			@include ns-size($width: 30%, $max-width: 250px, $height: 36px);
+			@include ns-background($repeat: no-repeat, $position: left center, $image: "dividers/dotted-line-purplegray-927x36.jpg", $prependPath: true);
+			content: "";
+			display: block;
+			margin: -10px auto ns-calc-vr(1.25);
+		}
+
+		// element: .ns-category-intro__container (clears the float)
+		&__container {
+			overflow: hidden;
+		}
+
+		// element: .ns-category-intro__figure (wraps the image)
+		&__figure {
+			text-align: center;
+		}
+
+		// element: .ns-category-intro__content
+		// note: by settings `overflow: hidden` it allows this pseudo-column to fill the rest of the remaining 
+		// space next to the floated figure
+		&__content {
+			overflow: hidden;		
+		}
+
+		// element: .ns-category-intro__description
+		&__description {
+			text-align: center;
+			margin-top: ns-calc-vr(-0.5);
+
+			& p {
+				color: $ns-brand-grayscale-2;
+			}
+
+			& a {
+				@include ns-type-style($is-heading: true, $bold: true);
+				color: $ns-brand-primary-color;
+
+				&:hover, &:visited {
+					color: $ns-brand-primary-color;
+				}
+			}
+		}
+		
+		// breakpoint: when sidebar extends and up
+		@include ns-breakpoint-simple($min-width: 941px){
+			@include ns-size($max-width: 1100px);
+			margin-bottom: ns-calc-vr(1);
+
+			// pseudo-child: bottom dot border
+			&:after {
+				display: none;
+			}
+
+			// element: .ns-category-intro__figure
+			&__figure {
+				float: left;
+			}
+
+			// element: .ns-category-intro__description
+			&__description {
+				text-align: left;
+				padding-left: $ns-thrive-margin-default;
+				margin-top: 0;
+			}
+		}
+	}
+}
+

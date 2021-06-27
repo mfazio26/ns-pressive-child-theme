@@ -1,0 +1,143 @@
+////
+/// @group notsalmon-components-videocourses-listing
+/// @access public
+//// 
+
+// ============================================================================================================
+// =============== VIDEO COURSES LISTING : VARIABLES ==========================================================
+// ============================================================================================================
+
+
+// ============================================================================================================
+// =============== VIDEO COURSES LISTING : EXPORT =============================================================
+// ============================================================================================================
+
+@mixin ns-export-ns-components-videocourses-listing() {
+
+	// ===== SIMPLE LISTING BOX ===============================================================================
+	// block
+	// This element is used on the /courses page to render a 3-column grid of the available video courses.
+	.ns-videocourses-listing {
+		@include ns-size($max-width: 960px);
+		margin: ns-calc-vr(2) auto;
+
+		// element: .ns-videocourses-listing__heading
+		// note: optional section heading/title
+		& &__heading {
+			text-align: center;
+			margin-bottom: ns-calc-vr(2);
+		}
+
+		// element: .ns-videocourses-listing__list
+		// note: 3-column list container
+		& &__list {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+
+		// block element: .ns-videocourses-listing__item (article)
+		& &-item {
+			@include ns-size($width: (100% / 3));
+			display: flex;
+			padding: 0 ($ns-thrive-margin-default / 2) ns-calc-vr(1.5);
+
+			// element: .ns-videocourses-listing-item__container
+			// note: inner wrapper to control heights and padding/margins
+			&__container {
+				display: flex;
+				flex-direction: column;
+				text-align: center;
+				background-color: $ns-brand-white;
+				border: 1px solid $ns-thrive-border-color;
+				border-radius: $ns-btn-border-radius;
+				overflow: hidden;
+			}
+
+			// element: .ns-videocourses-listing-item__btn (a)
+			// note: button that wraps the image and content, but not the cta button and footer.
+			&__btn {
+				display: block;
+				font-weight: inherit;
+				cursor: pointer;
+			}
+
+			// element: .ns-videocourses-listing-item__figure
+			// note: wraps the image
+			&__figure {
+
+			}
+
+			// element: .ns-videocourses-listing-item__img
+			// note: featured image
+			&__img {
+				@include ns-size($max-width: 100%, $height: auto);
+				display: block;
+			}
+			
+			// element: .ns-videocourses-listing-item__content
+			// note: wraps the article title and description
+			&__content {
+				text-align: center;
+				padding: ns-calc-vr(1) ns-calc-vr(0.25) ns-calc-vr(0.25);
+			}
+
+			// element: .ns-videocourses-listing-item__title
+			// note: article title
+			&__title {
+				@include ns-type-family($is-heading: true);
+				@include ns-type-size("medium", "auto");
+				@include ns-type-style($is-heading: true, $bold: true);
+				margin-top: 0;
+				margin-bottom: ns-calc-vr(0.75);
+			}
+			
+			// element: .ns-videocourses-listing-item__desc
+			// note: article description
+			&__desc {
+				@include ns-type-size("reduce", "auto");
+				margin-top: 0;
+			}
+
+			// element: .ns-videocourses-listing-item__footer
+			// note: article footer wraps the cta button and optional price
+			&__footer {
+				margin-top: auto;
+				margin-bottom: 0;
+				padding-bottom: ns-calc-vr(1);
+			}
+
+			// element: .ns-videocourses-listing-item__ctabutton (a)
+			// note: cta button
+			&__ctabtn {
+				@include ns-button-primary;
+				
+				// we have to do this to override thrive's <span> specificity.
+				& > span {
+					color: $ns-brand-white;
+				}
+			}
+
+			// element: .ns-videocourses-listing-item__price (span)
+			// note: optional price message below cta
+			&__price {
+				@include ns-type-size("reduce", "auto");
+				display: block;
+				color: $ns-brand-grayscale-2 !important;
+				margin-top: ns-calc-vr(0.25);
+			}
+
+			// breakpoint: medium screens are 2-columns
+			@include ns-breakpoint-simple($max-width: 774px) {
+				@include ns-size($width: 50%);
+				padding-bottom: ns-calc-vr(1);
+			}
+
+			// breakpoint: small screens are 1-column
+			@include ns-breakpoint-simple($max-width: 500px) {
+				@include ns-size($width: 100%);
+			}
+		}
+	}
+}
+

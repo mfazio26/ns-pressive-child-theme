@@ -1,0 +1,256 @@
+////
+/// @group thrive-base-typography
+/// @access public
+//// 
+
+// ============================================================================================================
+// =============== TYPOGRAPHY : VARIABLES =====================================================================
+// ============================================================================================================
+
+/// Stores font properties per font type. These can be used via mixin such as – `ns-type-family($is-heading: true)`. 
+/// @type Map
+$ns-type-family-variants: (
+	heading: (
+		family: ("Raleway", sans-serif),
+		bold: 700,
+		normal: 400
+	),
+
+	standard: (
+		family: ("Roboto", sans-serif),
+		bold: 700,
+		normal: 400
+	)
+) !default;
+
+/// Stores `font-size` and `line-height` properties per size keys. These can be used via mixin such as – 
+/// `ns-type-size(small, "auto")`
+/// @type Map
+$ns-type-size-variants: (	
+	small: (
+		font-size: 0.7778rem,				// 14px
+		line-height: ns-calc-vr(0.8) 		// 24px
+	),
+
+	reduce: (
+		font-size: 0.8889rem,				// 16px
+		line-height: ns-calc-vr(0.8) 		// 24px
+	),
+
+
+	standard: (
+		font-size: 1rem,					// 18px
+		line-height: ns-calc-vr(1) 			// 30px
+	),
+
+	standard2: (
+		font-size: 1.22rem,					// 22px
+		line-height: ns-calc-vr(1)			// 30px
+	),
+
+	standard3: (
+		font-size: 1.33rem,					// 24px
+		line-height: ns-calc-vr(1)			// 30px
+	),
+
+	medium: (
+		font-size: 1.611rem,				// 29px
+		line-height: ns-calc-vr(1)			// 30px
+	),
+
+	large: (
+		font-size: 2.444rem,				// 44px
+		line-height: ns-calc-vr(1.5)		// 45px
+	),
+
+	xlarge: (
+		font-size: 65px,					// 76px
+		line-height: ns-calc-vr(2.5)		// 90px
+	)
+) !default;
+
+// ============================================================================================================
+// =============== EXPORT : TYPOGRAPHY ========================================================================
+// ============================================================================================================
+
+@mixin ns-export-thrive-base-typography() {
+	
+	html, .root {
+		font-size: $ns-type-base-font-size;
+		line-height: $ns-type-base-line-height;
+	}
+
+	body {
+		@include ns-type-family($is-heading: false);
+		@include ns-type-size(standard, "auto");
+		@include ns-type-style($is-heading: false);
+		font-weight: 400;
+	}
+
+	h1 {
+		@include ns-type-h1;
+	}
+
+	h2 {
+		@include ns-type-size(large, "auto");
+		margin: ns-calc-vr(1) 0;
+		
+		@include ns-breakpoint-simple($max-width: 1080px){
+			font-size: ns-type-get($key: medium, $property: font-size, $rem: true) !important;
+			line-height: ns-type-get($key: medium, $property: line-height, $rem: true);
+		}
+
+		@include ns-breakpoint-simple($max-width: 540px){
+			font-size: ns-type-get($key: medium, $property: font-size, $rem: true) !important;
+			line-height: ns-type-get($key: medium, $property: line-height, $rem: true);
+		}
+	}
+
+	h3 {
+		@include ns-type-size(medium, "auto");
+		margin: ns-calc-vr(1.25) 0 ns-calc-vr(1);
+
+		@include ns-breakpoint-simple($max-width: 1080px){
+			font-size: ns-type-get($key: standard3, $property: font-size, $rem: true) !important;
+			line-height: ns-type-get($key: standard3, $property: line-height, $rem: true);
+		}
+
+		@include ns-breakpoint-simple($max-width: 540px){
+			font-size: ns-type-get($key: standard3, $property: font-size, $rem: true) !important;
+			line-height: ns-type-get($key: standard3, $property: line-height, $rem: true);
+		}
+
+		// margin: ns-calc-vr(2) 0 ns-calc-vr(1); // this spacing looks better, but disabled by request.
+		
+		// @include ns-breakpoint-simple($max-width: 1080px){
+		// 	@include ns-type-size(standard, "auto");
+		// 	margin: ns-calc-vr(1) 0 ns-calc-vr(0.5);
+		// }
+
+		// @include ns-breakpoint-simple($max-width: 540px){
+		// 	font-size: ns-type-get($key: standard, $property: font-size, $rem: true) !important;
+		// 	line-height: ns-type-get($key: standard, $property: line-height, $rem: true);
+		// }
+	}
+
+	h4 {
+		@include ns-type-size(standard2, "auto");
+		margin: ns-calc-vr(1) 0 ns-calc-vr(0.5);
+
+		// @include ns-breakpoint-simple($max-width: 540px){
+		// 	font-size: ns-type-get($key: standard, $property: font-size, $rem: true) !important;	
+		// }
+	}
+
+	h5, h6 {
+		@include ns-type-size(standard, "auto");
+		margin: ns-calc-vr(1) 0 ns-calc-vr(0.5);
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		word-wrap: normal;
+	}
+
+	p, ul, ol, pre, table, blockquote {
+		margin-top: ns-calc-vr(1);
+		margin-bottom: ns-calc-vr(1);
+	}
+
+	// intended to ensure that left/right aligned images are contained inside the blockquote and don't flow outside
+	blockquote {
+		overflow: hidden;
+	}
+
+	// ul ul, ol ol, ul ol, ol ul {
+	// 	margin-top: 0;
+	// 	margin-bottom: 0;
+	// }
+
+	// ===== TYPOGRAPHY-RELATED ===============================================================================
+
+	// when a small header is followed by a larger header, make them a little tighter together.
+	// @see /legacy-access/never-again/
+	h3 + h2 { 
+		margin-top: ns-calc-vr(-0.5);
+	}
+
+	// anchors in articles. This also applies to a lot of other things that it should not – like 
+	// listing item titles and pagination.
+	.cnt article a,
+	.bSe a {
+		@include ns-type-style($is-heading: true, $bold: true);
+	}
+
+	// note: when thrive visual editor (1.0) became thrive architect (2.0), we ended up with a few weird styling 
+	// issues. this one occurs inside ThriveBoxes that have a content box – which can be found in a popup lead 
+	// magnets "bonus box" at the bottom.
+	.tve_flt .tve_red.tve_cb5 .tve_cb_cnt p {
+		text-shadow: none !important; // thrive!
+	}
+
+	// listing h2 title
+	.wrp.cnt.gin .gr-i .entry-title {
+		@include ns-type-size(medium, "auto");
+		margin:0 0 ns-calc-vr(-0.5) 0;
+	}
+
+	// first paragraph in post
+	p.ifp {
+		@include ns-type-size(standard, null);
+		margin-top: 0;
+	}
+
+	// thrive's horizontal divider shortcode
+	// @see /legacy-access/never-again, /about/in-the-news
+	.divi.cdivi {
+		background-color: $ns-brand-aqua-blue;
+	}
+
+	// blockquotes inside posts
+	.bSe blockquote {
+		background-color: $ns-brand-light;
+		border-left-color: $ns-brand-mint-green;
+		
+		// removes the margin-top to headings inside blockquote (only if its the first element) so the spacing 
+		// is a little better.
+		& > h2:first-child,
+		& > h3:first-child,
+		& > h4:first-child {
+			margin-top: 0;
+		}
+
+		// special case: if a <p> is the first element, odds are it has an <img> in it.
+		// @see /books/50-off/
+		& > p:first-child {
+			margin-top: 0;
+
+			// & + h3 {
+			// 	margin-top: ns-calc-vr(1);
+			// }
+		}
+
+		
+		// negates Thrive removing all <p> margin-bottoms inside a block quote.
+		& p + p {
+			margin-top: $ns-thrive-margin-default;
+		}
+	}
+
+	// ordered-lists of anchors?
+	ol[type="a"] {
+		& li {
+			margin-bottom: 0;
+
+			&:last-child {
+				margin-bottom: $ns-thrive-margin-default;
+			}
+		}
+	}
+
+	// ===== CUSTOM WYSIWYG STYLES ============================================================================
+	.wysiwyg-color {
+		&--aqua-blue { color: $ns-brand-aqua-blue !important; }
+		&--mint-green { color: $ns-brand-mint-green !important; }
+		&--orange { color: $ns-brand-orange !important; }
+	}
+}

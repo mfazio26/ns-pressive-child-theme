@@ -1,0 +1,72 @@
+////
+/// @access public
+/// @group mixins-buttons
+//// 
+
+// ============================================================================================================
+// =============== MIXINS : BUTTONS ===========================================================================
+// ============================================================================================================
+
+/// Create the styles required form a primary button. Please note, depending on how the button markup is 
+/// structured, we may have to put rules in different places. For example, `<button><span>My Button</span></button>` 
+/// is different than `<button>My Button</button>`.
+/// @parameter {Bool} $use-heading-font [false] - `true` to use heading font family. `false` to use standard body font family.
+/// @parameter {Bool} $use-bold-style [false] - `true` to use bold font style. `false` to use normal font style.
+/// @parameter {String} $font-size [reduce] - The font-size "key" in `$ns-type-size-variants`.
+/// @parameter {String} $line-height ["auto"] - The line-height "key" in `$ns-type-size-variants`. ("auto" will match the font-size key!)
+/// @parameter {String} $display [inline-block] - The display type to apply to `display:`.
+/// @parameter {Number} $inner-padding [12px 17px] - The `padding` shorthand to apply.
+/// @parameter {Bool} $has-span [true] - `true` if the element contains an inner element. `false` if not.
+@mixin ns-button-primary(
+		$use-heading-font: false,
+		$use-bold-style: false,
+		$font-size: reduce,
+		$line-height: "auto",
+		$display: inline-block,
+		$inner-padding: 12px 17px,
+		$has-span: true
+	) {
+	
+	@include ns-type-family($is-heading: $use-heading-font);
+	@include ns-type-size($font-size, $line-height);
+	@include ns-type-style($is-heading: $use-heading-font, $bold: $use-bold-style);
+	@include ns-button-primary-colors;
+	@include ns-button-transition;
+	display: $display;
+	text-align: center;
+	border-radius: $ns-btn-border-radius;
+	cursor: pointer;
+
+	@if $has-span {
+		// immediate child
+		& > span {
+			display: $display;
+			padding: $inner-padding;
+		}	
+	}
+	@else {
+		padding: $inner-padding;
+	}
+	
+}
+
+/// Applies the base color and `:hover` state to a standard primary button.
+@mixin ns-button-primary-colors() {
+	border: none;
+	color: $ns-brand-white;
+	background-color: $ns-brand-primary-color;
+
+	&:hover {
+		color: $ns-brand-white;
+		background-color: $ns-brand-grayscale-1;
+	}
+}
+
+/// Shortcut to apply a button transition property so that all our different button instances match.
+/// @parameter {String} $property [all] - The property that should get the button transition.
+@mixin ns-button-transition($property: all) {
+	transition: $property 0.2s ease 0s;
+}
+
+
+

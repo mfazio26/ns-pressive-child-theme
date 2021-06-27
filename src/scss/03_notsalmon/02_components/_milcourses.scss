@@ -1,0 +1,51 @@
+// ============================================================================================================
+// =============== MIL COURSES : VARIABLES ====================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== MIL COURSES : EXPORT =======================================================================
+// ============================================================================================================
+
+@mixin ns-export-ns-components-milcourses() {
+
+	// ===== MIL COURSES ARCHIVE PAGES ========================================================================
+
+	.post-type-archive-mil_courses {
+
+		// ===== COURSE ITEM ==================================================================================
+		// note: we want to center the "content" so it differs from the standard "post" archives.
+		& .wrp.cnt.gin .gr-i {
+			text-align: center;
+
+			// child: image
+			// note: our courses are uploaded as a square (300x300), so in order to not crop anything, we have 
+			// to force the image to be a square via intrinsic aspect-ratio method.
+			& .fwit {
+				@include ns-size($height: auto);
+				padding-top: 100%;
+			}
+
+			// child: button - center it!
+			& .mrb.btn {
+				@include ns-position($left: 50%);
+				@include ns-hmargins-auto;
+				display: block;
+				transform: translateX(-50%);
+			}
+
+			// mil icon
+			&:after {
+				@include ns-size($width: 60px, $height: 60px);
+				@include ns-position($position: absolute, $top: 1px, $left: 1px, $z-index: 1);
+				@include ns-background($repeat: no-repeat, $size: contain, $position: 0px 2px, $image: "logos/mastersinlife-logo-213x179.png", $prependPath: true);
+				content: "";
+				display: block;
+				box-sizing: border-box;
+				background-color: $ns-brand-white;
+				padding: ns-calc-vr(0.1); // magic number!
+				border-bottom-right-radius: $ns-btn-border-radius;
+				border: 4px solid $ns-brand-white;
+			}
+		}
+	}
+}

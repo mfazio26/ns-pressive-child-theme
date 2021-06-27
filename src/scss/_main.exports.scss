@@ -1,0 +1,53 @@
+@import "04_vendors/foundation/foundation.exports";
+@import "04_vendors/font-awesome/font-awesome.exports";
+
+@include ns-export-ns-base-fonts;
+
+// everything in the "thrive" directory is intended to override the parent theme's styles 
+// that apply to the parent theme itself, its elements and widgets, and any third-party 
+// plugins.
+@include ns-export-thrive-base-typography;
+
+@include ns-export-thrive-elements-images;
+@include ns-export-thrive-elements-buttons;
+@include ns-export-thrive-elements-forms;
+
+@include ns-export-thrive-components-header;
+@include ns-export-thrive-components-footer;
+@include ns-export-thrive-components-sidebar;
+@include ns-export-thrive-components-archive;
+@include ns-export-thrive-components-post;
+@include ns-export-thrive-components-toggles;
+@include ns-export-thrive-components-testimonials;
+@include ns-export-thrive-components-leads;
+@include ns-export-thrive-components-ns-custom;
+
+@include ns-export-thrive-layouts-layout;
+
+
+// everything in the "notsalmon" directory is intended to set styles specific to the custom 
+// components that were created aside from what's provided in the parent theme or any 
+// third-party plugins.
+
+@include ns-export-ns-base-base;
+
+@include ns-export-ns-elements-buttons;
+@include ns-export-ns-elements-labels;
+
+@include ns-export-ns-components-books;
+@include ns-export-ns-components-posters;
+@include ns-export-ns-components-milcourses;
+@include ns-export-ns-components-callouts;
+@include ns-export-ns-components-related-content;
+@include ns-export-ns-components-sidebar-covers;
+@include ns-export-ns-components-sidebar-ctas;
+@include ns-export-ns-components-category-intro;
+@include ns-export-ns-components-social;
+@include ns-export-ns-components-users-listing;
+@include ns-export-ns-components-posts-authorspick;
+@include ns-export-ns-components-posts-comments;
+@include ns-export-ns-components-header-mobisearch;
+@include ns-export-ns-components-videocourses-listing;
+
+@include ns-export-vendor-monarch;
+@include ns-export-vendor-bctt;

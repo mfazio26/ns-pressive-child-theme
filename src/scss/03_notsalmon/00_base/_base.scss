@@ -1,0 +1,30 @@
+// ============================================================================================================
+// =============== BASE : VARIABLES ===========================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== BASE : EXPORT ==============================================================================
+// ============================================================================================================
+
+@mixin ns-export-ns-base-base() {
+
+	// thrive uses "content-box" in a lot of places, but we want to always use "border-box" on our custom 
+	// components. please note, `^="ns-"` actually means "the class attribute starts with" not "class names 
+	// that start with". That's an important distinction because it means our `ns-*` classes have to be first 
+	// inside the `class="..."` for it to match properly.
+	[class^="ns-"] {
+		box-sizing: border-box;
+	}
+	
+	// utility class for making sure content boxes clear properly.
+	.ns-clearable {
+		clear: both;
+	}
+
+	// utility class: hide on everything but mobile devices.
+	.ns-mobile-only {
+		@include ns-breakpoint-simple($min-width: 940px){
+			display: none;
+		}
+	}
+}

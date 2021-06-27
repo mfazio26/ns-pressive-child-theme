@@ -1,0 +1,71 @@
+////
+/// @access public
+//// 
+
+/// Removes the unit label from a number.
+/// @parameter {Number} $number - A number with or without unit.
+/// @return {Number} unitless
+/// @example scss
+/// 	ns-strip-unit(5em); // 5	
+@function ns-strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}
+
+/// Calculates a pseudo- vertical rythmn value – which is a multiple of our base font values.
+/// 
+/// **IMPORTANT:** Please note, when the value returns an `rem` unit, it is multiplied directly 
+/// to the `$ns-type-base-line-height`. When returning a `px` unit, we first need to figure the 
+/// actual line height in pixels first – `line-height * 18px`.
+/// 
+/// @parameter {Number} $multiplier - A number to be used as a multiplier.
+/// @parameter {Bool} $rem - `true` to return `rem` units. `false` to return `px` units.
+/// @return {Number} rem|px
+/// @example scss
+/// 	ns-calc-vr(2, false) // 1.667 * 2 * 18px = ~ 60px
+@function ns-calc-vr($multiplier: 1, $rem: true) {
+	@if $rem == true {
+		@return ($ns-type-base-line-height * $multiplier * 1rem);	
+	}
+	@else {
+		@return ($ns-type-base-line-height * $multiplier * $ns-type-base-font-size);
+	}
+}
+
+/// Converts numbers with PX units to REM units.
+/// @parameter {Number} $px - A number with or without unit.
+/// @return {Number} rem
+/// @example scss
+/// 	ns-px-to-rem(16px); // 1rem
+@function ns-px-to-rem($value){
+	@if unit($value) == "px" {
+		@return ($value / $ns-type-base-font-size) * 1rem;
+	}
+	@error("You passed #{$value} to mf-px-to-rem which is expecting a px unit value");
+}
+
+/// Converts numbers with REM units to PX units. Useful in places where REM units may be buggy,
+/// such as border weights or `:before, :after { line-height: ... }` in Internet Explorer.
+/// @parameter {Number} $rem - A number with or without unit.
+/// @return {Number} px
+/// @example scss
+/// 	ns-rem-to-px(1rem); // 16px
+@function mf-rem-to-px($value){
+	@if unit($value) == "rem" {
+		@return strip-unit($value) * $ns-type-base-font-size;
+	}
+	@error("You pass #{$value} to mf-rem-to-px which is expect an rem unit value");
+}
+
+/// Creates a path to a resource (image file, font, etc) that should be stored in the `/images` directory. 
+/// 
+/// @parameter {String} $file - The resource path, name, and extension with no leading or trailing slashes.
+/// @parameter {String} $str-replace - Needle. The placeholder/flag to replace.
+/// @return {String}
+/// @example scss
+/// 	ns-path-images($file: "image.jpg"); // "../pressive-child/images/image.jpg"
+@function ns-path-images($file) {
+	@return $ns-path-to-images + $file;
+}

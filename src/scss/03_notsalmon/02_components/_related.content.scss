@@ -1,0 +1,295 @@
+////
+/// @group notsalmon-components-relatedcontent
+/// @access public
+//// 
+
+// ============================================================================================================
+// =============== RELATED CONTENT : VARIABLES ================================================================
+// ============================================================================================================
+
+/// Background color to apply to `.ns-related-covers` instances. Please note, if you do not provide a color, 
+/// a slightly condensed version of the same box is styled because we don't need the exceess "inner padding".
+/// @type Color
+$ns-related-content-covers-bg-color: null !default;
+
+/// Background color to apply to `.ns-related-covers--boxed` instances. These are a slightly more robust version 
+/// that require a background color to be set.
+/// @type Color
+$ns-related-content-covers-boxed-bg-color: $ns-brand-light !default;
+
+/// The size of the container that hold the Masters In Life logo in the upper left corder.
+/// @type Number
+$ns-related-content-covers-mil-icon-size: 60px !default;
+
+
+// ============================================================================================================
+// =============== RELATED CONTENT : EXPORT ===================================================================
+// ============================================================================================================
+
+@mixin ns-export-ns-components-related-content() {
+
+	// ===== RELATED BOOKS AND MIL COURSES ====================================================================
+	// block
+	// this element is used on book and course pages to display "related" books/courses below the content in a 
+	// "You may also like..." callout box.
+	.ns-related-covers {
+		@include ns-size($width: 100%, $max-width: $ns-common-callout-max-width);
+		text-align: center;
+		background-color: $ns-related-content-covers-bg-color;
+		margin: $ns-common-content-vspacer auto;
+
+		// add extra inner padding if there is a background color applied
+		@if ($ns-related-content-covers-bg-color and ($ns-related-content-covers-bg-color != $ns-brand-white) and (alpha($ns-related-content-covers-bg-color) != 0)){
+			padding: ns-calc-vr(1) 0;
+		}
+
+		&--full {
+			@include ns-size($max-width: 100%);
+		}
+
+		&--thirds {
+			
+		}
+
+		&--fourths {
+
+		}
+		
+		// modifier: .ns-related-covers--boxed
+		// note: we have to use `at-root` because we aren'
+		&--boxed {
+			background-color: $ns-related-content-covers-boxed-bg-color;
+			padding: ns-calc-vr(1) $ns-thrive-margin-default;
+			border-top: 6px solid $ns-brand-aqua-blue;
+			border-bottom-left-radius: $ns-btn-border-radius;
+			border-bottom-right-radius: $ns-btn-border-radius;
+		}
+
+		// element: .ns-related-covers__heading
+		&__heading {
+			@include ns-type-family($is-heading: true);
+			@include ns-type-size(medium, "auto");
+			@include ns-type-style($is-heading: true, $bold: true);
+			color: $ns-brand-grayscale-2;
+		}
+
+		&__heading + &__content {
+			margin-top: ns-calc-vr(-0.5);
+		}
+
+		// element: .ns-related-covers__listing (row)
+		&__listing {
+			display: flex;
+			flex-flow: wrap;
+			justify-content: center;
+		}
+
+		// block element: .ns-related-covers-item (column)
+		&-item {
+			@include ns-size($width: 50%);
+			display: flex;
+			flex-flow: column;
+			padding: ns-calc-vr(1) $ns-thrive-margin-default;
+
+			// child: we have to override all the `<p>` tags so there are no unexpected results. we are using a `<p>` tags 
+			// to wrap some of our elements in an effort to stop WP from adding random ones anywhere.
+			& p {
+				margin: ns-calc-vr(0.75) 0;
+			}
+
+			// element: .ns-related-covers-item__figure
+			&__figure {
+
+				// element: .ns-related-covers-item__figure-inner
+				// note: because the parent figure is a "flex" item, this element acts as our "centered" content container
+				&-inner {
+					@include ns-position($position: relative, $z-index: 0);
+					display: inline-block;
+				}
+			}
+
+			// element: .ns-related-covers-item__image
+			// note: only here so WP doesn't wrap our `<img>` in a `<p>` tag.
+			&__image {
+
+				// parent modifier: when an mil course or video course, add a box shadow so it looks a little closer to a default book cover
+				.ns-related-covers--mil_courses & > img,
+				.ns-related-covers-item--mil_courses & > img,
+				.ns-related-covers-item--page & > img {
+					box-shadow: 1px 1px 1px rgba($ns-brand-grayscale-1, 0.6);
+				}
+			}
+
+			// element: .ns-related-covers-item__mil
+			// note: icon link only visible on mastersinlife courses
+			&__mil {
+				@include ns-position($position: absolute, $top: 1px, $left: 1px, $z-index: 1);
+
+				// immediate child: link icon
+				& > a {
+					@include ns-size($width: $ns-related-content-covers-mil-icon-size, $height: $ns-related-content-covers-mil-icon-size);
+					@include ns-button-transition($property: border-color);
+					box-sizing: border-box;
+					display: block;
+					background-color: $ns-brand-white;
+					padding: ns-calc-vr(0.1); // magic number!
+					border-bottom-right-radius: $ns-btn-border-radius;
+					border: 4px solid $ns-brand-white;
+
+					// immediate child: hidden text
+					& > span {
+						@include element-invisible;
+					}
+
+					// pseudo child: container
+					&:before {
+						@include ns-size($width: 100%, $height: 100%);
+						@include ns-background($repeat: no-repeat, $size: contain, $position: 0px 2px, $image: "logos/mastersinlife-logo-213x179.png", $prependPath: true);
+						content: "";
+						display: block;
+					}
+
+					// pseudo modifier: hover
+					&:hover {
+						border-color: $ns-brand-primary-color;
+					}
+				}
+			}
+
+			// element: .ns-related-covers-item__title
+			// note: we have to increase specificity!
+			& &__title {
+				flex-grow: 1;
+				margin-top: ns-calc-vr(0.5);
+
+				// immediate child: link
+				// note: this has to be wrapped to stop WP from adding a wrapping `<p>` tag.
+				& > a {
+					@include ns-type-family($is-heading: true);
+					@include ns-type-size(medium, "auto");
+					@include ns-type-style($is-heading: true, $bold: true);
+					@include ns-button-transition($property: color);
+					color: $ns-brand-grayscale-2;
+
+					// pseudo modifier: hover
+					&:hover {
+						color: $ns-brand-primary-color;
+					}
+				}
+			}
+
+			// element: .ns-related-covers-item__cta
+			// note: we have to increase specificity!
+			& &__cta {
+				margin: 0;
+
+				// immediate child: link
+				// note: this has to be wrapped to stop WP from adding a wrapping `<p>` tag.
+				& > a {
+					@include ns-button-primary;
+				}
+			}
+		}
+
+		// block element: .ns-related-covers-footer
+		// note: contains a list of links
+		&-footer {
+			padding-top: ns-calc-vr(0.5);
+			padding-bottom: ns-calc-vr(0.5);
+			border: 1px solid $ns-thrive-border-color;
+			margin-top: ns-calc-vr(1);
+
+			// parent modifier: if the block is `boxed`, we want to add a background to this element.
+			.ns-related-covers--boxed & {
+				background-color: $ns-brand-light-blue;
+				padding-left: $ns-thrive-margin-default;
+				padding-right: $ns-thrive-margin-default;
+				border-bottom-left-radius: $ns-btn-border-radius;
+				border-bottom-right-radius: $ns-btn-border-radius;
+				border: none;
+				margin: ns-calc-vr(1) ($ns-thrive-margin-default * -1) ns-calc-vr(-1);
+			}
+
+			// element: .ns-related-covers-footer__caption
+			// note: we have to increase specificity!
+			& &__caption {
+				@include ns-type-family($is-heading: true);
+				@include ns-type-size(standard, "auto");
+				@include ns-type-style($is-heading: false, $bold: true);
+				display: inline-block;
+				color: $ns-brand-grayscale-2;
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+
+			// element: .ns-related-covers-footer__list
+			// note: we have to increase specificity!
+			& &__list {
+				display: inline-block;
+				list-style: none;
+				padding: 0 ns-calc-vr(0.25);
+				margin: 0;
+			}
+
+			// element: .ns-related-covers-footer__item
+			// note: we have to increase specificity!
+			& &__item {
+				@include ns-type-family($is-heading: false);
+				@include ns-type-size(small, "auto");
+				@include ns-type-style($is-heading: false, $bold: true);
+				display: inline-block;
+				margin-bottom: 0;
+			}
+
+			// element: .ns-related-covers-footer__btn
+			&__btn {
+				display: inline-block;
+				text-transform: uppercase;
+				margin-left: 0.75em;
+				margin-right: 0.75em;
+			}
+		}
+
+		@include ns-breakpoint-simple($min-width: 541px){
+			&--thirds {
+				& .ns-related-covers-item {
+					@include ns-size($width: (1/3 * 100%));
+				}
+			}
+
+			&--fourths {
+				& .ns-related-covers-item {
+					@include ns-size($width: 50%);
+				}
+			}
+		}
+
+		// breakpoint: small screens only
+		@include ns-breakpoint-simple($max-width: 540px){
+
+			// block element: .ns-related-covers-item (column)
+			&-item {
+				@include ns-size($width: 100%);
+
+				// element: .ns-related-covers-item__title
+				& &__title {
+					// immediate child: link
+					// note: we want to make the title a little smaller, but a little easier to read as well.
+					& > a {
+						@include ns-type-size(standard, "auto");
+						text-transform: uppercase;
+					}
+				}
+			}
+		}
+
+		@include ns-breakpoint-simple($min-width: 960px){
+			&--fourths {
+				& .ns-related-covers-item {
+					@include ns-size($width: 25%);
+				}
+			}
+		}
+	}
+}
+

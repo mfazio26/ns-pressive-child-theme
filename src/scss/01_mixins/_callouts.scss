@@ -1,0 +1,40 @@
+////
+/// @access public
+/// @group mixins-callouts
+//// 
+
+// ============================================================================================================
+// =============== MIXINS : CALLOUTS ==========================================================================
+// ============================================================================================================
+
+/// Creates the base styles for an in-content/after-content callout box. (see legacy notice component)
+/// @parameter {Number} $max-width [824px] - The `max-width` to limit the callout box on full width pages.
+/// @parameter {String} $text-align [center] - The text alignment of the callout box content.
+/// @parameter {Color} $bg-color [$ns-brand-light] - The background color of the callout box.
+/// @parameter {Color} $border-top-color [null] - The `border-top-color` of the callout box.
+@mixin ns-callout-box-base(
+		$max-width: 824px,
+		$text-align: center,
+		$bg-color: $ns-brand-light,
+		$border-top-color: null
+	) {
+
+	@include ns-size($width: 100%, $max-width: $max-width); // should only effects full-width pages
+	@include ns-hmargins-auto;
+	text-align: $text-align;
+	background-color: $bg-color;
+	padding: ns-calc-vr(1.5);
+	border-bottom-left-radius: $ns-btn-border-radius;
+	border-bottom-right-radius: $ns-btn-border-radius;
+	margin-top: ns-calc-vr(2);
+	margin-bottom: ns-calc-vr(2);
+
+	@if $border-top-color {
+		border-top: 6px solid $border-top-color;
+	}
+
+	@include ns-breakpoint-simple($max-width: 540px){
+		padding-left: ns-calc-vr(1);
+		padding-right: ns-calc-vr(1);
+	}
+}

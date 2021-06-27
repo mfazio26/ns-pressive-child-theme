@@ -1,0 +1,50 @@
+// ============================================================================================================
+// =============== LEADS : VARIABLES ==========================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== LEADS : EXPORTS ============================================================================
+// ============================================================================================================
+
+@mixin ns-export-thrive-components-leads() {
+	
+	// ===== LEADS FORM CONTAINER =============================================================================
+	// @see /happy-kids/
+	// note: Thrive adds a weird negative margin that throws off the alignment on moible sizes.
+	.tve_lead_generated_inputs_container {
+		@include ns-breakpoint-simple($max-width: 740px){
+			margin-right: 0 !important;
+		}
+	}
+
+	// ===== GENERAL SUBSCRIBE IN-CONTENT =====================================================================
+	// @see /blog/
+	// note: This is the General Subscribe call-to-action that triggers the General Subscribe Lightbox. This 
+	// callout appears in the flow of content – within an archive or at the bottom of a page/post.
+	.tve-leads-conversion-object {
+		&[data-tl-type="shortcode_49903"] {
+			clear: both;
+
+			& .thrv-leads-form-box {
+				border-top-width: 6px !important;
+				border-bottom-left-radius: $ns-btn-border-radius;
+				border-bottom-right-radius: $ns-btn-border-radius;
+			}
+		}
+	}
+
+	// we don't want to show the General Subscribe in-content callout box on the `/happy-inbox/` and 
+	// `/happy-inbox/thank-you` pages because that would be redundant.
+	.page-id-49921,
+	.page-id-49920 {
+		& .tve-leads-track-shortcode_49903 {
+			display: none !important;
+		}
+	}
+
+	// ===== FOCUS AREAS ======================================================================================
+	// general focus areas! if we don't do this, in-between posts can get all jacked up!
+	.far {
+		clear: both;
+	}
+}

@@ -1,0 +1,957 @@
+// ============================================================================================================
+// =============== CUSTOM : NOTES =============================================================================
+// ============================================================================================================
+
+// There are a number of places where Thrive Content Builder and/or Lead Forms Builder/Designer has limited 
+// options. For example, you can only add a `background-color` to a "Content Box" and not a `background-image`. 
+// 
+// To get around these limitations, they provide a slot to input a "Custom Class". This file is dedicated to 
+// storing ONLY those custom classes we are using in Thrive Content Builder and Lead Forms Builder/Designer so 
+// we have one central place to look for any pre-made classes that might meet our future needs.
+
+
+// ============================================================================================================
+// =============== CUSTOM : VARIABLES =========================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== CUSTOM : EXPORTS ===========================================================================
+// ============================================================================================================
+
+@mixin ns-export-thrive-components-ns-custom() {
+
+	// ===== GENERAL ALIGNMENT ================================================================================
+	// note: centers text elements and images
+	.ns-tt-text-align {
+
+		// modifier: .ns-tt-text-align--center
+		&--center {
+			text-align: center;
+		}
+	}
+
+	// ===== GENERAL DISPLAY ==================================================================================
+	
+	.ns-tt-inline-block {
+		display: inline-block;
+	}
+
+	// ===== STYLES APPLIED TO MOBILE ONLY ====================================================================
+	// note: Thrive's `.tcb-flex-col` breaks at `767px` and not the normal `774px` like everything else. Just 
+	// be aware!
+	.ns-tt-mobi {
+
+		// breakpoint: mobile only (stacked)
+		@include ns-breakpoint-simple($max-width: 767px){
+
+			// .ns-tt-mobi-text: text formatting
+			&-text {
+
+				// .ns-tt-mobi-text--center
+				&--center {
+					text-align: center;
+				}
+			}
+
+			// .ns-tt-mobi-btn: button positioning
+			&-btn {
+
+				// .ns-tt-mobi-btn--center
+				&--center {
+					display: block;
+					text-align: center;
+				}
+
+				// .ns-tt-mobi-btn--full
+				&--full {
+					display: block;
+					margin-left: 0 !important; // thrive!
+					margin-right: 0 !important; // thrive!
+
+					// child: .ns-tt-mobi-btn--full .tve_btn
+					& .tve_btn {
+						@include ns-size($width: 100% !important);	
+						display: block;
+					}
+				}
+			}
+
+			// .ns-tt-mobi-hero: hero positioning
+			&-hero {
+
+				// .ns-tt-mobi-hero--vcondense
+				// note: this pulls the text column up a bit (should only be used when the hero image is the first column!)
+				&--vcondense {
+					& h1 {
+						margin-top: ns-calc-vr(-1.25);
+					}
+				}
+			}
+		}
+	}
+
+	// ===== LABEL TAGS =======================================================================================
+	// note: this is a small colored label tag. see the homepage lead magnets.
+	.ns-tt-label-btn {
+		display: inline-block;
+		padding: 0.1em 0.75em;
+		border-radius: $ns-btn-border-radius;
+		background-color: $ns-brand-primary-color;
+		color: $ns-brand-white !important;
+
+		// immediate child: .ns-tt-label-btn > a
+		& > a {
+			@include ns-type-style($is-heading: false, $bold: false);
+			color: $ns-brand-white !important; // thrive!
+		}
+	}
+
+	// note: Thrive changed the way it allows ThriveBoxes to be opened, and it appears you can only attach a 
+	// ThriveBox event to a "thrive button" now. So, this is the same as the label above, except that this one 
+	// is styling an actual Thrive Button element (and structure) instead.
+	.ns-tt-label-ttbtn
+	 {
+
+		// immediate child: .ns-tt-label-ttbtn > a
+		& > a {
+			@include ns-type-size(small, "auto");
+			@include ns-type-style($is-heading: false, $bold: false);
+			color: $ns-brand-white !important; // thrive!
+			background-color: $ns-brand-primary-color;
+			padding: 0.1em 0.75em;
+			border-radius: $ns-btn-border-radius;
+
+			// hover state
+			&:hover {
+				color: $ns-brand-white !important; // thrive!
+				background-color: $ns-brand-primary-color;
+			}
+
+			// child (at multiple levels inside <a>)
+			& span {
+				font-family: inherit;
+				font-weight: inherit;
+				font-style: inherit;
+				font-size: inherit;
+				color: inherit !important;
+			}
+		}
+	}
+
+	// ===== UL LIST ELEMENT ==================================================================================
+	// note: this is a custom list element that is intended to condense the spacing of a standard unordered list 
+	// item.
+	// ul.ns-tt-list {
+	// 	// Modifier: .ul.ns-tt-list--condensed
+	// 	&--condensed {
+	// 		padding-left: 20px;
+	// 		margin-bottom: 45px;
+
+	// 		// Immediate child items.
+	// 		& > li {
+	// 			line-height: 1.25em;
+	// 			margin-bottom: 0.75em;
+	// 		}
+	// 	}
+	// }
+
+	// Note: this is the same as the above styles, except its specificity is raised so that it overrides the 
+	// styles in a standard post when applicable.
+	.bSe ul.ns-tt-list {
+
+		&--condensed {
+			padding-left: 20px;
+			margin-bottom: 45px;
+
+			& > li {
+				line-height: 1.25em;
+				margin-bottom: 0.75em;
+			}
+		}
+	}
+
+	
+
+	// ===== FREEBIES SECTION =================================================================================
+	// note: This is the 4-column freebies section that when clicked, opens up the corresponding Thrive Leads 
+	// ThriveBox. Thrive continues to change how their html/css works, so this is the 3rd iteration of this 
+	// section.
+
+	.ns-tt-freebies-4col,
+	#tve_editor .ns-tt-freebies-4col {
+
+		// Title inside column
+		& h3 {
+			@include ns-button-transition($property: color);
+			margin: 0 auto 15px;
+		}
+		
+		// Magenta label. Actually a button.
+		& .ns-tt-label-ttbtn {
+
+			// By default, all text inside btns are forced to bold. Thrive!!! Force the label back to normal.
+			& span {
+				font-weight: normal !important;
+			}
+
+			// Remove the top margin that is added to the excerpt.
+			& + .thrv_text_element > p {
+				margin-top: 0;
+			}
+
+			// Add a background-color transition (for hover state)
+			& .tcb-button-link {
+				@include ns-button-transition($property: background-color);
+			}
+		}
+
+		// Add hover effects to children when the parent container is :hover
+		& .thrv-content-box:hover {
+			& h3 {
+				color: $ns-brand-primary-color;
+			}
+
+			& .tve_anim_shrink {
+				transform: scale(0.9);
+			}
+
+			& .ns-tt-label-ttbtn .tcb-button-link {
+				background-color: $ns-brand-grayscale-1 !important;
+			}
+		}
+
+		// breakpoint: On small screens, make the columns 2-wide.
+		@include ns-breakpoint-simple($max-width: 774px){
+			& .tcb--cols--4 {
+				flex-direction: row;
+				flex-wrap: wrap;
+			}
+
+			& .tcb-flex-col {
+				width: 50%;
+				flex: 1;
+			}
+		}
+
+		// breakpoint: On medium-up screens, make the columns 4-wide.
+		@include ns-breakpoint-simple($min-width: 775px){
+			& .tcb-flex-col {
+				width: 25%;
+				flex: 1;
+			}
+		}
+	}
+
+	// ===== LEAD MAGNETS =====================================================================================
+	// note: used in popup lead magnets when a book cover is displayed slightly rotated
+	.ns-tt-lead-magnet-cover {
+		transform: translateX(10px) rotate(-8deg);
+		box-shadow: 3px 4px 5px rgba(14, 17, 22, 0.2) !important;
+	}
+
+	// ===== HEROS (ie...images and text) =====================================================================
+	.ns-tt-hero {
+		
+		&--home {
+			& .tve-page-section-out {
+				background-repeat: repeat-x !important;
+
+				// breakpoint: above mobile try to keep background below left word column
+				@media (min-width: 768px) {
+					background-position: left 50% bottom -175px !important;
+				}
+			}
+		}
+
+	}
+
+	
+	// ===== LOGO GRID ========================================================================================
+	// note: used on homepage for "as seen in" section.
+	.ns-tt-logo-grid {
+
+		// modifier: .ns-tt-logo-grid--col3
+		&--col3 {
+
+		}
+
+		// modifiers: .ns-tt-logo-grid--col5
+		&--col5 {
+			
+			// child: .ns-tt-logo-grid--col5 .tcb-flex-row
+			& .tcb-flex-row {
+				flex-wrap: wrap;
+				
+				// child: ns.tt-logo-grid--col5 .tcb-flex-row .tcb-flex-col
+				& .tcb-flex-col {
+					@include ns-size($max-width: 100% !important);
+					flex: 1 0 auto;
+					flex-basis: auto !important; // thrive!!!
+				}
+			}
+
+			// breakpoint: small screen sizes
+			@include ns-breakpoint-simple($max-width: 774px){
+				@include ns-size($max-width: 500px);
+				@include ns-hmargins-auto;
+				
+				// child: .ns-tt-logo-grid--col5 .tcb-flex-row
+				& .tcb-flex-row {
+					flex-direction: row;
+					flex-wrap: wrap;
+					justify-content: center;
+
+					// child: .ns-tt-logo-grid--col5 .tcb-flex-row .tcb-flex-col
+					& .tcb-flex-col {
+						width: 33.3333% !important;
+					}
+				}
+			}
+		}
+	}
+
+	// ===== GRID CONTAINER ===================================================================================
+	// note: grid container used for category cards on /masters-in-life
+	.ns-tt-gridcontainer {
+
+		&--col4#{&}--col4 {
+
+			& .tcb-flex-row {
+				// justify-content: center !important;
+			}
+			
+
+			@include ns-breakpoint-simple($max-width: 774px){
+				// child: .ns-tt-gridcontainer--col4 .tcb-flex-row
+				& .tcb-flex-row {
+					flex-direction: row;
+					justify-content: center;
+					flex-wrap: wrap;
+
+					// child: .ns-tt-gridcontainer--col4 .tcb-flex-row .tcb-flex-col
+					// note: 2-wide
+					& .tcb-flex-col {
+						@include ns-size($width: 50%);
+					}
+				}
+			}
+
+			@include ns-breakpoint-simple($min-width: 775px){
+
+				// child: .ns-tt-gridcontainer--col4 .tcb-flex-row .tcb-flex-col
+				// note: 4-wide
+				& .tcb-flex-row {
+					justify-content: center;
+
+					& .tcb-flex-col {
+						flex: 0 0 25% !important; // thrive!
+						max-width: 25% !important; // thrive!		
+					}
+				}
+			}
+		}
+	}
+
+	
+	// ===== GRID CARD ========================================================================================
+	// block: card, used as category element on /masters-in-life page.
+	.ns-tt-card {
+		cursor: pointer;
+
+		// element: .ns-tt-card__title
+		&__title {
+
+			// title and child anchor
+			&, 
+			& a {
+				@include ns-button-transition($property: color);	
+			}
+		}
+
+		// element: .ns-tt-card__image
+		&__image {
+			@include ns-button-transition($property: transform);
+			box-sizing: border-box;
+		}
+
+		// element: .ns-tt-card__excerpt
+		&__excerpt {
+			cursor: default;
+		}
+
+		// pseudo-modifier: hover state for the entire card
+		&:hover {
+
+			// modified element: .ns-tt-card:hover .ns-tt-card__title
+			& .ns-tt-card__title {
+
+				&, 
+				& a {
+					color: $ns-brand-grayscale-1;	
+				}
+			}
+
+			// modified element: .ns-tt-card:hover .ns-tt-card__image
+			& .ns-tt-card__image {
+				transform: scale(0.9, 0.9);
+			}
+		}
+	}
+
+	// ===== IMAGES ===========================================================================================
+	.ns-tt-img {
+
+		// .ns-tt-img--full
+		// note: Thrive's "borderless image" doesn't center an image...which is weird. so we're doing it.
+		&--full {
+			@include ns-hmargins-auto;
+			text-align: center;
+		}
+
+		// .ns-tt-img--nolimit
+		// note: Thrive limits the maximum width of images, and we want some to always expand to the size of 
+		// the container. Unfortunately, we have to be super specific to do that.
+		&--nolimit {
+
+			// .ns-tt-img.ns-tt-img.ns-tt-img.ns-tt-img 
+			// note: this is kinda dumb, but necessary.
+			&#{&}#{&}#{&} {
+				width: 100% !important; // thrive!!!
+				max-width: none !important; // thrive!!!
+			}
+		}
+
+		// .ns-tt-img--instrinsic-16x9
+		// note: makes a background-image 16:9 via intrinsic aspect ratio
+		&--intrinsic-16x9 {
+			@include ns-size($width: 100%, $max-width: 100%);
+			padding-top: 56.25%;
+		}
+	}
+
+	.ns-tt-aspect-ratio--16x9 {
+		// @include ns-size($width: 100%);
+		// margin-bottom: 0;
+		// // flex-wrap: wrap;
+		// flex-direction: column;
+		// &:before {
+		// 	content: "";
+		// 	display: block;
+		// 	width: 100%;
+		// 	padding-top: 56.25%;
+		// }
+	}
+	
+	// ===== VIDEOS ===========================================================================================
+	// note: this is used when a video (youtube) has a custom poster image with a button. the intention is to 
+	// move the button to the lower left corner so it doesn't fall directly on top of the image focus – which 
+	// is typically a photo of Karen. 
+	// .ns-tt-video-w-btn {
+
+	// 	// child: .ns-tt-video-w-btn .overlay_play_button
+	// 	& .overlay_play_button {
+	// 		@include ns-position($top: auto, $bottom: ns-calc-vr(-0.25), $left: ns-calc-vr(2.25));
+
+	// 		// breakpoint: expand
+	// 		@include ns-breakpoint-simple($max-width: 767px){ 
+	// 			@include ns-position($left: ns-calc-vr(1.5));
+
+	// 			// pseudo child: icon
+	// 			&:before {
+	// 				font-size: 50px;
+	// 			}
+	// 		}
+	// 	}
+	// }
+
+	// ===== DIVIDERS =========================================================================================
+	.ns-tt-divider {
+
+		// .ns-tt-divider--full
+		// note: makes a divider image a block so it can be full width
+		&--full {
+			display: block;
+		}
+
+		// .ns-tt-divider--purplegray
+		// note: adds a "purplegray dotted divider". intended to be used with full-width modifier
+		&--dotted-purplegray {
+			@include ns-size($height: 36px);
+			@include ns-background(
+				$repeat: repeat-x, 
+				$position: center center, 
+				$image: "dividers/dotted-line-purplegray-927x36.jpg", 
+				$prependPath: true
+			);
+		}
+
+		// .ns-tt-divider--purplegray
+		// note: adds a "purplegray dotted divider". intended to be used with full-width modifier
+		&--dotted-purplegray-transparent {
+			@include ns-size($height: 36px);
+			@include ns-background(
+				$repeat: repeat-x, 
+				$position: center center, 
+				$image: "dividers/dotted-line-purplegray-927x36.png", 
+				$prependPath: true
+			);
+		}
+	}
+
+	// ===== HORIZONTAL MENU LIST =============================================================================
+	// used in sales page disclaimers
+	ul.ns-tt-menulist-horizontal {
+		text-align: center;
+		list-style: none;
+		padding-left: 0 !important; // thrive!
+		margin: 0 !important; // thrive!
+
+		// menu item
+		& li {
+			display: inline-block;
+			margin: 0 ns-calc-vr(0.25);
+
+			// menu button link
+			& a {
+				@include ns-type-family($is-heading: false);
+				@include ns-type-size(small, "auto");
+				@include ns-type-style($is-heading: false, $bold: true);
+				@include ns-button-transition($property: color);
+				color: $ns-brand-grayscale-2;
+				text-transform: uppercase;
+
+				// pseudo-modifier: hover state
+				&:hover {
+					color: $ns-brand-primary-color;
+				}
+			}
+		}
+
+		// breakpoint: mobile, stack the menu items
+		@include ns-breakpoint-simple($max-width: 774px){
+			& li {
+				display: block;
+				margin-bottom: ns-calc-vr(0.5);
+			}
+		}
+	}
+
+	// ===== ICON LIST ========================================================================================
+	ul.ns-tt-iconlist {
+		list-style: none;
+		padding-left: 0 !important; // thrive!
+		margin: 0 !important; // thrive!
+
+		// child: list item
+		& li {
+			@include ns-position($position: relative, $z-index: 0);
+
+			// pseudo-child: icon
+			&:before {
+				@include fa-icon;
+				@include ns-position($position: absolute, $left: 0, $top: 0, $z-index: 0);
+			}
+		}
+
+		// modifier: .ns-tt-iconlist--check
+		// note: adds a checkbox icon
+		&--check {
+
+			// modified child: list item
+			& li {
+				padding-left: 40px;
+
+				// pseudo-child: check icon
+				&:before {
+					content: $fa-var-check-square-o;
+				}
+			}
+		}
+
+		// modifier: .ns-tt-iconlist--medium
+		// note: this is intended to size the icon only!
+		&--medium {
+
+			// modified child: list item
+			& li {
+				padding-left: 40px;
+
+				// pseudo-child: icon (resize and re-position)
+				&:before {
+					@include ns-position($top: 2px);
+					font-size: 30px;
+				}
+			}
+		}
+
+		// modifier: .ns-tt-iconlist--aqua-blue
+		// note: this is intended to color the icon only!
+		&--aqua-blue {
+
+			// modified child: list item
+			& li {
+
+				// pseudo-child: icon
+				&:before {
+					color: $ns-brand-aqua-blue;
+				}
+			}
+		}
+	}
+
+	// ===== BOOK COVER LISTING INLINE ========================================================================
+	// note: controls the sizing of an inline list of "book cover" samples. based on how many columns are added, 
+	// we want to layout this out different than the default Thrive layout and breakpoints.
+	.ns-tt-cover-listing {
+		
+		// row: 5 columns/images
+		& .tcb--cols--5 {
+
+			// columns: default to all fitting on one line
+			& .tcb-flex-col {
+				flex: 1;
+			}
+
+			// breakpoint: up until this breakpoint, we want the covers to be layed out 3-wide and centered.
+			@include ns-breakpoint-simple($max-width: 774px){
+				flex-direction: row;
+				justify-content: center;
+
+				// columns: 3-wide (33.3333%)
+				& .tcb-flex-col {
+					@include ns-size($width: (1 / 3 * 100%));
+				}
+				
+			}
+
+			// up until this breakpoint, we want to make the row a little narrower so the covers are a little 
+			// smaller.
+			@include ns-breakpoint-simple($max-width: 1023px){
+				@include ns-size($width: 80%);
+				@include ns-hmargins-auto;
+			}
+		}
+	}
+
+	// ===== LEADS FORM BUILDER : BACKGROUND IMAGES ===========================================================
+	// note: adds a "watercolor texture" background image to the child "content box". Please note the use of 
+	// `!important`. Its unfortunate, but we have to do it.
+	.ns-tt-watercolor-bg--1 {
+		& > .tve_cb {
+			@include ns-background-cover-base;
+			background-color: $ns-brand-light-blue;
+			background-image: url(ns-path-images("textures/watercolor-bg-1-1200x1200.jpg")) !important; // thrive!!
+			border: none !important; // thrive!
+		}
+	}
+
+	// ===== BUTTONS ==========================================================================================
+	// block: a group of buttons, typically displayed side-by-side. see homepage "about karen" section.
+	.ns-tt-btn-group {
+
+		// modifier: .ns-tt-btn-group--center
+		&--center {
+			text-align: center;
+		}
+
+		// modifier: .ns-tt-btn-group--inline
+		// note: 
+		&--inline {
+
+			// modified child: .ns-tt-btn-group--inline .ns-tt-btn
+			& .ns-tt-btn {
+				display: inline-block !important;
+				margin: 0 ($ns-thrive-margin-default / 2) ns-calc-vr(0.5);
+
+				// breakpoint: small screens
+				@include ns-breakpoint-simple($max-width: 774px){
+
+					// note: on small screens, we want inline buttons to be full width and stack!
+					&,
+					& .tve_btn {
+						@include ns-size($width: 100%);
+						display: block;
+						margin-left: 0;
+						margin-right: 0;
+					}
+				}
+			}
+		}
+	}
+
+	// note: this class adds the color transition and border radius that match our "branded" elements. When 
+	// necessary, you should add this class to each button so that our default branded styled buttons match 
+	// any buttons that are created using Thrive's visual editors!!!
+	.ns-tt-btn {
+
+		&,
+		& a,
+		& button,
+		& .tve_btn {
+			@include ns-button-transition;
+			border-radius: $ns-btn-border-radius !important;
+		}
+	}
+
+	// note: this button is used within a Thrive Leads Shortcode that we are using as a ThriveBox "trigger" 
+	// instead of containing the form itself. The way we do this is apply the ThriveBox trigger to a button, 
+	// however, that wraps a `<span>` that does not expand the the full size of the button. So, we have to 
+	// add some custom styles to get this to work properly.
+	.ns-tt-lead-trigger-btn {
+
+		// we have to be very specific to override thrive's styles
+		&#{&} {
+
+			// ...ad even more specific
+			&.thrv_button_shortcode {
+
+				// for some reason the "button styles and hovers" are applied to a div that wraps the actual 
+				// `<a>` element
+				& > .tve_btn {
+					@include ns-button-transition;
+					border-radius: $ns-btn-border-radius;
+				}
+
+				// This is the anchor itself that contains a `<span>` that triggers the ThriveBox. Please note, 
+				// we want the inner `<span>` to fill the entire clickable areas of the button, so we have to 
+				// remove all the padding here, and add it back directly on to the span.
+				& a.tve_btnLink {
+					@include ns-type-family($is-heading: false);
+					@include ns-type-size(reduce, "auto");
+					@include ns-type-style($is-heading: false, $bold: false);
+					text-shadow: none;
+					padding: 0;
+
+					// this is the actual ThriveBox trigger. We want it to fill the entire size of the parent 
+					// button's clickable area...so, we are applying "padding" to this element instead.
+					& .tve-leads-two-step-trigger {
+						display: block;
+						padding: 12px 17px;
+					}
+				}
+			}
+		}
+	}
+	
+	// ===== THRIVE ARCHITECT : TOGGLE BOX ====================================================================
+	// Customized Expandable/Collapsible Toggle Box
+	// note: This component is used on the video course /courses/* pages to show the actual course video 
+	// curriculum.
+	.ns-tt-toggler {
+
+		// child: expandable section
+		& .tve_faq {
+			background-color: $ns-brand-light;
+			border: 1px solid $ns-thrive-border-color;
+
+			// expandable section heading
+			& h4 {
+				@include ns-type-size(standard, "auto");
+				@include ns-type-style($is-heading: true, $bold: false);
+			}
+
+			// hover: expand/collapse hover state
+			&:hover {
+				background-color: lighten($ns-brand-purplegray, 33%) !important;
+			}
+
+			// expandable/collapsible body - reduce the font size
+			& .tve_faqC {
+				@include ns-type-size(reduce, "auto");
+				padding-top: 0;
+				
+				// make the spacing of the inner content a little nicer
+				& p:first-child {
+					margin-top: ns-calc-vr(0.25);
+				}
+
+				& p:last-child {
+					margin-bottom: ns-calc-vr(1.5);
+				}
+
+				@include ns-breakpoint-simple($max-width: 540px) {
+					padding-left: 15px;
+					padding-right: 15px;
+				}
+			}
+		}
+	}
+
+	// hover state: expandable section heading
+	// note: thrive specificity battle!
+	#tve_editor .thrv_toggle_shortcode.ns-tt-toggler .tve_faq:hover > .tve_faqI > .tve_faqB h4:not(.tve_toggle_open_text) {
+		color: $ns-brand-grayscale-2 !important;
+	}
+	
+	// ===== LEADS : THRIVEBOX : SHORTCODES ===================================================================
+	// custom Thrive Post Grid
+	// custom Thrive Post Grid
+	// note: the happy-inbox ThriveBox and Shortcode form's heading do some weird unpredictable things at 
+	// different breakpoints so we are attempting to normalize a bit. please note, because Thrive is so 
+	// specific, we have to use a mix of `!important` and other properties to get around the specificity.
+	#tve_editor,
+	.thrv-leads-form-box {
+		& .ns-tt-lead-happy-inbox {
+			& h2 {
+				@include ns-breakpoint-simple($min-width: 540px, $max-width: 1080px){
+					font-size: ns-type-get(large, font-size, true) !important;
+				}
+			}
+
+			& h3 {
+				@include ns-breakpoint-simple($max-width: 540px){
+					font-size: ns-type-get(medium, font-size, true) !important;
+					line-height: ns-type-get(medium, line-height, true) !important;
+					padding-top: ns-calc-vr(1.25);
+					padding-bottom: ns-calc-vr(1.25);
+				}
+			}
+		}
+	}
+
+	// ===== LEADS : CONFIRM STATE : PROGRESSBAR ==============================================================
+	// note: We're adding a "50% complete" progressbar message to the "success" state of a Thrive Leads Opt-in
+	// Form to make it clear that a user must complete the process by confirming their subscription by 
+	// checking their inbox. this progress bar graphic hopefully makes that a little more clear that the 
+	// registration process is not yet complete.
+	.ns-tt-optin-confirm-progressbar {
+		padding-top: ns-calc-vr(0.5);
+		padding-bottom: ns-calc-vr(0.5);
+
+		& p {
+			margin-top: 0 !important;
+			margin-bottom: 0 !important;
+		}
+
+		& .tve_progress_bar_fill {
+			height: ns-calc-vr(0.25) !important;
+		}
+	}
+
+	// ===== CUSTOM POST GRID =================================================================================
+	// custom Thrive Post Grid
+	// note: The intention of this class is to make Thrive's custom Post Grid "look" like your customized 
+	// blog archive post items. For some reason, Thrive structures and styles these two items completely 
+	// differently even though they are basically the same item.
+	.ns-tt-post-grid  {
+
+		// thrive namespace!!!
+		& .thrv_post_grid .tve_pg_row {
+
+			// block: post item
+			& .tve_post {
+				margin-bottom: ns-calc-vr(3);
+
+				// breakpoint: after the mobile full width breakpoint, we want the items to be 2-wide for a bit.
+				@include ns-breakpoint-simple($max-width: 774px){
+					@include ns-size($max-width: 50%);
+				}
+
+				// breakpoint: on small screens, we want the items to be full-width
+				@include ns-breakpoint-simple($max-width: 650px){
+					@include ns-size($max-width: 100%);
+				}
+
+				// pseudo-modifier: .tve-post:hover
+				// note: when hovering over the card item, we want the title and overlay to animate too.
+				&:hover {
+
+					// .tve-post:hover .tve-post-grid-title > a
+					& .tve-post-grid-title > a {
+						color: $ns-brand-primary-color;
+					}
+
+					// .tve-post:hover .tve-pg_img_overlay
+					& .tve_pg_img_overlay {
+						background-color: rgba($ns-brand-primary-color, 0.8);
+					}
+				}
+
+				// child: .tve_post .tve_pg_container
+				& .tve_pg_container {
+					display: flex;
+					flex-direction: column;
+					padding: 0 ($ns-thrive-margin-default / 2);
+					border: none;
+					box-shadow: none;
+					margin: 0;
+				}
+
+				// child: .tve_post .tve_post_grid_image_wrapper
+				// note: put a border around the image container
+				& .tve_post_grid_image_wrapper {
+					border: 1px solid $ns-brand-grayscale-1;	
+				}
+
+				// child: .tve_post .tve_pg_img_overlay
+				& .tve_pg_img_overlay {
+					background-color: rgba($ns-brand-primary-color, 0);
+					transition: all .5s ease-in-out;
+
+					// child: .tve_post .tve_pg_img_overlay .thrv-icon
+					// note: by default, this is a lower-right arrow icon. we want to make it our centered heart.
+					& .thrv-icon {
+						@include ns-position($top: 50%, $right: 0, $bottom: auto, $left: 0);
+						@include ns-size($width: 100%, $height: 0);
+						font-size: 2rem;
+						line-height: 0;
+						box-sizing: border-box;
+						background-color: transparent;
+						transform: translateY(-50%);
+						
+						// pseudo-child: icon
+						&:before {
+							content: "\2665";
+							color: $ns-brand-white;
+						}
+					}
+				}
+
+				// child: .tve_post .tve_post-grid-title
+				// note: main article title
+				& .tve-post-grid-title {
+
+					// immediate child: .tve_post .tve_post-grid-title > a
+					& > a {
+						@include ns-button-transition($property: color);
+					}
+				}
+
+				// child: .tve_post .tve-post-grid-text
+				// note: excerpt
+				& .tve-post-grid-text {
+					padding-top: 0;
+					border-top: none;
+					margin-bottom: ns-calc-vr(1.5);
+				}
+
+				// child: .tve_post .tve_pg_more
+				// note: read more button
+				& .tve_pg_more {
+					@include ns-button-primary($has-span: false);
+					margin-top: auto;
+					margin-bottom: 0;
+					align-self: flex-start;
+
+					// immediate child: .tve_post .tve_pg_more > a
+					// note: inner button label
+					& > a {
+						color: inherit;
+						font-weight: inherit;
+
+						// pseudo-modifier: hover
+						&:hover {
+							text-decoration: none;
+						}
+					}
+
+					// immediate child: .tve_post .tve_pg_more > .thrv-icon
+					// note: by default, there is an arrow/caret after the button label. we want to hide that.
+					& > .thrv-icon {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}

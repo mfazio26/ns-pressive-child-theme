@@ -1,0 +1,60 @@
+@import "./00_modules/functions";
+@import "./00_modules/variables";
+@import "./04_vendors/foundation/foundation.imports";
+@import "./04_vendors/font-awesome/font-awesome.imports";
+@import "./04_vendors/monarch/monarch.share";
+@import "./04_vendors/betterclicktotweet/betterclicktotweet";
+
+@import "./01_mixins/layouts";
+@import "./01_mixins/breakpoints";
+@import "./01_mixins/buttons";
+@import "./01_mixins/typography";
+@import "./01_mixins/callouts";
+@import "./01_mixins/backgrounds";
+@import "./01_mixins/forms";
+
+// everything in the "thrive" directory is intended to override the parent theme's styles 
+// that apply to the parent theme itself, its elements and widgets, and any third-party 
+// plugins.
+@import "./02_thrive/00_base/typography";
+
+@import "./02_thrive/01_elements/images";
+@import "./02_thrive/01_elements/buttons";
+@import "./02_thrive/01_elements/forms";
+
+@import "./02_thrive/02_components/header";
+@import "./02_thrive/02_components/footer";
+@import "./02_thrive/02_components/sidebar";
+@import "./02_thrive/02_components/archive";
+@import "./02_thrive/02_components/post";
+@import "./02_thrive/02_components/toggles";
+@import "./02_thrive/02_components/testimonials";
+@import "./02_thrive/02_components/leads";
+@import "./02_thrive/02_components/ns.custom";
+
+@import "./02_thrive/03_layouts/layouts";
+
+
+// everything in the "notsalmon" directory is intended to set styles specific to the custom 
+// components that were created aside from what's provided in the parent theme or any 
+// third-party plugins.
+@import "./03_notsalmon/00_base/base";
+@import "./03_notsalmon/00_base/fonts";
+
+@import "./03_notsalmon/01_elements/buttons";
+@import "./03_notsalmon/01_elements/labels";
+
+@import "./03_notsalmon/02_components/books";
+@import "./03_notsalmon/02_components/posters";
+@import "./03_notsalmon/02_components/milcourses";
+@import "./03_notsalmon/02_components/callouts";
+@import "./03_notsalmon/02_components/related.content";
+@import "./03_notsalmon/02_components/sidebar.covers";
+@import "./03_notsalmon/02_components/sidebar.ctas";
+@import "./03_notsalmon/02_components/category.intro";
+@import "./03_notsalmon/02_components/social";
+@import "./03_notsalmon/02_components/users.listing";
+@import "./03_notsalmon/02_components/posts.authorspick";
+@import "./03_notsalmon/02_components/posts.comments";
+@import "./03_notsalmon/02_components/header.mobisearch";
+@import "./03_notsalmon/02_components/videocourses.listing";

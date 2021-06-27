@@ -1,0 +1,245 @@
+// ============================================================================================================
+// =============== POST : VARIABLES ===========================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== POST : EXPORT ==============================================================================
+// ============================================================================================================
+
+@mixin ns-export-thrive-components-post() {
+
+	// ===== POST COLUMN CONTAINER ============================================================================
+	// primary post wrapper?
+	.bSeCont .bSe {
+		border: none;
+	}
+
+	// inner content?
+	.tve-c {
+
+		// whatever the first element is, we want to normalize the top padding so its visually close to top 
+		// aligned with the sidebar.
+		& > *:first-child {
+			margin-top: 0;
+		}
+	}
+
+	// ===== VIDEO CONTAINER (IN CONTENT) =====================================================================
+	// @see /about/in-the-news/
+	.rve {
+		margin-bottom: ns-calc-vr(1.5);
+	}
+	
+	// ===== THRIVE RELATED POST (AFTER CONTENT) ==============================================================
+	.bSeCont .rltpi {
+		padding-top: 0;
+		margin-top: ns-calc-vr(2);
+		margin-bottom: ns-calc-vr(2);
+		background-color: $ns-brand-light;
+		padding: ns-calc-vr(1);
+		border-top: 6px solid $ns-brand-purplegray;
+
+		// child: heading
+		& h5 {
+			@include ns-type-family($is-heading: true);
+			@include ns-type-size(medium, "auto");
+			@include ns-type-style($is-heading: true, $bold: true);
+			text-align: center;
+			padding-bottom: 0;
+			border-bottom: 0;
+			margin-bottom: ns-calc-vr(1);
+		}
+
+		// child: article title?
+		& p {
+			@include ns-type-family($is-heading: true);
+			@include ns-type-size(standard, reduce);
+			@include ns-type-style($is-heading: true, $bold: true);
+			color: $ns-brand-grayscale-2;
+			text-align: center;
+			padding-left: $ns-thrive-margin-default;
+			padding-right: $ns-thrive-margin-default;
+			transition: color 0.2s ease;
+		}
+
+		// child: image container
+		& .rlt-i {
+			box-sizing: border-box;
+			border: 1px solid $ns-brand-grayscale-2;
+			margin-bottom: ns-calc-vr(0.5);
+
+			// border overlay
+			&:before {
+				border-color: $ns-brand-light-blue;
+			}
+			
+			// pseudo modifier: border overlay
+			&:hover:before {
+				border-color: $ns-brand-primary-color;
+			}
+		}
+
+		// child modifier: on hover, highlight the article title
+		& a:hover > p {
+			color: $ns-brand-primary-color;
+		}
+
+		// modifier: post type
+		// note: we want force the image to be 4:3 at all times, and start the 2-wide 
+		// side-by-side columns sooner.
+		& .ns-post-type--post {
+
+			// child: image
+			& .rlti {
+				@include ns-size($height: auto);
+				padding-top: 75%;
+
+			}
+
+			// breakpoint: side-by-side sooner!
+			@include ns-breakpoint-simple($min-width: 540px) {
+				@include ns-size($width: 48%);
+				margin: 0 15px 15px 0;
+			}
+		}
+	
+		// modifier: poster type
+		// note: we want to remove the highlight border and force the image box to be a square
+		& .ns-post-type--poster {
+			
+			// child: image container
+			& .rlt-i {
+				// border overlay
+				&:before {
+					border: none;
+				}
+			}
+			// child: image
+			& .rlti {
+				@include ns-size($height: auto);
+				padding-top: 100%;
+			}
+		}
+	}
+
+	// ===== AUTHOR BOX (AFTER CONTENT) =======================================================================
+	.aut {
+		background-color: $ns-brand-light;
+		// border-top: 6px solid $ns-brand-purple;
+		margin-top: ns-calc-vr(2);
+		margin-bottom: ns-calc-vr(2);
+
+		// child: columns
+		& .tai,
+		& .tat {
+			@include ns-size($width: 100%);
+			text-align: center;
+		}
+
+
+		// child: image column (if "image clickable" is enabled in the authorbox.php template)
+		& .tai > a {
+			@include ns-position($position: relative, $z-index: 0);
+			@include ns-hmargins-auto;
+			margin-top: ns-calc-vr(0.5);
+			margin-bottom: ns-calc-vr(1);
+
+			// fake offset border
+			&:after {
+				@include ns-position($position: absolute, $top: 0, $right: 0, $bottom: 0, $left: 0);
+				content: "";
+				display: block;
+				border: 5px solid $ns-brand-purple;
+				border-radius: 50%;
+				transform: scale(1.2, 1.2);
+			}
+		}
+
+		// child: image column (if "image clickable" is disabled in the authorbox.php template)
+		& .tai > div {
+			@include ns-position($position: relative, $z-index: 0);
+			@include ns-hmargins-auto;
+			display: inline-block;
+			margin-top: ns-calc-vr(0.5);
+			margin-bottom: ns-calc-vr(0.5);
+		}
+		
+		// child: bio column
+		& .tat {
+			padding-right: $ns-thrive-margin-default;
+			margin-left: 0;
+			
+			// heading
+			& h4 {
+				@include ns-type-family($is-heading: true);
+				@include ns-type-size(standard, "auto");
+				@include ns-type-style($is-heading: true, $bold: true);
+				text-transform: uppercase;
+				color: $ns-brand-grayscale-2;
+			}
+
+			// bio
+			& p {
+				@include ns-type-size(reduce, "auto");
+				@include ns-type-style($is-heading: false, $bold: false);
+				color: $ns-brand-grayscale-2;
+				margin-top: ns-calc-vr(0.5);
+			}
+		}
+
+		// parent modifier: we have to be more specific for the social column. err.
+		.wrp & {
+			// child: social column
+			& .scl {
+				background-color: $ns-brand-primary-color;
+
+				// child: follow label
+				& .flw {
+					color: $ns-brand-light;
+					background-color: $ns-brand-grayscale-1;
+				}
+
+				// child: icons
+				& .scw ul li a:hover:after {
+					border-left-color: $ns-brand-primary-color;				
+				}
+			}
+		}
+	}
+
+	// ===== MONARCH SHARE BOTTOM (AFTER CONTENT) =============================================================
+	.et_monarch .et_social_inline_bottom {
+		clear: both;
+		margin-top: ns-calc-vr(2);
+
+		// fake heading
+		&:before {
+			content: "Like it? Share it with others!";
+			@include ns-type-family($is-heading: true);
+			@include ns-type-size(medium, "auto");
+			@include ns-type-style($is-heading: true, $bold: true);
+			display: block;
+			color: $ns-brand-grayscale-2;
+			text-align: center;
+			margin-bottom: ns-calc-vr(1);
+		}
+	}
+
+	// ===== DISQUS COMMENTS (AFTER CONTENT) ==================================================================
+	#disqus_thread {
+		margin-top: ns-calc-vr(2);
+		margin-bottom: ns-calc-vr(2);
+
+		// fake heading
+		&:before {
+			content: "Leave me a comment!";
+			@include ns-type-family($is-heading: true);
+			@include ns-type-size(medium, "auto");
+			@include ns-type-style($is-heading: true, $bold: true);
+			display: block;
+			color: $ns-brand-grayscale-2;
+			text-align: center;
+			margin-bottom: ns-calc-vr(1);
+		}
+	}
+}

@@ -1,0 +1,87 @@
+////
+/// @access public
+/// @group mixins-typography
+//// 
+
+// ============================================================================================================
+// =============== MIXINS : TYPOGRAPHY ========================================================================
+// ============================================================================================================
+
+/// Retreives a numeric property from the `$ns-type-size-variants` variable by `$key` and `$property`. Please 
+/// note, this "function" is placed with the "mixins" because its only really being used here or in combination 
+/// with these mixins exclusively.
+/// @example scss
+/// 	font-size: ns-type-get($key: small, $property: font-size, $rem: true); // 0.7778rem
+/// @parameter {String} $key - The list "key" to retrieve.
+/// @parameter {String} $property [font-size] - The property inside the list retreived by the "key".
+/// @parameter {Bool} $rem [true] - `true` to return `rem` units. `false` to return `px` units.
+@function ns-type-get($key, $property: font-size, $rem: true){
+	@if $key and map-has-key($ns-type-size-variants, $key) {
+		$map: map-get($ns-type-size-variants, $key);
+		@if $property and map-has-key($map, $property) {
+			$rem-value: map-get($map, $property);
+			$px-value: strip-unit($rem-value) * $ns-type-base-font-size;
+			@return if($rem, $rem-value, $px-value);
+		}
+	} 
+	@return null;
+}
+
+/// Finds an applies the heading or standard `font-family` property.
+/// @parameter {Bool} $is-heading [true] - `true` to get heading-specific font family. `false` to get standard body font family.
+@mixin ns-type-family($is-heading: true){
+	@if type-of($is-heading) == bool {
+		$map: map-get($ns-type-family-variants, if($is-heading, heading, standard));
+		font-family: map-get($map, family);
+	}
+}
+
+/// Optionally applies font weights and styles. Please note, because heading and standard fonts may have differing 
+/// ways of defined "bold" (ie...400, bold, 700), we have to provide whether we should look up the "heading" or 
+/// "standard" font properties.
+/// @parameter {Bool} $is-heading [true] - `true` to get heading-specific font styles. `false` to get standard body font styles.
+/// @parameter {Bool} $bold [null] - `true` to apply "bold". `false` to apply "normal". And `null` to not apply the `font-weight` property at all.
+/// @parameter {Bool} $italic [null] - `true` to apply "italic". `false` to apply "normal". And `null` to not apply the `font-style` property at all.
+@mixin ns-type-style($is-heading: true, $bold: null, $italic: null){
+	@if type-of($is-heading) == bool {
+		$map: map-get($ns-type-family-variants, if($is-heading, heading, standard));
+
+		@if type-of($bold) == bool {
+			font-weight: map-get($map, if($bold == true, bold, normal));
+		}
+		@if type-of($italic) == bool {
+			font-style: if($italic == true, italic, normal);
+		}
+	}
+}
+
+/// Applies `font-size` and `line-height` properties based on the `ns-type-get()` lookup function. Please note, 
+/// you can mute any properties output by setting its parameter to `null`. And, you can set `$line-height-key` to 
+/// `"auto"` to automatically use the supplied `$size-key`...so you can do `ns-type-size(reduce, "auto")` instead of 
+/// `ns-type-size(reduce, reduce)`.
+/// @parameter {String} $size-key [null] - The list "key" to retrieve.
+/// @parameter {String} $line-height-key [null] - The line-height "key" inside the size-key lookup. `"auto"` will match the `$size-key`.
+/// @parameter {Bool} $size-rem [true] - `true` to return `rem` units for size. `false` to return `px` units.
+/// @parameter {Bool} $size-rem [true] - `true` to return `rem` units for line-height. `false` to return `px` units.
+@mixin ns-type-size($size-key: null, $line-height-key: null, $size-rem: true, $line-height-rem: true){
+	$lh-key: if($line-height-key == "auto", $size-key, $line-height-key);
+	font-size: ns-type-get($size-key, font-size, $size-rem);
+	line-height: ns-type-get($lh-key, line-height, $line-height-rem);
+}
+
+/// Shortcut to create our standard `<h1>` styles.
+@mixin ns-type-h1(){
+	@include ns-type-family($is-heading: true);
+	@include ns-type-size(xlarge, "auto");
+	@include ns-type-style($is-heading: true, $bold: true);
+
+	@include ns-breakpoint-simple($max-width: 1080px){
+		font-size: ns-type-get($key: large, $property: font-size, $rem: true) !important;
+		line-height: ns-type-get($key: large, $property: line-height, $rem: true);
+	}
+
+	@include ns-breakpoint-simple($max-width:540px){
+		font-size: ns-type-get($key: medium, $property: font-size, $rem: true) !important;
+		line-height: ns-type-get($key: medium, $property: line-height, $rem: true);			
+	}
+}

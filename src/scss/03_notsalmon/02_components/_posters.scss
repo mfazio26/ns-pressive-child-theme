@@ -1,0 +1,294 @@
+// ============================================================================================================
+// =============== POSTERS : VARIABLES ========================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== POSTERS : EXPORT ===========================================================================
+// ============================================================================================================
+
+@mixin ns-export-ns-components-posters() {
+
+	// ===== POSTER ARCHIVE PAGES =============================================================================
+	.post-type-archive-poster,
+	.tax-poster_tag {
+
+		// ===== POSTER ITEM ==================================================================================
+		& .wrp.cnt.gin .gr-i {
+			// padding-bottom: 0;
+
+			// child: image
+			// note: our posters are uploaded as a square, so in order to not crop anything, we have to force 
+			// the image to be a square.
+			& .fwit {
+				@include ns-size($height: auto);
+				padding-top: 100%;
+			}
+
+			// child: title
+			& .entry-title {
+				text-align: center;
+			}
+
+			// read more button (after content)
+			// note: we don't really need the "read more" button. its kind of unnecessary in this scenario.
+			& .awr + a {
+				// display: none;
+			}
+
+			// breakpoint: mobile only
+			@include ns-breakpoint-simple($max-width: 774px) {
+				padding-bottom: ns-calc-vr(1.5);
+				margin-bottom: ns-calc-vr(2.5);
+			}
+		}
+
+		// Show the "read more" button as a text link.
+		& .wrp.cnt.gin .mrb.btn {
+			@include ns-size($width: 100%);
+			@include ns-type-size(standard, "auto");
+			color: $ns-brand-primary-color;
+			text-align: center;
+			text-decoration: underline !important;
+			background-color: transparent;
+			padding: 0;
+			margin: 0 auto;
+			cursor: pointer;
+
+			& > span {
+				padding: 0;
+			}
+		}
+	}
+
+	// ===== POSTER SINGLE POST ===============================================================================
+	.single-poster {
+
+		// featured image
+		& .fwit {
+
+			// child: center the Monarch social media sharer on image.
+			& > .et_social_media_wrapper {
+				@include ns-size($max-width: 640px);
+				@include ns-hmargins-auto;
+			}
+			
+			// child image (center it)
+			& img {
+				@include ns-hmargins-auto();
+			}
+		}
+	}
+
+	// ===== POSTER ARCHIVE INTRO =============================================================================
+	// block
+	.ns-poster-archiveintro {
+
+		// element: .ns-poster-archiveintro__container
+		// note: inner container limits width
+		&__container {
+			@include ns-size($max-width: 860px);
+			@include ns-hmargins-auto;
+			box-sizing: border-box;
+			padding: ns-calc-vr(0.5) $ns-thrive-margin-default 0;
+		}
+		
+		// element: .ns-poster-archiveintro__headline
+		&__headline {
+			@include ns-type-size(medium, "auto");
+			@include ns-type-style($is-heading: true, $bold: true);
+			color: $ns-brand-grayscale-2;
+			text-align: center;
+			margin-top: 0;
+		}
+
+		// element: .ns-poster-archiveintro__content
+		// note: this element is optional and contains a WYSIWYG editor.
+		&__content {
+
+		}
+
+		// breakpoint: mobile only
+		@include ns-breakpoint-simple($max-width: 774px) {
+
+			// element: .ns-poster-archiveintro__container
+			// note: condense vertical padding
+			&__container {
+				padding-top: 0;
+			}
+
+			// element: .ns-poster-archiveintro__headline
+			// note: specificity battle! thrive!!!
+			&__headline {
+				font-size: 1.2rem !important;
+				line-height: 1.25em !important;
+			}
+		}
+	}
+
+	// ===== POSTER SHARE/DOWNLOAD BOX ========================================================================
+	.ns-poster-downloadbox {
+		text-align: center;
+		border-top: 1px solid $ns-brand-grayscale-3;
+		margin-top: ns-calc-vr(2);
+
+
+		&__heading {
+			margin-bottom: ns-calc-vr(0.5);
+		}
+
+		&__description {
+
+		}
+
+		&__heading, 
+		&__description {
+
+		}
+
+		&__links {
+			& > a {
+				display: inline-block;
+				text-decoration: underline;
+				margin-left: ns-calc-vr(0.25);
+				margin-right: ns-calc-vr(0.25);
+			}
+		}
+	}
+
+
+
+	// ===== POSTER EMBED IMAGE BOX ===========================================================================
+	.ns-poster-embedbox {
+
+		// block: .ns-poster-embedbox.ns-poster-embedbox
+		// note: specificity battle!
+		&#{&} {
+			margin-top: ns-calc-vr(2);
+			margin-bottom: ns-calc-vr(1);
+		}
+
+		// element: .ns-poster-embedbox__heading
+		&__heading {
+			margin-bottom: ns-calc-vr(0.5);
+		}
+
+		// element: .ns-poster-embedbox__description
+		&__description {
+			margin-top: 0;
+		}
+
+		// shared elements: .ns-poster-embedbox__heading, .ns-poster-embedbox__description
+		&__heading,
+		&__description {
+			text-align: center;
+		}
+
+		// element: .ns-poster-embedbox__pre
+		// note: wraps textarea. this is required to stop wordpress from adding extra `<p>` wrapping tags.
+		&__pre {
+			background: none;
+			padding: 0;
+			border: none;
+			margin: 0;
+		}
+
+		// element: .ns-poster-embedbox__textarea
+		// note: holds embed code
+		&__textarea {
+			@include ns-size($width: 100%, $max-width: 100%, $min-width: 100%, $min-height: 150px);
+			@include ns-type-size(small, "auto");
+			font-family: monospace;
+		}
+	}
+
+	// ===== POSTER TAGS LIST UI ==============================================================================
+	.ns-poster-tags {
+		$block-selector: &;
+
+		@include ns-size($max-width: 1300px);
+		@include ns-hmargins-auto;
+		box-sizing: border-box;
+		text-align: center;
+		
+		// element: .ns-poster-tags__container
+		&__container {
+			padding: ns-calc-vr(1.5);
+
+			// parent modifier: .ns-poster-tags--single .ns-poster-tags__container
+			// note: appears at the bottom of a poster single post
+			#{$block-selector}--single & {
+				background-color: $ns-brand-light;
+				border-top: 6px solid $ns-brand-primary-color;
+				margin-top: ns-calc-vr(2);
+				margin-bottom: ns-calc-vr(2);
+			}
+
+			// parent modifier: .ns-poster-tags--archive .ns-poster-tags__container
+			// note: appears at the top of a poster archive page
+			#{$block-selector}--archive & {
+				margin-left: 35px;
+				margin-right: 35px;
+
+				@include ns-breakpoint-simple($max-width: 774px){
+					padding-top: ns-calc-vr(0.5);
+				}
+
+				@include ns-breakpoint-simple($max-width: 940px){
+					padding-left: 0;
+					padding-right: 0;
+					margin-left: 15px;
+					margin-right: 15px;
+				}
+			}
+		}
+
+		// element: .ns-poster-tags__heading
+		// note: appears above the list of links
+		&__heading {
+			@include ns-type-family($is-heading: true);
+			@include ns-type-size(standard, "auto");
+			@include ns-type-style($is-heading: false, $bold: true);
+			display: block;
+			color: $ns-brand-grayscale-2;
+			margin-top: 0;
+			margin-bottom: ns-calc-vr(1);
+		}
+
+		// element: .ns-poster-tags__list
+		&__list {
+			@include ns-type-family($is-heading: false);
+			@include ns-type-size(small, "auto");
+			@include ns-type-style($is-heading: false, $bold: true);
+
+			// child: links output by WP
+			// note: [href] hack to increase specificity
+			& > a[href] {
+				display: inline-block;
+				color: $ns-brand-grayscale-2;
+				text-transform: uppercase;
+				margin-left: 0.5em;
+				margin-right: 0.5em;
+
+				// pseudo child: add hash before each link
+				&:before {
+					content: "#";
+				}
+
+				// pseudo modifier: hover
+				&:hover {
+					color: $ns-brand-primary-color;
+				}	
+			}
+		}
+
+		// element: .ns-poster-tags__message
+		// note: appears below the list of links
+		&__message {
+			@include ns-type-family($is-heading: false);
+			@include ns-type-size(reduce, "auto");
+			@include ns-type-style($is-heading: false, $bold: false);
+			color: $ns-brand-grayscale-2;
+			margin-bottom: 0;
+		}
+	}
+}

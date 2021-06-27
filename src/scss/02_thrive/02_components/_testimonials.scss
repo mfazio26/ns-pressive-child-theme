@@ -1,0 +1,242 @@
+////
+/// @group thrive-components-testimonials
+/// @access public
+//// 
+
+// ============================================================================================================
+// =============== TESTIMONIALS : VARIABLES ===================================================================
+// ============================================================================================================
+/// Should we use a special "heart" icon instead of the "quote" icon at the top of `set3`?
+/// @type Bool
+$ns-testimonials-set3-use-heart-icon: false !default;
+$ns-testimonials-set2-use-images: false !default;
+
+// ============================================================================================================
+// =============== TESTIMONIALS : EXPORT ======================================================================
+// ============================================================================================================
+
+@mixin ns-export-thrive-components-testimonials() {
+
+
+	// ===== SET2 : SMALL LIST : CUSTOMER TESTIMONIALS ========================================================
+	// Note, the wrappers changed in Thrive Architect.
+	.tvo-set2-small-template.tvo-set2-small-template {
+
+		// item
+		&.tvo-testimonials-display-grid .tvo-testimonial-display-item {
+
+			// wrapper
+			& .tvo-background-wrapper {
+				background-color: transparent;
+				padding-right: 70px;
+
+				// testimonial content
+				& p {
+					@include ns-type-family($is-heading: false);
+					@include ns-type-size(reduce, "auto");
+					@include ns-type-style($is-heading: false, $bold: false, $italic: true);
+					color: $ns-brand-grayscale-2;
+					margin-top: 0;
+					margin-bottom: 0;
+
+					@if $ns-testimonials-set2-use-images == false {
+						margin-left: 0 !important;
+					}
+
+					& + p {
+						margin-bottom: ns-calc-vr(1);
+					}
+
+					&:empty {
+						display: none;
+					}
+				}
+
+				// name/role
+				& .tvo-testimonial-info {
+					@if $ns-testimonials-set2-use-images == false {
+						margin-left: 0 !important;
+					}
+
+					& .tvo-testimonial-name {
+						text-transform: none;
+						color: $ns-brand-aqua-blue;
+					}
+
+					& .tvo-testimonial-role {
+						color: $ns-brand-purplegray;
+					}
+				}
+
+				// quote icon mark
+				& .tvo-testimonial-quote::before {
+
+					// specificity thrive!!!
+					&,
+					#tve_editor & {
+						color: rgba($ns-brand-mint-green, 0.5) !important;
+					}
+				}
+
+				// user photo
+				& .tvo-testimonial-image-cover {
+					@if $ns-testimonials-set2-use-images == true {
+						border: 1px solid rgba($ns-brand-mint-green, 0.5);
+					}
+					@else {
+						display: none;	
+					}
+				}
+			}
+
+			// breakpoint - mobile only
+			// note: make everything fit a little better!
+			@include ns-breakpoint-simple($max-width: 540px) {
+				& .tvo-background-wrapper {
+					padding-right: 22px;
+
+					& .tvo-testimonial-content {
+						@if $ns-testimonials-set2-use-images == false {
+							margin-top: ns-calc-vr(1.25);
+						}
+					}
+
+					& p,
+					& .tvo-testimonial-info {
+						margin-left: 0;
+					}
+
+					& .tvo-testimonial-image-cover {
+						@include ns-position($position: relative, $top: 0, $left: 0);
+						margin-bottom: ns-calc-vr(0.5);
+					}
+				}
+			}
+		}
+	}
+
+	// thrive overation wrapper
+	// note: specificity!
+	.tvo-testimonials-display.tvo-testimonials-display {
+		
+		// ===== SET12 : PROS / CELEBRITY W/ PHOTO ============================================================
+		&.tvo-set12-template {
+
+			// image wrapper
+			& .tvo-image-wrapper {
+
+				// image
+				& .tvo-testimonial-image-cover {
+					border-color: $ns-brand-light-blue;
+				}
+			}
+
+			// content wrapper 
+			& .tvo-testimonial-content {
+
+				& h4 {
+					color: $ns-brand-grayscale-2;
+					// @include ns-type-family($is-heading: true);
+					// @include ns-type-size(medium, "auto");
+					// @include ns-type-style($is-heading: true, $bold: true);
+				}
+
+				& p {
+					@include ns-type-family($is-heading: false);
+					@include ns-type-size(standard, "auto");
+					@include ns-type-style($is-heading: false, $bold: false);
+					color: $ns-brand-grayscale-2;
+				}
+				
+				// quote graphic
+				& .tvo-testimonial-quote {
+					color: $ns-brand-aqua-blue;
+				}
+
+				// author info
+				& .tvo-testimonial-info {
+
+					// author's role
+					& .tvo-testimonial-role {
+						// modifer: if role has a linked website url applied
+						& a:hover {
+							color: $ns-brand-primary-color;
+						}
+					}
+
+					// authors name
+					& .tvo-testimonial-name {
+						color: $ns-brand-aqua-blue;
+					}	
+				}
+			}
+		}
+	
+		// ===== SET3 : CUSTOMERS / ANNONYMOUS W/O PHOTO ======================================================
+		&.tvo-set3-template {
+
+			// wrapper
+			& .tvo-testimonial-display-item {
+				border: 1px solid $ns-thrive-border-color;
+				border-top: 6px solid $ns-brand-light-blue;
+				box-shadow: none;
+				
+				// general typography body
+				&, 
+				& .tvo-testimonial-content p {
+					@include ns-type-family($is-heading: false);
+					@include ns-type-size(standard, "auto");
+					@include ns-type-style($is-heading: false, $bold: false);	
+				}
+
+				// quote heading
+				& h4 {
+					@include ns-type-family($is-heading: true);
+					@include ns-type-size(medium, "auto");
+					@include ns-type-style($is-heading: true, $bold: true);
+					color: $ns-brand-grayscale-2;
+				}
+
+				// quote icon
+				& .tvo-testimonial-quote {
+					color: $ns-brand-aqua-blue;
+					
+					// should we use our "heart" icon instead of the default "quote" icon?
+					@if $ns-testimonials-set3-use-heart-icon == true {
+						transform: none; // flips it right side up
+
+						// pseudo child: icon
+						&:before {
+							@include ns-size($width: auto, $height: auto);
+							content: "\2665"; // heart icon
+							color: $ns-brand-purple;
+							font-size: 3rem;
+							line-height: 1;
+							margin: ns-calc-vr(1) auto;
+						}	
+					}
+				}
+
+				// author info
+				& .tvo-testimonial-info {
+
+					// author name
+					& .tvo-testimonial-name {
+						@include ns-type-family($is-heading: false);
+						@include ns-type-size(standard, "auto");
+						font-weight: map-get(map-get($ns-type-family-variants, standard), bold) !important; // thrive!
+						color: $ns-brand-aqua-blue;
+					}
+
+					// author role
+					& .tvo-testimonial-role {
+						@include ns-type-family($is-heading: false);
+						@include ns-type-size(standard, "auto");
+						@include ns-type-style($is-heading: false, $bold: false);
+					}
+				}
+			}
+		}
+	}
+}
+

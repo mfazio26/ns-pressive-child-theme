@@ -1,0 +1,102 @@
+// ============================================================================================================
+// =============== LABELS : VARIABLES =========================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== LABELS : EXPORT ============================================================================
+// ============================================================================================================
+
+@mixin ns-export-ns-elements-labels() {
+
+	// ===== SIMPLE ===========================================================================================
+	// @see `/courses/write-your-way-best-seller/`
+	// this is just a simple label tag
+	.ns-label-simple {
+		text-transform: uppercase;
+		margin-bottom: ns-calc-vr(1);
+
+		// immediate child: inner inline element
+		& > span {
+			@include ns-type-family($is-heading: false);
+			@include ns-type-size(small, "auto");
+			@include ns-type-style($is-heading: false, $bold: false);
+			display: inline-block;
+			border-radius: $ns-btn-border-radius;
+			padding: 0.15em 0.8em 0.1em;
+		}
+
+		// modifier: add different styles here
+		&--aqua-blue {
+			& > span {
+				color: $ns-brand-white !important;
+				background-color: $ns-brand-aqua-blue !important;
+			}
+		}
+
+		// modifier
+		&--brand-orange {
+			& > span {
+				color: $ns-brand-white !important;
+				background-color: $ns-brand-orange !important;
+			}
+		}
+
+		// modifier
+		&--brand-purple {
+			& > span {
+				color: $ns-brand-white !important;
+				background-color: $ns-brand-purple !important;
+			}
+		}
+	}
+
+	// ===== GUARANTEED CHECKOUT ==============================================================================
+	// @see `/courses/stop-emotional-eating`
+	// this is a label that has a shield icon and the words "Guaranteed Safe Checkout" displayed side-by-side
+	.ns-label-guaranteed-checkout {
+		@include ns-size($max-width: 255px);
+		@include ns-type-family($is-heading: false);
+		@include ns-type-size(reduce);
+		display: flex;
+		align-items: center;
+		line-height: 1.4em;
+		// background-color: lighten($ns-brand-light, 1%);
+		// border: 1px solid rgba($ns-brand-purplegray, 0.5);
+		border-radius: $ns-btn-border-radius;
+
+		// element: .ns-label-guaranteed-checkout__icon
+		// note: svg container
+		&__icon {
+			@include ns-size($width: 26px, $height: 26px);
+			background-color: rgba($ns-brand-purplegray, 0.8);
+			padding: 0.5em;
+			border-radius: 50%;
+		}
+
+		// element: .ns-label-guaranteed-checkout__svg
+		// note: svg icon
+		&__svg {
+			fill: $ns-brand-yellow;
+		}
+
+		// element: .ns-label-guaranteed-checkout__label
+		// note: text label
+		&__label {
+			color: $ns-brand-purplegray;
+			padding: 0.5em;
+		}
+
+		// mobile/small screens only
+		@include ns-breakpoint-simple($max-width: 774px){
+			@include ns-size($max-width: 220px);
+			@include ns-type-size(small);
+
+			// element: make the icon smaller to match the shrinked text
+			&__icon {
+				@include ns-size($width: 20px, $height: 20px);
+			}
+		}
+	}
+
+
+}

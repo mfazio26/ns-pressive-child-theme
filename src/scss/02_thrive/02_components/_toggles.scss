@@ -1,0 +1,37 @@
+// ============================================================================================================
+// =============== TOGGLES : VARIABLES ========================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== EXPORT : TOGGLES ===========================================================================
+// ============================================================================================================
+
+@mixin ns-export-thrive-components-toggles() {
+
+	// ===== TOGGLE / FAQ =====================================================================================
+	// note: typically used to reveal additional content and/or testimonials
+	// `/about/praise`
+	.faq {
+
+		// pseudo modifier: hover
+		&:hover {
+
+			// arrow icon
+			& h6 {
+				&, & span {
+					color: $ns-brand-primary-color;	
+				}
+			}
+		}
+
+		// child: inner content (revealable)
+		& .faqI {
+			cursor: auto; // don't know why Thrive is forcing the `pointer`. Just use the default.
+		}
+
+		// modifier: when two faq items touch, get rid of the weird gap in-between.
+		& + & {
+			margin-top: -9px;
+		}
+	}
+}

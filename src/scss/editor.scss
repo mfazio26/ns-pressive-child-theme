@@ -1,0 +1,226 @@
+// imports
+@import "main.imports";
+
+// exports
+@include ns-export-thrive-base-typography;
+@include ns-export-thrive-elements-images;
+
+// make the editor a little easier to see
+body {
+  font-weight: 400;
+}
+
+// set our heading font-family because it isn't set in the original mixin exports
+h1, h2, h3, h4, h5, h6 {
+	@include ns-type-family($is-heading: true);
+}
+
+// adds additional styles in the "formats" dropdown...
+.wysiwyg-color {
+	&--aqua-blue {
+		color: $ns-brand-aqua-blue;
+	}
+
+	&--mint-green {
+		color: $ns-brand-mint-green;
+	}
+
+	&--orange {
+		color: $ns-brand-orange;
+	}
+}
+
+// ============================================================================================================
+// =============== OLD : FROM PREVIOUS SITE ===================================================================
+// ============================================================================================================
+// The styles below are from the previous notsalmon.com site. We are keeping them here for reference just in 
+// case there's anything we should add later.
+// 
+// 
+// 
+// body {
+//   font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+// }
+// blockquote {
+//   color: #6db59d;
+// }
+// blockquote p {
+//   font-style: italic;
+//   color: inherit;
+//   font-size: 1.166em;
+// }
+// .green-1 {
+//   color: #63b49d;
+// }
+// .green-2 {
+//   color: #6dc2c2;
+// }
+// .orange {
+//   color: #cc6136;
+// }
+// .red {
+//   color: #ca6b6f;
+// }
+// .blue {
+//   color: #6f899a;
+// }
+// .purple {
+//   color: #877a8e;
+// }
+// .btn,
+// button,
+// input[type="reset"],
+// input[type="submit"],
+// input[type="button"],
+// .more-link,
+// .posts-navigation .nav-previous a,
+// .posts-navigation .nav-next a,
+// .comment-navigation .next,
+// .comment-navigation .prev,
+// #edd-purchase-button,
+// input[type=submit].edd-submit,
+// .edd-submit {
+//   -webkit-appearance: none;
+//   display: inline-block;
+//   text-decoration: none;
+//   background-color: #b7a6c2;
+//   color: #fff;
+//   font-size: 24px;
+//   font-weight: 500;
+//   border: none;
+//   border-radius: 3px;
+//   padding: 7px 16px 5px;
+//   line-height: 32px;
+//   -webkit-transition: 280ms background-color;
+//   transition: 280ms background-color;
+//   position: relative;
+//   cursor: pointer;
+// }
+// .btn:hover,
+// button:hover,
+// input[type="reset"]:hover,
+// input[type="submit"]:hover,
+// input[type="button"]:hover,
+// .more-link:hover,
+// .posts-navigation .nav-previous a:hover,
+// .posts-navigation .nav-next a:hover,
+// .comment-navigation .next:hover,
+// .comment-navigation .prev:hover,
+// #edd-purchase-button:hover,
+// input[type=submit].edd-submit:hover,
+// .edd-submit:hover {
+//   background-color: #cfc4d7;
+// }
+// .btn:active,
+// button:active,
+// input[type="reset"]:active,
+// input[type="submit"]:active,
+// input[type="button"]:active,
+// .more-link:active,
+// .posts-navigation .nav-previous a:active,
+// .posts-navigation .nav-next a:active,
+// .comment-navigation .next:active,
+// .comment-navigation .prev:active,
+// #edd-purchase-button:active,
+// input[type=submit].edd-submit:active,
+// .edd-submit:active {
+//   top: 1px;
+// }
+// .btn.disabled,
+// button.disabled,
+// input[type="reset"].disabled,
+// input[type="submit"].disabled,
+// input[type="button"].disabled,
+// .more-link.disabled,
+// .posts-navigation .nav-previous a.disabled,
+// .posts-navigation .nav-next a.disabled,
+// .comment-navigation .next.disabled,
+// .comment-navigation .prev.disabled,
+// #edd-purchase-button.disabled,
+// input[type=submit].edd-submit.disabled,
+// .edd-submit.disabled,
+// .btn[disabled],
+// button[disabled],
+// input[type="reset"][disabled],
+// input[type="submit"][disabled],
+// input[type="button"][disabled],
+// .more-link[disabled],
+// .posts-navigation .nav-previous a[disabled],
+// .posts-navigation .nav-next a[disabled],
+// .comment-navigation .next[disabled],
+// .comment-navigation .prev[disabled],
+// #edd-purchase-button[disabled],
+// input[type=submit].edd-submit[disabled],
+// .edd-submit[disabled] {
+//   cursor: auto;
+// }
+// .btn.red,
+// button.red,
+// input[type="reset"].red,
+// input[type="submit"].red,
+// input[type="button"].red {
+//   background-color: #e2b6b7;
+// }
+// .btn.red:hover,
+// button.red:hover,
+// input[type="reset"].red:hover,
+// input[type="submit"].red:hover,
+// input[type="button"].red:hover {
+//   background-color: #f1dbdb;
+// }
+// .btn.blue,
+// button.blue,
+// input[type="reset"].blue,
+// input[type="submit"].blue,
+// input[type="button"].blue {
+//   background-color: #abb9c4;
+// }
+// .btn.blue:hover,
+// button.blue:hover,
+// input[type="reset"].blue:hover,
+// input[type="submit"].blue:hover,
+// input[type="button"].blue:hover {
+//   background-color: #c9d2d9;
+// }
+// .btn.green,
+// button.green,
+// input[type="reset"].green,
+// input[type="submit"].green,
+// input[type="button"].green {
+//   background-color: #aad4c6;
+// }
+// .btn.green:hover,
+// button.green:hover,
+// input[type="reset"].green:hover,
+// input[type="submit"].green:hover,
+// input[type="button"].green:hover {
+//   background-color: #cce5dd;
+// }
+// .btn.orange,
+// button.orange,
+// input[type="reset"].orange,
+// input[type="submit"].orange,
+// input[type="button"].orange {
+//   background-color: #f0c0a9;
+// }
+// .btn.orange:hover,
+// button.orange:hover,
+// input[type="reset"].orange:hover,
+// input[type="submit"].orange:hover,
+// input[type="button"].orange:hover {
+//   background-color: #f8e0d4;
+// }
+// .btn.purple,
+// button.purple,
+// input[type="reset"].purple,
+// input[type="submit"].purple,
+// input[type="button"].purple {
+//   background-color: #b8b0bd;
+// }
+// .btn.purple:hover,
+// button.purple:hover,
+// input[type="reset"].purple:hover,
+// input[type="submit"].purple:hover,
+// input[type="button"].purple:hover {
+//   background-color: #d1ccd4;
+// }

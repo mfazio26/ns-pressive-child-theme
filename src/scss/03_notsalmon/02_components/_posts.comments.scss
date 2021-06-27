@@ -1,0 +1,36 @@
+// ============================================================================================================
+// =============== POSTS COMMENTS : VARIABLES =================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== POSTS COMMENTS : EXPORT ====================================================================
+// ============================================================================================================
+
+@mixin ns-export-ns-components-posts-comments() {
+
+	// block: authors comments
+	.ns-post-comments {
+		$block_selector: &;
+
+		// block element:;
+		&-anchor {
+			display: block;
+			height: 1px !important; 
+			line-height: 0 !important;
+			padding: 0 !important;
+			margin: 0 !important; 
+			overflow: hidden; 
+			visibility: hidden; 
+		}
+		
+		// block element: cta message placed immediately after an article that is intended to be a 
+		// CTA that jumps to the "anchor" point - which is placed directly above the comments.
+		&-cta {
+			text-align: center;
+			// border-top: 1px solid $ns-brand-grayscale-4;
+			padding: 0.25rem 1rem;
+			margin-top: ns-calc-vr(1.5);
+		}
+	}
+}
+

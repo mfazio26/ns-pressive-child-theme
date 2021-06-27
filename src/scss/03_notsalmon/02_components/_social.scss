@@ -1,0 +1,188 @@
+////
+/// @group notsalmon-components-social
+/// @access public
+//// 
+
+// ============================================================================================================
+// =============== SOCIAL : VARIABLES =========================================================================
+// ============================================================================================================
+/// Container size of each Monarch Social Follow icon.
+/// 
+/// **IMPORTANT:** Please only use `px` units.
+/// @type Number
+$ns-social-follow-icon-size: 30px !default;
+
+// ============================================================================================================
+// =============== SOCIAL : EXPORT ============================================================================
+// ============================================================================================================
+
+@mixin ns-export-ns-components-social() {
+
+	// ===== SOCIAL FOLLOW (ACCOUNTS) =========================================================================
+	.ns-social-follow {
+		$selector: &;
+
+		text-align: left;
+
+		// shared elements: .ns-social-follow__heading, .ns-social-follow__subheading
+		// note the specificity!
+		& &__heading,
+		& &__subheading {
+			padding-left: ns-calc-vr(0.6); // magic number!
+			margin: 0;
+		}
+
+		// element: .ns-social-follow__heading
+		// note the specificity!
+		& &__heading {
+			@include ns-type-size(standard, "auto");
+			@include ns-type-style($is-heading: true, $bold: true);
+			
+		}
+
+		// element: .ns-social-follow__subheading
+		// note the specificity!
+		& &__subheading {
+			@include ns-type-family($is-heading: false);
+			@include ns-type-size(reduce, standard);
+		}
+
+		// breakpoint: mobile 
+		@include ns-breakpoint-simple($max-width: 774px){
+			text-align: center;
+		}
+
+		// modifier container
+		// we have to do this to ensure we are being "specific enough" to override Monarch's styles.
+		.et_monarch & .et_social_networks {
+			@include ns-size($max-width: 400px);
+			margin-top: ns-calc-vr(1);
+			
+			// list item (network btn container)
+			// note: we have to force the items to continue to float (instead of stack) even on small screens.
+			& li[class^="et_social_"] {
+				@include ns-size($min-height: $ns-social-follow-icon-size);
+				background-color: transparent;
+				float: left;
+				clear: none !important;
+			}
+
+			// list item (network btn container)
+			// note: Monarch creates sizes per-column class, so we have to do the same thing to override their 
+			// styles. please note, we also have to use `!important`.
+			@for $i from 1 through 10 {
+				&.et_social_#{$i}col li {
+					@include ns-size($max-width: (1 / $i) * 100% !important);
+				}
+			}
+
+			// network btn (`<a>`)
+			& .et_social_follow {
+
+				// network btn icon
+				& .et_social_icon {
+
+					// shared styles: we have to assign the size and line-height to the icon container and the 
+					// pseudo-element that actually holds the icon.
+					&,
+					&:before {
+						@include ns-size($width: $ns-social-follow-icon-size, $height: $ns-social-follow-icon-size);
+						line-height: $ns-social-follow-icon-size;
+					}
+
+					// note: I think this element holds "count" details (which we aren't using), so its ok to hide 
+					// this element...its not doing anything anyways.
+					&:after {
+						display: none;
+					}
+				}	
+			}
+		}
+
+		// modifier: social follow component at the top of the main header
+		&--header {
+			$dark-theme: false; // `true` is on a dark background. `false` is on a light background.
+
+			text-align: center;
+			padding-left: $ns-thrive-margin-default;
+			padding-right: $ns-thrive-margin-default;
+			border-bottom: 1px solid $ns-thrive-border-color;
+
+			// if on a dark background...
+			@if $dark-theme {
+				background-color: $ns-brand-grayscale-2;
+
+				// light text colors
+				& #{$selector}__heading,
+				& #{$selector}__subheading {
+					color: darken($ns-brand-light, 10%);
+				}
+
+				// light icon colors and bright hover states
+				.et_monarch & .et_social_networks {
+					& li {
+						& .et_social_icon {
+							color: $ns-brand-light !important;
+						}
+
+						&:hover a i.et_social_icon {
+							color: $ns-brand-secondary-color !important;
+						}
+					}	
+				}
+			}
+			// if on a light background...
+			@else {
+				$content-color: lighten($ns-brand-grayscale-2, 20%);
+
+				background-color: $ns-brand-light;
+
+				// darker text colors
+				& #{$selector}__heading,
+				& #{$selector}__subheading {
+					color: $content-color;
+				}
+
+				// darker icon color (keep the default primary hover color)
+				.et_monarch & .et_social_networks {
+					& li .et_social_icon {
+						color: $content-color !important;
+					}
+				}
+			}
+			
+			// heading and subheading components
+			// inline
+			& #{$selector}__heading,
+			& #{$selector}__subheading {
+				@include ns-type-size(small, "auto");
+				display: inline-block;
+				vertical-align: middle;
+				padding-left: ($ns-thrive-margin-default / 2);
+				padding-right: ($ns-thrive-margin-default / 2);
+			}
+
+			// icon container
+			.et_monarch & .et_social_networks {
+				@include ns-size($width: auto);
+				margin-top: 0;
+				vertical-align: middle;
+
+				// icon items
+				& li[class^="et_social_"] { 
+					@include ns-size($min-width: 40px);
+				}
+			}
+
+			// breakpoint: mobile only
+			@include ns-breakpoint-simple($max-width: 774px){
+				// hide heading and subheading! only icons should be showing!
+				& #{$selector}__heading,
+				& #{$selector}__subheading {
+					display: none;
+				}
+			}
+		}
+	}
+}
+

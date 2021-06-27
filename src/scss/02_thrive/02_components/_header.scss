@@ -1,0 +1,493 @@
+// ============================================================================================================
+// =============== HEADER : VARIABLES =========================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== HEADER : EXPORT ============================================================================
+// ============================================================================================================
+
+@mixin ns-export-thrive-components-header() {
+
+	header {
+
+		// ===== MAIN HEADER : BACKGROUND =====================================================================
+		// please note the specificity!
+		#floating_menu & {
+			padding: 0 !important;
+			transition: none;
+			
+			// important: I don't know what this is for, so for now, we are hiding it. we might have to double 
+			// check this later if we start using the header ribbon lead type.
+			&:before {
+				display: none;
+			}
+
+			// we want to control the header padding in the sub-containers, not the header or wrapper.
+			& .wrp {
+				padding: 0;
+			}
+
+			// breakpoint: above mobile breakpoint, add the background "pond" image.
+			@include ns-breakpoint-simple($min-width: 775px){
+				@include ns-background(
+					$position: center 104px,
+					$repeat: no-repeat, 
+					$image: "logos/ns-logo-full-bg-1268x170.jpg", 
+					$prependPath: true
+				);
+			}
+
+			// breakpoint: we have to change the vertical position of the background image up until this 
+			// breakpoint because of the logo sizing and nav wrapping. We want the "pond" image to cut directly 
+			// through the "NotSalmon" logo words.
+			@include ns-breakpoint-simple($max-width: 1024px){
+				@include ns-background($position: center 96px);
+			}
+		}
+
+		// ===== MAIN CONTAINERS ==============================================================================
+		.t-c &,
+		.c-c & {
+			box-shadow: none;
+
+			& .h-i {
+				box-sizing: border-box;
+				padding: ns-calc-vr(0.75) $ns-thrive-margin-default;
+				border-bottom: none;
+				margin-bottom: 0;
+
+				@include ns-breakpoint-simple($min-width: 940px){
+					padding-left: $ns-thrive-desktop-margin-outer;
+					padding-right: $ns-thrive-desktop-margin-outer;
+					// padding-top: ns-calc-vr(0.5) !important; 
+					// padding-bottom: ns-calc-vr(0.5) !important;
+				}
+			}
+		}
+		
+		// ===== LOGO(S) ======================================================================================
+		#floating_menu & #logo {
+			padding: 0 !important;
+
+			// mobile `<img>`. Thrive differentiates this logo to be used as a dark logo above light content...which 
+			// we are abusing to have a different mobile/desktop logo.
+			& .l-d {
+				@include ns-size($max-width: 150px !important);
+			}
+
+			// desktop `<img>`. Thrive differentiates this logo to be used as a light logo above dark content...
+			// which we are abusing to have a different mobile/desktop logo.
+			& .l-l {
+				@include ns-size($max-width: 260px);
+			}
+
+			// logo button wrapper. each desktop/mobile get their own wrapper
+			& > a {
+				display: block;
+				vertical-align: bottom;
+			}
+
+			// logo images: we don't want thrive setting max heights anywhere!
+			& img {
+				@include ns-size($max-height: none !important);
+				vertical-align: bottom;
+			}
+
+			// breakpoint: use a smaller desktop logo up until this breakpoint.
+			@include ns-breakpoint-simple($max-width: 1024px){
+				& .l-l { @include ns-size($max-width: 235px); }	
+			}
+
+			// breakpoint: mobile only. show mobile logo, hide desktop logo.
+			@include ns-breakpoint-simple($max-width: 774px){
+				& .l-d { display: inline-block !important; }
+				& .l-l { display: none !important; }
+			}	
+		}
+
+		// ===== NAVIGATION ===================================================================================
+		&.side {
+
+			// header nav column
+			& .m-s {
+				vertical-align: middle;
+			}
+
+			// header nav
+			& nav {
+
+				// primary container: we don't want any of that `table-collapse` stuff in here.
+				&.menu-primary-navigation-container {
+					@include ns-breakpoint-simple($min-width: 775px){
+						// thrive bugix: resizing browser can result in desktop nav never coming back 
+						// after mobile nav has been shown and opened
+						display: block !important; 
+					}	
+				}
+
+				// top-level menus
+				& > ul.menu,
+				& > ul#menu {
+					margin-top: 0;
+					margin-bottom: 1rem;
+
+					// header nav > ul > li
+					// top level menu line items
+					& > li {
+						padding-top: 0;
+						padding-bottom: 0.5rem;
+						
+						// current top-level li menus
+						&.current-menu-item,
+						&.current_page_item,
+						&.current-page-item {
+
+							// btn
+							& > a {
+								color: $ns-brand-primary-color;
+
+								// highlight borders
+								&:before,
+								&:after {
+									background: $ns-brand-primary-color;
+									transition: width 0.2s ease;
+									bottom: -0.5rem;
+								}
+
+								// pseudo modifier: hover
+								&:hover {
+
+									// highlight borders
+									&:before,
+									&:after {
+										transition: height 0.2s ease;
+									}
+								}
+							}
+						}
+
+						// breakpoint: top-level menu line items above mobile...
+						@include ns-breakpoint-simple($min-width: 775px){
+							padding-right: ns-calc-vr(0.5);
+
+							// top level menu item anchors
+							& > a {
+								@include ns-type-family($is-heading: true);
+								@include ns-type-size(small, "auto");
+								@include ns-type-style($is-heading: true, $bold: true);
+							}
+						}
+
+						// breakpoint: top-level menu line items - mobile only.
+						@include ns-breakpoint-simple($max-width: 774px){
+							padding-bottom: 0;
+						}
+					}
+
+					// breakpoint: top level menus (`ul`) above mobile.
+					@include ns-breakpoint-simple($min-width: 775px){
+						text-align: right;
+					}
+				}
+
+				// all list items
+				& ul li {
+					float: none;
+
+					// all clickable menu item anchors
+					& a {
+						@include ns-type-family($is-heading: true);
+						@include ns-type-size(reduce, "auto");
+						@include ns-type-style($is-heading: true, $bold: false);	
+					}
+
+					// breakpoint: all list items below mobile
+					@include ns-breakpoint-simple($max-width: 774px){
+						padding-left: 0;
+						padding-right: 0;
+
+						// all list item anchors below mobile
+						& a {
+							color: $ns-brand-grayscale-2 !important;
+
+							// pseudo modifier: hover
+							&:hover {
+								background-color: $ns-brand-primary-color;
+								color: $ns-brand-white !important; // thrive
+							}
+						}
+					}
+				}
+
+				// submenu: header nav ul li > ul
+				& ul li > ul {
+					@include ns-position($top: 100%);
+					border-top-color: $ns-brand-primary-color;
+					margin-top: 0;
+					margin-bottom: 0;
+
+					// submenu button
+					& li a {
+						color: $ns-brand-grayscale-2;
+
+						// pseudo modifier: hover
+						&:hover {
+							color: $ns-brand-white;
+							background-color: $ns-brand-primary-color;
+						}
+
+						// breakpoint: submenu button below mobile
+						@include ns-breakpoint-simple($max-width: 774px){
+							padding-left: 30px;
+						}
+					}
+				}
+			}
+		}
+
+		// ===== TAGLINE ======================================================================================
+		& .ns-header-tagline {
+			@include ns-size($width: 90%);
+			@include ns-hmargins-auto;
+			display: block;
+			font-family: $ns-font-stack-mrs-ant;
+			font-size: 1.3rem;
+			color: $ns-brand-grayscale-2;
+			padding: 0 0 ns-calc-vr(1.5);
+			margin-top: ns-calc-vr(-0.5);
+
+			// mobile
+			@include ns-breakpoint-simple($max-width: 774px){
+				@include ns-type-size(reduce, "auto");
+				// @include ns-type-style($is-heading: false, $bold: true);
+				padding: ns-calc-vr(0.5) 0 0;
+				margin-top: 0;
+
+				&:before {
+					@include ns-size($width: 100%);
+					@include ns-background(
+						$repeat: no-repeat, 
+						$position: center top,
+						$size: contain, 
+						$image: "dividers/wave-border-wide-1174x49.jpg", 
+						$prependPath: true
+					);
+					content: "";
+					display: block;
+					padding-top: 5%;
+					margin-bottom: ns-calc-vr(0.25);
+				}
+			}
+		}
+
+		// ===== NAV CTA BUTTON ===============================================================================
+		& ul.menu > li.menu-item.h-cta > a {
+
+			// desktop
+			@include ns-breakpoint-simple($min-width: 775px){
+				@include ns-type-size(small, "auto");
+				@include ns-button-transition;
+				color: $ns-brand-white !important;
+				background-color: $ns-brand-secondary-color;
+				padding: 0.5em 1em;
+				border-radius: $ns-btn-border-radius;
+				border: none;
+				margin-top: -12px;
+				
+				&:hover {
+					background-color: $ns-brand-grayscale-1;
+				}
+			}
+		
+			// mobile
+			@include ns-breakpoint-simple($max-width: 774px){
+				&:hover {
+					background-color: $ns-brand-primary-color;
+				}
+			}
+		}
+	
+		// ===== MOBILE TRIGGER ===============================================================================
+		// header .hsm
+		& .hsm {
+			background-color: transparent;
+			border: none;
+
+			& span {
+				@include ns-size($width: auto);
+				box-sizing: border-box;
+				color: $ns-brand-grayscale-2;
+				padding-right: 28px;
+
+				// icon
+				&:after {
+					@include ns-position($right: 0);
+					background-color: $ns-brand-primary-color;
+				}
+			}
+		}
+
+		// ===== SEARCH =======================================================================================
+		// nav search icon
+		& .s-b .s-bb {
+			padding-top: 3px;
+
+			// icon
+			&:before {
+				padding-left: 15px;
+			}
+
+			&:hover:before {
+				color: $ns-brand-primary-color;
+			}
+		}
+
+		// ===== MODIFIER : FLOATING HEADER  ==================================================================
+		// this selector is only available when you have choosen the "floating header on scroll up" Thrive Theme 
+		// option. these styles are only applied to the condensed version of the header when a user scrolls back 
+		// up the page – at which time the header is revealed as a "fixed" element.
+		#floating_menu.mff.mfu & {
+			// its always a good idea to add some "context" that you are not at the top of the page yet by 
+			// being able to see through it slightly.
+			background-color: rgba($ns-brand-white, 0.85);
+
+			// hide the social follow and tagline components to the condensed header is as short as possible.
+			& .ns-social-follow--header,
+			& .ns-header-tagline {
+				display: none;
+			}
+
+			// adjusting the container padding so it appears symmetrical on the top and bottom
+			& .h-i {
+				padding-top: ns-calc-vr(0.75);
+				padding-bottom: 0;
+			}
+
+			// logo: force the condensed "mobile" logo to show instead of the taller desktop logo with the fish.
+			& #logo {
+				vertical-align: top;
+
+				& .l-d { display: inline-block !important; }
+				& .l-l { display: none !important; }
+			}
+
+			// re-align any callout buttons that may be available in the nav.
+			& .h-cta {
+				@include ns-position($top: 0);
+			}
+		}
+	}
+
+	// ===== HEADER HERO ======================================================================================
+	.h-b,
+	.c-c {
+
+		// remove the padding from the wrapper. we want the heros to be relatively tight.
+		& .wrp {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+
+		// heading container
+		& .b-tt {
+			text-align: center;
+			padding: 0;
+			
+			// the heading
+			& h1,
+			& .entry-title {
+				@include ns-position($position: relative, $z-index: 0);
+				@include ns-type-h1;
+				@include ns-hmargins-auto;
+				display: inline-block; // note: we have to do this so that the dots underline is only the width of the heading, not the full container
+				color: $ns-brand-grayscale-2;
+				text-align: center;
+				text-transform: uppercase;
+				margin-top: ns-calc-vr(0.5);
+
+				// dots underline
+				&:after {
+					@include ns-size($width: 100%, $height: 36px);
+					@include ns-background($repeat: repeat-x, $position: left center, $image: "dividers/dotted-line-purplegray-927x36.jpg", $prependPath: true);
+					content: "";
+					display: block;
+				}
+
+				// breakpoint: above mobile. don't allow the heading to stretch the full width because it 
+				// provides a nice bit of offset/contrast from the other containers
+				@include ns-breakpoint-simple($min-width: 775px){
+					@include ns-size($max-width: 80%);
+				}
+			}
+		}
+	}
+	
+	// ===== SEARCH BAR =======================================================================================
+	// modifier: when search bar is open
+	.s-s {
+
+		& #floating_menu {
+
+			// main header: we have to hide the background image because the form doesn't cover the whole 
+			// header and you can see where the "pond texture" overflows on the sides. instead, we're just 
+			// gonna hide it.
+			& header {
+				background-image: none;	
+			}
+
+			// search bar container
+			& .s-b {
+				background-color: rgba($ns-brand-white, 0.95);
+				padding-top: ns-calc-vr(1.25);
+
+				// search bar close button
+				& .s-bb {
+					padding-top: ns-calc-vr(0.25);
+
+					&:before {
+						color: $ns-brand-grayscale-2;
+					}
+
+					&:hover:before {
+						color: $ns-brand-primary-color;
+					}
+				}
+			}
+
+			// inner form (without close button)
+			// please note, we have to leave a little extra room for the close button so it doesn't get 
+			// pushed down below the form.
+			& form {
+				$px: ns-calc-vr(1.5);
+
+				@include ns-size($width: calc(100% - #{$px}), $height: auto);
+				background-color: transparent;
+				box-sizing: border-box;
+
+				// input label: "search" word, left column
+				& label {
+					@include ns-type-family($is-heading: true);
+					@include ns-type-size(standard, "auto");
+					@include ns-type-style($is-heading: true, $bold: true);
+					@include ns-size($width: 15%);
+					box-sizing: border-box;
+					color: $ns-brand-grayscale-2;
+					text-align: right;
+					padding-top: ns-calc-vr(0.15);
+					padding-right: $ns-thrive-margin-default;
+				}
+
+				// search input
+				& input {
+					@include ns-type-family($is-heading: false);
+					@include ns-type-size(standard, "auto");
+					@include ns-type-style($is-heading: false, $bold: false);
+					@include ns-size($width: 85%);
+					box-sizing: border-box;
+					background-color: $ns-brand-white;
+					margin-top: 0;
+				}
+			}
+		}
+	}
+}

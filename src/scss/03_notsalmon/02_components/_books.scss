@@ -1,0 +1,101 @@
+// ============================================================================================================
+// =============== BOOKS : VARIABLES ==========================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== BOOKS : EXPORT =============================================================================
+// ============================================================================================================
+
+@mixin ns-export-ns-components-books() {
+
+	// ===== BOOK ARCHIVE PAGES ===============================================================================
+	.post-type-archive-book {
+		$hide-read-more-btn: false;
+
+		// ===== BOOK ITEM ====================================================================================
+		// note: we want to center the "content" so it differs from the standard "post" archives.
+		& .wrp.cnt.gin .gr-i {
+			text-align: center;
+
+			// if hiding the button, we want to get rid of the extra padding at the bottom.
+			@if $hide-read-more-btn == true {
+				padding-bottom: 0;
+			}
+
+			// child: image
+			// note: books are uploaded at a specific size (205 x 300).
+			& .fwit {
+				@include ns-size($max-width: 205px);
+				@include ns-hmargins-auto;
+				background-size: contain;
+				padding-top: (((300 / 205) * 100%) / 2);
+				border: none;
+				
+				// button overlay
+				// note: our covers have "shadows" in the images themselves, so we have to offset the 
+				// left and right so the overlay doesn't look positioned "wrong" when it fades in.
+				&:after {
+					@include ns-position($top: 0, $right: 4px, $bottom: 0, $left: 4px);
+					@include ns-size($width: auto, $height: auto);
+				}
+			}
+
+			// child: don't know what this is for, but we're getting rid of it!
+			& .sub-entry-title {
+				display: none;
+			}
+
+			// child: excerpt
+			& .pl-c {
+				// display: none;
+			}
+
+			// child: button
+			& .mrb.btn {
+				// if hiding it, hide it!
+				@if $hide-read-more-btn == true {
+					display: none;
+				}
+				// if showing it, center it!
+				@else {
+					@include ns-position($left: 50%);
+					@include ns-hmargins-auto;
+					display: block;
+					transform: translateX(-50%);	
+				}
+			}
+
+			// breakpoint: small-to-mid screens
+			@include ns-breakpoint-simple($max-width: 540px){
+				// reduce the size of the title to match what we're doing in our "related books/courses" component.
+				& .entry-title {
+					& a {
+						@include ns-type-size(standard, small);
+						display: block; // note, without this the line-height can only get as small as the parent `<h2>` line height.
+						text-transform: uppercase;
+					}
+				}
+			}
+
+			// breakpoint: mid-to-larger screens. limit the length of the titles/excerpts
+			@include ns-breakpoint-simple($min-width: 400px, $max-width: 774px){
+				@include ns-size($max-width: 74%);
+			}
+
+			// breakpoint: mobile only. add some extra vertical space between items when they are stacked.
+			@include ns-breakpoint-simple($max-width: 774px){
+				padding-bottom: ns-calc-vr(1);
+
+				// child: read more button. allow it to just be a normal static, centered button.
+				& .mrb.btn {
+					@include ns-position($position:static, $left: auto);
+					@include ns-size($max-width: none);
+					display: inline-block;
+					text-align: center;
+					margin-bottom: ns-calc-vr(1);
+					transform: none;
+				}
+			}
+		}
+	}
+}

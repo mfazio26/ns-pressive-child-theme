@@ -1,0 +1,17 @@
+////
+/// @access public
+/// @group mixins-forms
+//// 
+
+// ============================================================================================================
+// =============== MIXINS : FORMS =============================================================================
+// ============================================================================================================
+
+/// Creates the base styles for form inputs.
+@mixin ns-form-input-base(){
+	@include ns-type-size(standard, "auto");
+	@include ns-type-style($is-heading: false, $bold: false);
+	color: $ns-brand-grayscale-2;
+	padding: ns-calc-vr(0.25) ns-calc-vr(0.4);
+	border: 1px solid #CCCCCC;
+}

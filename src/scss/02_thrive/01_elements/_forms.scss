@@ -1,0 +1,53 @@
+// ============================================================================================================
+// =============== FORMS : VARIABLES ==========================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== FORMS : EXPORT =============================================================================
+// ============================================================================================================
+
+@mixin ns-export-thrive-elements-forms() {
+
+
+	// text inputs and textfields
+	input:not([type='radio']):not([type='checkbox']):not([type='submit']):not([type='button']):not([type='image']):not([type='file']),
+	textarea {
+		
+		// apply to general inputs and Gravity Forms. please note that we have to double the specificity to 
+		// override the Gravity Forms styles. errr.
+		&,
+		.gform_wrapper.gform_wrapper & {
+			@include ns-form-input-base;	
+		}
+		
+	}
+
+	// basic form buttons: normalize with our styles
+	input[type="button"],
+	input[type="submit"],
+	button {
+		&:not(.search-button){
+			@include ns-button-primary($has-span: false);
+		}
+	}
+
+	// Gravity Forms buttons – we have to be super specific (including doubling up the wrapper specificity)
+	// again, errrr.
+	.gform_wrapper.gform_wrapper {
+		& .gform_footer,
+		& .gform_page_footer {
+			& input.button,
+			& input[type="submit"] {
+				@include ns-type-size(reduce, "auto");
+			}
+		}
+	}
+
+	// sidebar search input
+	section[id*="search-"] .srh input.search-field {
+		@include ns-size($width: 81%);
+		border-right-color: transparent !important; // thrive!
+
+		
+	}
+}

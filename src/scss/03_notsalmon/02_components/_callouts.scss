@@ -1,0 +1,536 @@
+// ============================================================================================================
+// =============== CALLOUTS : VARIABLES =======================================================================
+// ============================================================================================================
+
+// ============================================================================================================
+// =============== CALLOUTS : EXPORT ==========================================================================
+// ============================================================================================================
+
+@mixin ns-export-ns-components-callouts() {
+
+	// ===== LEGACY NOTICE ====================================================================================
+	// block
+	// used on legacy course/book pages to notify users of MastersInLife.com
+	.ns-legacy-notice {
+		@include ns-callout-box-base(
+			$max-width: 824px,
+			$text-align: center,
+			$bg-color: $ns-brand-yellow,
+			$border-top-color: $ns-brand-grayscale-2
+		);
+
+		// element: heading (specificity)
+		& > &__heading {
+			@include ns-type-family($is-heading: true);
+			@include ns-type-size(medium, "auto");
+			@include ns-type-style($is-heading: true, $bold: true);
+			color: $ns-brand-grayscale-1;
+			margin: 0;
+		}
+
+		// element: content (specificity)
+		& > &__content {
+			margin-bottom: ns-calc-vr(1);
+
+			// content and child paragraphs
+			// note, we have to set `!important` to override thrive styles
+			&, & p {
+				color: $ns-brand-grayscale-1 !important; // thrive!!!	
+			}	
+		}
+
+		// element: actions
+		& > &__actions {
+
+			// child: buttons
+			& .ns-legacy-notice__btn {
+				@include ns-type-family($is-heading: true);
+				@include ns-type-size(standard, "auto");
+				@include ns-type-style($is-heading: true, $bold: false);
+				@include ns-button-primary-colors;
+				display: block;
+				padding: ns-calc-vr(0.5);
+				border-radius: $ns-btn-border-radius;
+				transition: all 0.2s ease 0s;
+
+				& > span {
+					color: inherit;
+				}
+			}
+		}
+
+		// breakpoint: small screens
+		@include ns-breakpoint-simple($max-width: 540px){
+			padding-left: ns-calc-vr(1);
+			padding-right: ns-calc-vr(1);
+			
+			// element: buttons
+			& > &__actions &__btn {
+				@include ns-type-size(reduce, "auto");
+			}
+		}
+	}
+	
+	// ===== BOOK RETAILER CTA ================================================================================
+	// block
+	// note: this block can be used in the sidebar or in-content via shortcode. it displays a book cover, cta, 
+	// and a list of available retailers (if available).
+	.ns-book-cta {
+		clear: both;
+
+		// element: .ns-book-cta__container (row)
+		&__container {
+			display: flex;
+			flex-flow: wrap;
+			align-items: center;
+		}
+
+		// element: .ns-book-cta__media (column)
+		&__media {
+
+		}
+
+		// element: .ns-book-cta__content (column)
+		&__content {
+			text-align: center;
+		}
+
+		// element: .ns-book-cta__heading
+		// note: increase specificity!
+		& &__heading {
+			@include ns-type-family($is-heading: true);
+			@include ns-type-size(medium, standard);
+			@include ns-type-style($is-heading: true, $bold: true);
+			margin-top: 0;
+		}
+
+		// element: .ns-book-cta__list
+		// note: increase specificity!
+		& &__list {
+			display: flex;
+			flex-wrap: wrap;
+			list-style: none;
+			padding-left: 0;
+		}
+
+		// element: .ns-book-cta__item
+		// note: increase specificity!
+		&__item {
+			display: flex;
+			align-items: stretch;
+		}
+
+		// element: .ns-book-cta__btn
+		// note: increase specificity due to Thrive Themes sidebar
+		& &__item &__btn {
+			@include ns-button-primary(
+				$use-heading-font: false,
+				$use-bold-style: false,
+				$font-size: reduce,
+				$line-height: "auto",
+				$display: flex,
+				$inner-padding: 12px 17px
+			);
+			// pass on flex to children
+			flex: 1;
+			align-items: center;
+
+			// immediate child: label
+			& > span {
+				@include ns-size($width: 100%);
+				box-sizing: border-box;
+				display: block;
+			}
+		}
+
+		// modifier: .ns-book-cta--sidebar
+		&--sidebar {
+			background-color: $ns-brand-purplegray;
+			padding: ns-calc-vr(1) ns-calc-vr(0.5) ns-calc-vr(0.5);
+			border-radius: $ns-btn-border-radius;
+			
+			// modified element: .ns-book-cta--sidebar .ns-book-cta__content
+			& .ns-book-cta__content {
+				@include ns-size($width: 100%);
+				@include ns-hmargins-auto;
+			}
+
+			// modified element: .ns-book-cta--sidebar .ns-book-cta__heading
+			& .ns-book-cta__heading {
+				color: $ns-brand-white;
+			}
+
+			// modified element: .ns-book-cta--sidebar .ns-book-cta__list
+			& .ns-book-cta__list {
+				margin-bottom: 0;
+			}
+
+			// modified element: .ns-book-cta--sidebar .ns-book-cta__item
+			& .ns-book-cta__item {
+				@include ns-size($width: 100%);
+				margin: ns-calc-vr(0.1) 0;
+
+				// modified child: .ns-book-cta--sidebar .ns-book-cta__item .ns-book-cta__btn
+				// note: increased specificity due to Thrive Themes sidebar
+				& .ns-book-cta__btn {
+					padding: 0;
+				}
+			}
+		}
+
+		
+		// modifier: .ns-book-cta--standard (in-content)
+		&--standard {
+			@include ns-callout-box-base(
+				$max-width: $ns-common-callout-max-width,
+				$text-align: center,
+				$bg-color: $ns-brand-light,
+				$border-top-color: null
+			);
+			border: 2px solid $ns-brand-purplegray;
+
+			// modified elements: columns
+			& .ns-book-cta__media,
+			& .ns-book-cta__content {
+				padding: 0 ($ns-thrive-margin-default / 2);
+			}
+
+			// modified element: .ns-book-cta--standard .ns-book-cta__media (column)
+			& .ns-book-cta__media {
+				@include ns-size($width: grid-col(4));
+			}
+
+			// modified element: .ns-book-cta--standard .ns-book-cta__content (column)
+			& .ns-book-cta__content {
+				@include ns-size($width: grid-col(8));
+			}
+
+			// modified element: .ns-book-cta--standard .ns-book-cta__heading
+			& .sn-book-cta__heading {
+				color: $ns-brand-grayscale-2;
+			}
+
+			// modified element: .ns-book-cta--standard .ns-book-cta__item
+			& .ns-book-cta__item {
+				@include ns-size($width: 50%);
+				padding: ns-calc-vr(0.25) ($ns-thrive-margin-default / 2);
+				margin: 0;
+
+				// pseudo modifiers: if this item is the only item or the last item is an odd number,
+				// make it take up the entire width
+				&:first-child:last-child,
+				&:last-child:nth-child(odd) {
+					@include ns-size($width: 100%);
+				}
+			}
+
+			// breakpoint: small small-to-mid screens only
+			@include ns-breakpoint-simple($max-width: 700px){
+
+				// modified element: .ns-book-cta--standard .ns-book-cta__media (column)
+				// note: we don't want to show yet another book cover on mobile. takes up too much room.
+				& .ns-book-cta__media {
+					display: none;
+				}
+
+				// modified element: .ns-book-cta--standard .ns-book-cta__content (column)
+				& .ns-book-cta__content {
+					@include ns-size($width: 100%);
+				}
+
+				// modified element: .ns-book-cta--standard .ns-book-cta__item
+				& .ns-book-cta__item {
+					@include ns-size($width: 100%);	
+				}
+			}
+		}
+	}
+	
+	// ===== OPTIN 2STEP CTA TRIGGER ==========================================================================
+	// block
+	// note: this block is rendered via shortcode, and can be used on any page/post type. it is intended to 
+	// render a cta callout box that can be configured to trigger any valid Thrive Themes 2Step Lightbox Optin 
+	// Form.
+	.ns-optin-2stepctatrigger {
+		$block-selector: &;
+
+		// modifier: .ns-optin-2stepctatrigger.ns-optin-2stepctatrigger--primary
+		// note: applies styles that look like a typical text link (primary colors)
+		&#{&}--primary {
+			
+			// modified element: .ns-optin-2stepctatrigger__cta
+			& #{$block-selector}__cta {
+				@include ns-type-family($is-heading: false);
+				@include ns-type-size(standard, "auto");
+				@include ns-type-style($is-heading: false, $bold: true);
+				color: $ns-brand-primary-color;
+			}
+		}
+
+		// shared modifiers: .ns-optin-2stepctatrigger.ns-optin-2stepctatrigger--nobox, .ns-optin-2stepctatrigger.ns-optin-2stepctatrigger--boxed
+		// note: whether the callout is nobox or boxed, it shares similar "block" styles.
+		&#{&}--nobox,
+		&#{&}--boxed {
+			@include ns-size($width: 100%, $max-width: $ns-common-callout-max-width);
+			display: block;
+			margin-top: ns-calc-vr(1);
+			margin-bottom: ns-calc-vr(1);
+			clear: both;
+
+			// immediate child
+			// note: the thrive shortcode wrapper is a "span", so we want to force it to be a block.
+			& > .tve-leads-two-step-trigger {
+				display: block;
+			}
+
+			// modified element: .ns-optin-2stepctatrigger__cta
+			// note: we want to apply its own padding so the clickable area is larger than the text alone.
+			& #{$block-selector}__cta {
+				display: block;
+				text-align: center;
+				padding: ns-calc-vr(1) ns-calc-vr(0.5);
+			} 
+		}
+
+		// modifier: .ns-optin-2stepctatrigger.ns-optin-2stepctatrigger--nobox
+		// note: renders a primary colored cta that is separated from other content, but does not have a visible 
+		// "box". This is the default layout state.
+		&#{&}--nobox {
+			
+		}
+
+		// modifier: .ns-optin-2stepctatrigger.ns-optin-2stepctatrigger--inline
+		// note: renders an inline cta that can be used inside a paragraph.
+		&#{&}--inline {
+			display: inline;
+		}
+
+		// modifier: .ns-optin-2stepctatrigger.ns-optin-2stepctatrigger--inline
+		// note: renders an cta that is separated from other content, and DOES have a visible container box.
+		&#{&}--boxed {
+			background-color: $ns-brand-white;
+			box-shadow: rgba($ns-brand-grayscale-2, 0.14) 0px 0px 5px 2px !important;
+		}
+
+		// modifier: .ns-optin-2stepctatrigger.ns-optin-2stepctatrigger--expanded
+		// note: used with "nobox" or "boxed" modifiers to apply extra vertical margins/spacing between elements.
+		&#{&}--expanded {
+			margin-top: $ns-common-content-vspacer;
+			margin-bottom: $ns-common-content-vspacer;
+		}
+	}
+
+	// ===== BOOK/VIDEO COURSE : SINGLE INLINE IN-CONTENT CALLOUT/CONTENT =====================================
+	// block
+	// note: this block is rendered via shortcode, and can be used on any page/post type. However, it is 
+	// intended to place a "related" or "featured" book or video course callout within an article post. it simply 
+	// displays a callout heading, the book/course cover/featured image, and the book/course title in a box which 
+	// can be left/right/center aligned within the post content itself...just like adding an image to a post.
+	.ns-videocourse-single-inline-cta {
+		@include ns-single-inline-cta();
+	}
+
+	.ns-book-single-inline-cta {
+		@include ns-single-inline-cta();
+	}
+
+	// ===== GLOBAL : NS COLORBOX =============================================================================
+	// block
+	// note: This block is rendered via shortcode, and can be used on any page/post type. It simply renders 
+	// content inside a themeable box where an author can change the text and background colors. For 
+	// convenience, we are providing 4 preset theme options, but we can add more later if required by simply 
+	// adding more modifier classes.
+	.ns-colorbox {
+		@include ns-size($width: 100%);
+		padding: ($ns-thrive-margin-default * 0.75) $ns-thrive-margin-default;
+		border-radius: $ns-btn-border-radius;
+		margin: ns-calc-vr(1) auto;
+		clear: both;
+		
+		// element: .ns-colorbox__inner
+		// note: this is an inner wrapper that doesn't have any styles of its own. this is provided because 
+		// (depending on use-cases) it may be necessary later. For example, we may need to include columns, 
+		// floats, etc where we'll need the extra control.
+		&__inner {
+			
+			// immediate child
+			// note: shortcode inner content will almost always be wrapped in a <p> tag...at least in our 
+			// initial use cases. so, we need to be able to control the color and margins.
+			& > p {
+				color: inherit !important;
+				margin-top: 0;
+
+
+				// last <p>
+				// note: get rid of the bottom margin
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
+
+		// modifiers: .ns-colorbox--theme1
+		// note: theme1 is also the default theme - applied when no theme is present.
+		&,
+		&--theme1 {
+			color: $ns-brand-grayscale-2;
+			background-color: $ns-brand-light-blue;
+		}
+
+		&--theme2 {
+			color: $ns-brand-light;
+			background-color: $ns-brand-purplegray;
+		}
+
+		&--theme3 {
+			color: $ns-brand-aqua-blue;
+			background-color: $ns-brand-mint-green;
+		}
+
+		&--theme4 {
+			color: $ns-brand-grayscale-2;
+			background-color: $ns-brand-yellow;
+		}
+	}
+}
+
+
+// ============================================================================================================
+// =============== ADDITIONAL MIXINS: SHARED CALLOUTS =========================================================
+// ============================================================================================================
+// IMPORTANT, this callout type is shared between multiple different post types (books, videocourses, etc) and 
+// is rendered via shortcode. In order to make each type use its own class names but also share exactly the same 
+// formatting, we have to move this into a mixin. (See usage above)
+
+// Note: This block is rendered via shortcode, and can be used on any page/post type. However, it is 
+// intended to place a "related" or "featured" book or video course callout within an article post. it simply 
+// displays a callout heading, the book/course cover/featured image, and the book/course title in a box which 
+// can be left/right/center aligned within the post content itself...just like adding an image to a post.
+@mixin ns-single-inline-cta(){
+	$selector: &;
+
+	@include ns-size($max-width: 250px);
+	text-align: center;
+	background-color: $ns-brand-white;
+	padding: 20px;
+	margin: 0 auto 20px auto;
+	border: 1px solid $ns-brand-grayscale-4;
+	box-sizing: border-box;
+	box-shadow: rgba($ns-brand-grayscale-2, 0.14) 0px 0px 5px 2px !important;
+	clear: both;
+	
+	// child element: .ns-book-single-inline-cta__heading
+	// note: we need to add !important to override the <h2> styles!
+	& &__heading {
+		@include ns-type-family($is-heading: true);
+		@include ns-type-style($is-heading: true);
+		font-size: ns-type-get($key: standard, $property: font-size, $rem: true) !important;
+		line-height: ns-type-get($key: standard, $property: line-height, $rem: true);
+		margin-top: 0;
+		margin-bottom: 0;
+		
+		// pseudo child: colored bar below heading
+		&:after {
+			@include ns-size($width: 55px, $height: 3px);
+			content: "";
+			display: block;
+			background-color: $ns-brand-aqua-blue;
+			margin: ns-calc-vr(0.1) auto ns-calc-vr(1) auto;
+		}
+	}
+
+	// element: .ns-book-single-inline-cta__btn
+	// note: <a> that wraps the image and caption
+	&__btn {
+		display: block;
+		
+		// modifier: hover state
+		&:hover {
+
+			// modified child: .ns-book-single-inline-cta__btn__media:after
+			// note: we want to fade up the book cover's color overlay
+			& #{$selector}__media:after {
+				opacity: 0.5;
+			}
+		}
+	}
+
+	// element: .ns-book-single-inline-cta__media
+	// note: <figure> wraps the image.
+	&__media {
+		@include ns-position($position: relative, $z-index: 0);
+		display: block;
+		margin: 0 0 ns-calc-vr(0.25);
+
+		// pseudo child: color highlight overlay above image (on hover)
+		&:after {
+			@include ns-position($position: absolute, $top: 0, $left: 0, $z-index: 1);
+			@include ns-size($width: 100%, $height: 100%);
+			@include ns-button-transition($property: opacity);
+			content: "";
+			display: block;
+			background-color: $ns-brand-purple;
+			opacity: 0;
+		}
+	}
+
+	// element: .ns-book-single-inline-cta__image
+	// note: actual <img>
+	&__image {
+		@include ns-size($width: 100%);
+		display: block;
+		margin: 0;
+	}
+
+	// element: .ns-book-single-inline-cta__caption
+	// note: book title below image
+	&__caption {
+		@include ns-type-family($is-heading: false);
+		@include ns-type-style($is-heading: false, $bold: false, $italic: true);
+		@include ns-type-size(reduce, "auto");
+		display: block;
+		margin-bottom: ns-calc-vr(0.25);
+	}
+
+	// child
+	// note: we don't want Monarch to add the social sharing icons above the image, so we have to force it 
+	// to be hidden!
+	& .et_social_media {
+		display: none !important;
+	}
+
+	// breakpoint: above small screen
+	@include ns-breakpoint-simple($min-width: 600px) {
+		
+		// modifiers: .ns-book-single-inline-cta--left, .ns-book-single-inline-cta--right
+		// note: left justify text and heading bar
+		&--left,
+		&--right {
+			text-align: left;
+			clear: none;
+
+			& #{$selector}__heading:after {
+				margin-left: 0;
+			}
+		}
+
+		// modifier: .ns-book-single-inline-cta--left
+		// note: float left inside content
+		&--left {
+			float: left;
+			margin-left: 0;
+			margin-right: 35px;
+		}
+
+		// modifier: .ns-book-single-inline-cta--right
+		// note: float right inside content
+		&--right {
+			float: right;
+			margin-left: 35px;
+			margin-right: 0;	
+		}
+	}
+}
+
+
+

@@ -1,0 +1,253 @@
+
+
+# BEGIN Stop WP from processing static file 404 errors
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} \.(css|js|avi|bmp|doc|docx|exe|gif|ico|jpg|jpeg|pdf|png|tif|tiff|ttf)$ [NC]
+RewriteRule .* - [L]
+</IfModule>
+# END Stop WP from processing static file 404 errors
+
+
+# BEGIN De-prioritizing MastersInLife.com (2019)
+redirect 301 /masters-in-life                             	  /courses
+redirect 301 /do-it                            	  			  /courses/stop-emotional-eating
+redirect 301 /hate-loss-plan                            	  /courses/toxic-people
+redirect 301 /blindspot                     	  			  /courses/anxiety-cure
+
+
+# END De-prioritizing MastersInLife.com (2019)
+
+
+# BEGIN RewriteRule ^old-url/?$ /new-url [R=301,L] - New during migration (2017)
+redirect 301 /courses/never-again                             /never-again
+redirect 301 /courses/do-it                                   /courses/stop-emotional-eating
+redirect 301 /courses/unblock                                 /unblock
+redirect 301 /courses/blindspot                               /courses/anxiety-cure
+redirect 301 /courses/hateloss-recording                      /courses/toxic-people
+redirect 301 /courses/write-your-way-best-seller              /unblock
+redirect 301 /courses/brand-honey                             /brand-honey
+redirect 301 /jewelry-by-karen                                /products
+
+# END RewriteRule ^old-url/?$ /new-url [R=301,L] - New during migration (2017)
+
+# BEGIN Moved during migration (2017)
+redirect 301 /media-rss                                       /feed/?post_type=poster
+redirect 301 /brandstory                                      /about/brand-story
+redirect 301 /about/karen-salmansohn-in-the-news						  /about/in-the-news
+redirect 301 /notsalmon-story											            /about/notsalmon-story
+redirect 301 /praise                                          /about/praise
+redirect 301 /shop/prince-harming-syndrome                    /books/prince-harming-syndrome
+redirect 301 /books/bounce-back-book                          /books/the-bounce-back-book
+redirect 301 /books/be-happy-dammit                           /books/how-to-be-happy-dammit
+redirect 301 /shop/hateloss-recording                         /courses/toxic-people
+redirect 301 /hateloss-temp                                   /courses/toxic-people
+redirect 301 /hateloss-recording                              /courses/toxic-people
+redirect 301 /hate-loss-recording                             /courses/toxic-people
+redirect 301 /shop/brand-honey                                /brand-honey
+redirect 301 /shop/50-off                                     /books/50-off
+redirect 301 /shop/enough-dammit                              /books
+redirect 301 /shop/gut                                        /books/gut
+redirect 301 /shop/how-to-be-happy-dammit                     /books/how-to-be-happy-dammit
+redirect 301 /shop/how-to-succeed-in-business                 /books/how-to-succeed-in-business
+redirect 301 /shop/instant-happy-journal                      /books/instant-happy-journal
+redirect 301 /shop/instant-happy                              /books/instant-happy
+redirect 301 /shop/open-when                                  /books/open-when
+redirect 301 /shop/think-happy                                /books/think-happy
+redirect 301 /shop/write-your-way-best-seller                 /unblock
+redirect 301 /best-seller-recording                           /legacy-access/best-seller-recording
+redirect 301 /never-again-program-access                      /legacy-access/never-again
+redirect 301 /brand-honey-worksheet                           /legacy-access/brand-honey-worksheet
+redirect 301 /do-it-program-access                            /legacy-access/do-it
+redirect 301 /happy-kids-thanks                               /happy-kids/thank-you
+# END Moved during migration (2017)
+
+# BEGIN Retired during migration (2017)
+redirect 302 /journal                                         /books/instant-happy-journal
+redirect 302 /books/enough-dammit 							  /books
+redirect 301 /author/karen                                    /about
+redirect 301 /video-page/eight-ways-to-forgive-and-forget     https://www.youtube.com/watch?v=yGWfVH_7oaE
+redirect 301 /video-page/fight-poison-envy                    https://www.youtube.com/watch?v=ms_-iuo8EcA
+redirect 301 /video-page/how-to-be-a-love-magnet              https://www.youtube.com/watch?v=xPA0ReYs_uE
+redirect 301 /video-page/joy-jolt-1                           https://www.youtube.com/watch?v=p-4riVYfXHM
+redirect 301 /video-page/joy-jolt-2                           https://www.youtube.com/watch?v=Slns71fH4_s
+redirect 301 /video-page/when-life-throws-you-curveballs      https://www.youtube.com/watch?v=njlEtUxb_RI
+redirect 301 /affiliate-agreement                             /
+redirect 301 /affiliate-dashboard                             /
+redirect 301 /behindthescenes                                 /
+redirect 301 /best-seller-webinar                             /
+redirect 301 /7livelysins                                     /
+redirect 301 /bonus-7livelysins-test                          /
+redirect 301 /testttttt                                       /
+redirect 301 /poptalk-images                                  /
+redirect 301 /optin-monster-preview-page                      /
+redirect 301 /make-posters                                    /
+redirect 301 /bestseller                                      /
+redirect 301 /bestsellerthanks                                /
+redirect 301 /free-tools-thanks                               /
+redirect 301 /thank-you                                       /
+redirect 301 /new-blog                                        /blog
+redirect 301 /doit                                            /courses/stop-emotional-eating
+redirect 301 /do-it-program                                   /courses/stop-emotional-eating
+redirect 301 /temp                                            /courses/stop-emotional-eating
+redirect 301 /shop/do-it-program                              /courses/stop-emotional-eating
+redirect 301 /3tools                                          /courses/stop-emotional-eating
+redirect 301 /3-tools-thanks                                  /courses/stop-emotional-eating
+redirect 301 /books-new                                       /books
+redirect 301 /books-news                                      /books
+redirect 301 /happy-kids-old                                  /happy-kids
+redirect 301 /thanks-signup-hdd                               /happy-inbox
+redirect 301 /thanks-signup                                   /happy-inbox/thank-you
+redirect 301 /thank-you-kindness-rockstar                     /happy-inbox
+redirect 301 /instant-happy-book                              /books/instant-happy
+redirect 301 /hatelossthanks                                  /courses/toxic-people
+redirect 301 /newsletter-popup-test                           /happy-inbox
+redirect 301 /site-terms-conditions                           /terms-and-conditions
+redirect 301 /unblock-terms                                   /terms-and-conditions
+redirect 301 /unblock-disclaimer                              /disclaimers
+redirect 301 /freebies/ecards                                 /quotes
+redirect 301 /shop/artwork                                    /shop
+redirect 301 /copy-of-shop                                    /shop
+redirect 301 /thanks-purchase                                 /shop
+redirect 301 /shop/woot-woot-new-day-new-possibilities        http://www.cafepress.com/karensalmansohnsstore.869852264
+redirect 301 /shop/you-can-do-it                              http://www.cafepress.com/karensalmansohnsstore.1602856983
+redirect 301 /shop/25-different-dieting-reminders             http://www.cafepress.com/karensalmansohnsstore/11352700
+redirect 301 /shop/a-life-without-coffee-i-dont-think-so      http://www.cafepress.com/karensalmansohnsstore.1454014348
+redirect 301 /shop/all-you-need-is-love-oh-and-coffee         http://www.cafepress.com/karensalmansohnsstore.1454013078
+redirect 301 /shop/become-thoughts-think-poster               http://www.cafepress.com/karensalmansohnsstore.869843429
+redirect 301 /shop/breathe-in-the-good-shit-breathe-out-the-bullshit    http://www.cafepress.com/karensalmansohnsstore.1220459480
+redirect 301 /shop/family-rules                               http://www.cafepress.com/karensalmansohnsstore.1665377350
+redirect 301 /shop/first-step-living-life-want                http://www.cafepress.com/karensalmansohnsstore.869843419
+redirect 301 /shop/hell-anything-doesnt-make-happy            http://www.cafepress.com/karensalmansohnsstore.772698824
+redirect 301 /shop/i-can-i-will                               http://www.cafepress.com/karensalmansohnsstore.1586661324
+redirect 301 /shop/id-rather-role-model-supermodel            http://www.cafepress.com/karensalmansohnsstore.1560248667
+redirect 301 /shop/love-heck-life                             http://www.cafepress.com/karensalmansohnsstore.785703708
+redirect 301 /shop/optimism-is-sexy                           http://www.cafepress.com/karensalmansohnsstore.633532965
+redirect 301 /shop/pretty-amazing-girl                        http://www.cafepress.com/karensalmansohnsstore.883919634
+redirect 301 /shop/set-inner-clock-live-now                   http://www.cafepress.com/karensalmansohnsstore.869857316
+redirect 301 /shop/the-power-of-hope                          http://www.cafepress.com/karensalmansohnsstore.869848335
+redirect 301 /shop/weird-new-awesome                          http://www.cafepress.com/karensalmansohnsstore.839131703
+# END Retired during migration (2017)
+
+# BEGIN Redirection Plugin (v1.0-pre2017)
+redirect 301 /insiderinfo                                     /downloads/Karen-Salmansohn-Brand-2016.pdf
+redirect 301 /cafepress                                       http://cafepress.com/karensalmansohnsstore
+redirect 301 /2011/09/21/6-liberating-mind-stretching-questions-to-help-you-let-go-of-the-pain-in-a-break-up/   /2011/09/21/let-go-pain-break-up
+redirect 301 /IHJournal                                       http://www.amazon.com/gp/product/160774824X/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=160774824X&linkCode=as2&tag=notsalcom-20&linkId=6EKKHLAAFJJRFWQV
+# END Redirection Plugin (v1.0-pre2017)
+
+# BEGIN Uncategorized updates (v1.0-pre2017)
+redirect 301 /bio                                             /about
+redirect 301 /book-detail                                     /books
+# redirect 301 /book-detail/?bkd=quickie                      /books
+# redirect 301 /book-detail/?bkd=whip                         /books
+# redirect 301 /book-detail/?bkd=ballsy                       /books
+# redirect 301 /book-detail/?bkd=how_to_be                    /books
+# redirect 301 /book-detail/?bkd=bounce_back                  /books/the-bounce-back-book
+# redirect 301 /book-detail/?bkd=gut                          /books/gut
+# redirect 301 /book-detail/?enough                           /books
+redirect 301 /books/lessons-from-a-cocktail-waitress					/books/business-lessons-from-a-swimming-cocktail-waitress-ebook
+redirect 301 /happiness-reboot                                /brand-honey
+redirect 301 /programs                                        /brand-honey
+redirect 301 /free-tools                                      /free-stuff
+redirect 301 /for-kids                                        /happy-kids
+redirect 301 /preorder                                        /journal
+redirect 301 /ecards-gallery                                  /quotes
+redirect 301 /testcard-gallery                                /quotes
+redirect 301 /shop/morelove-poster                            /shop
+redirect 301 /joy-jolts                                       /video
+redirect 301 /2011/09/21/the-law-of-attraction-really-begins-with-the-law-of-subtraction    /2011/09/21/10-forgiveness-tools-to-help-you-let-go-of-anger-at-your-ex-and-yourself
+redirect 301 /2011/09/21/how-to-recover-from-a-prince-harming			                          /2011/09/21/6-liberating-mind-stretching-questions-to-help-you-let-go-of-the-pain-in-a-break-up
+redirect 301 /2012/04/19/what-we-see-is-mostly-what-we-look-for/poster-what-we-see          /2012/04/19/what-we-see-is-mostly-what-we-look-for
+# redirect 301 /IHJournal                                     http://app.snapapp.com/InstantHappyJournal
+# END Uncategorized updates (v1.0-pre2017)
+
+# BEGIN Old WP Engine stuff (v1.0-pre2017)
+redirect 301 /heart-attacked-free-call/#                      /books/prince-harming-syndrome
+redirect 301 /heart-attacked-free-call                        /books/prince-harming-syndrome
+redirect 301 /the-do-it-program                               /courses/stop-emotional-eating
+redirect 301 /never-again-lopr-confirm                        /never-again
+redirect 301 /neveragainprogram                               /never-again
+redirect 301 /downloads/never-program                         /never-again
+redirect 301 /never-again-prince-harming-special              /never-again
+redirect 301 /instantpeptalk                                  /shop
+redirect 301 /peptalk-app                                     https://itunes.apple.com/us/app/instant-peptalk-happiness/id634778919?mt=8
+redirect 301 /2011/01/28/great-neck-daddy-mitch-leff 					/
+redirect 301 /2010/03/11/the-truth-about-mitchell-leff-who-went-from-ivf-to-mia-in-under-a-month    /
+# END Old WP Engine stuff (v1.0-pre2017)
+
+# BEGIN LightningBase (v1.0-pre2017)
+redirect 301 /store                                           /shop
+redirect 301 /store/faithit-poster                            /shop
+redirect 301 /store/beawesome-poster                          /shop
+redirect 301 /store/naphappy-poster                           /shop
+redirect 301 /store/static-poster                             /shop
+redirect 301 /store/thoughts-poster                           /shop
+redirect 301 /store/cahselove-poster                          /shop
+redirect 301 /store/waves-poster                              /shop
+redirect 301 /store/pause-poster                              /shop
+redirect 301 /shop/category/books/prince-harming-syndrome     /books/prince-harming-syndrome
+# END LightningBase (v1.0-pre2017)
+
+# BEGIN Old migration stuff (v1.0-pre2017)
+redirect 301 /shop/blindspot-spotter-program-1-session        /courses/anxiety-cure
+redirect 301 /shop/the-blindspot-spotter-program              /courses/anxiety-cure
+redirect 301 /shop/blindspot-spotter__trashed                 /courses/anxiety-cure
+redirect 301 /downloads/prince-harming-syndrome               /books/prince-harming-syndrome
+redirect 301 /preince-harming-syndrome                        /books/prince-harming-syndrome
+redirect 301 /shop/bounce-back-book                           /books/the-bounce-back-book
+redirect 301 /shop/the-bounce-back-book                       /books/the-bounce-back-book
+redirect 301 /pillage-and-conquer                             /brand-honey
+redirect 301 /shop/pillage-and-conquer                        /brand-honey
+redirect 301 /shop/pillage-conquer                            /brand-honey
+redirect 301 /hateloss                                        /courses/toxic-people
+redirect 301 /HATELOSS                                        /courses/toxic-people
+redirect 301 /shop/the-do-it-program                          /courses/stop-emotional-eating
+redirect 301 /shop/the-do-it-program__trashed                 /courses/stop-emotional-eating
+redirect 301 /glad-scientist-signup                           /happy-inbox
+redirect 301 /happy-dammit-sign-up                            /happy-inbox
+redirect 301 /newsletter                                      /happy-inbox
+redirect 301 /shop/never-program                              /never-again
+redirect 301 /shop/unblock-program-a-la-carte                 /unblock
+redirect 301 /shop/unblock-program-full                       /unblock
+# END Old migration stuff (v1.0-pre2017)
+
+# BEGIN Super old stuff (v1.0-pre2017)
+# Note: This redirect causes an infinite loop on the homepage. Not sure why.
+# redirect 301 /home.html                                       /
+redirect 301 /bio.html                                        /about
+redirect 301 /in_the_media.html                               /about/in-the-news
+redirect 301 /faq.html                                        /about/notsalmon-story
+redirect 301 /blog.php                                        /blog
+redirect 301 /books/index.html                                /books
+redirect 301 /coaching.html                                   /masters-in-life
+# END Super old stuff (v1.0-pre2017)
+
+# BEGIN Uncategorized updates (v1.0-pre2017)
+RewriteRule ^store/?.*$ /shop [R=301,L]
+RewriteRule ^legacy-access/?$ /account [R=301,L]
+RewriteRule ^shop/category/(.*)/?$ $1 [R=301,L]
+RewriteRule ^shop/categories/(.*)/?$ $1 [R=301,L]
+# RewriteRule ^courses/?$ /masters-in-life [R=301,L]
+RewriteRule ^single-prints/?.*$ /quotes [R=301,L]
+RewriteRule ^bully-posters/?.*$ /quotes [R=301,L]
+RewriteRule ^ecard/?.*$ /quotes [R=301,L]
+RewriteRule ^checkout/?.*$ /shop [R=301,L]
+RewriteRule ^now/?$ /courses/stop-emotional-eating [R=301,L]
+# END Uncategorized updates (v1.0-pre2017)
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
+
+

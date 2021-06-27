@@ -1,0 +1,49 @@
+////
+/// @access public
+/// @group mixins-layouts
+//// 
+
+// ============================================================================================================
+// =============== MIXINS : LAYOUTS ===========================================================================
+// ============================================================================================================
+
+/// Shortcut to outputting all *dimensional* properties quickly and easily. If an parameter values are `null`, the
+/// corresponding property will not be exported. If you need properties to be exported in a particular order, you can 
+/// use this `ns-size()` mixin with a single property at a time, or just write out the properties yourself.
+/// @parameter {Number} $width [null] - A number to apply to `width`.
+/// @parameter {Number} $min-width [null] - A number to apply to `min-width`.
+/// @parameter {Number} $max-width [null] - A number to apply to `max-width`.
+/// @parameter {Number} $height [null] - A number to apply to `height`.
+/// @parameter {Number} $min-height [null] - A number to apply to `min-height`.
+/// @parameter {Number} $max-height [null] - A number to apply to `max-height`.
+@mixin ns-size($width: null, $min-width: null, $max-width: null, $height: null, $min-height: null, $max-height: null) {
+	width: $width;
+	min-width: $min-width;
+	max-width: $max-width;
+	height: $height;
+	min-height: $min-height;
+	max-height: $max-height;
+}
+
+/// Shortcut to outputting all *positional* properties quickly and easily. If an parameter values are `null`, the
+/// corresponding property will not be exported.
+/// @parameter {String} $position [null] - Applied to `position`. (relative, absolute, etc)
+/// @parameter {Number} $top [null] - Applied to `top`. (100%, 0, etc)
+/// @parameter {Number} $right [null] - Applied to `right`. (100%, 0, etc)
+/// @parameter {Number} $bottom [null] - Applied to `bottom`. (100%, 0, etc)
+/// @parameter {Number} $left [null] - Applied to `left`. (100%, 0, etc)
+/// @parameter {Number} $z-index [null] - Applied to `z-index`.
+@mixin ns-position($position: null, $top: null, $right: null, $bottom: null, $left: null, $z-index: null) {
+	position: $position;
+	top: $top;
+	right: $right;
+	bottom: $bottom;
+	left: $left;
+	z-index: $z-index;
+}
+
+/// Shortcut to outputting horizontal auto margins for centering a *defined-width* element within its container.
+@mixin ns-hmargins-auto() {
+	margin-left: auto;
+	margin-right: auto;
+}
